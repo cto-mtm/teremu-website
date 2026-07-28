@@ -1,0 +1,238 @@
+/* Webfonts — matched to the Teremu app ("Crisp Culinary" system):
+   Gochi Hand = display (h1 + wordmark), Yeseva One = body/UI. */
+@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&family=Gochi+Hand&display=swap");
+
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* ── "Crisp Culinary" design tokens (shared with the app) ─────────
+   The palette is built around EMBER #ff751f (the brand color). Ember
+   carries all interactive identity; the neutrals are warmed to sit
+   under it. Herb (green) and coral (crimson) are SEMANTIC only —
+   herb = profit / stable prices, coral = margin drops / price hikes.
+   Marketing-site note: full 50→950 ramps are provided so Nuxt UI can
+   map primary=ember, secondary/success=herb, error=coral. */
+@theme {
+  /* Ember — brand (#ff751f = 500) */
+  --color-ember-50: #fff4ec;
+  --color-ember-100: #ffe4cf;
+  --color-ember-200: #ffc99f;
+  --color-ember-300: #ffab6b;
+  --color-ember-400: #ff8f42;
+  --color-ember-500: #ff751f;
+  --color-ember-600: #e35c05;
+  --color-ember-700: #bc4a02;
+  --color-ember-800: #953b08;
+  --color-ember-900: #78320e;
+  --color-ember-950: #411704;
+
+  /* Herb — positive (profit, price drops) (#2e9e5b = 500) */
+  --color-herb-50: #ecf8f0;
+  --color-herb-100: #d5f0df;
+  --color-herb-200: #aee1c1;
+  --color-herb-300: #7ccda0;
+  --color-herb-400: #4fb87f;
+  --color-herb-500: #2e9e5b;
+  --color-herb-600: #25824a;
+  --color-herb-700: #1e6b3d;
+  --color-herb-800: #1a5533;
+  --color-herb-900: #16462b;
+  --color-herb-950: #08271a;
+
+  /* Coral — negative (margin slips, price hikes) (#dc3448 = 500) */
+  --color-coral-50: #fdeef0;
+  --color-coral-100: #fadbe0;
+  --color-coral-200: #f5bcc4;
+  --color-coral-300: #ee8f9c;
+  --color-coral-400: #e45f72;
+  --color-coral-500: #dc3448;
+  --color-coral-600: #b8243a;
+  --color-coral-700: #991d30;
+  --color-coral-800: #801b2c;
+  --color-coral-900: #6d1a2a;
+  --color-coral-950: #3d0a13;
+
+  /* Warm brand neutrals (single tokens, as in the app) */
+  --color-ink: #1c1410;
+  --color-smoke: #7a6f66;
+  --color-cream: #faf5f0;
+
+  /* Fonts */
+  --font-sans: "Yeseva One", serif;
+  --font-display: "Gochi Hand", cursive;
+
+  /* Layered card shadow (tight contact + soft ambient, warm-tinted) */
+  --shadow-card: 0 1px 2px rgba(28, 20, 16, 0.05), 0 10px 30px -14px rgba(28, 20, 16, 0.14);
+
+  --header-height: 4rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Ambient warmth: two soft brand-tinted glows over the cream canvas.
+     Fixed so cards appear to float over it while scrolling. */
+  background-image:
+    radial-gradient(1100px 520px at 85% -12%, rgba(255, 117, 31, 0.10), transparent 60%),
+    radial-gradient(900px 520px at -12% 28%, rgba(46, 158, 91, 0.07), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Display font on h1 page titles only; everything else inherits Yeseva One. */
+h1,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+
+/* ── Reusable component classes (shared with the app) ───────────── */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-white/70 p-4;
+    box-shadow: var(--shadow-card);
+    background-image: linear-gradient(165deg, #ffffff 0%, #fffaf4 100%);
+  }
+  .glass {
+    @apply border border-white/60 bg-white/75 backdrop-blur-xl;
+  }
+  /* Brand-gradient text (wordmark, hero numbers) */
+  .text-gradient {
+    background-image: linear-gradient(120deg, #ff8a3d, #ff751f 45%, #e35c05);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Ember-gradient button (shared with the app's .btn-primary) */
+  .btn-gradient {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98];
+    background-image: linear-gradient(135deg, #ff8a3d, #ff751f 55%, #f06a10);
+    box-shadow: 0 4px 14px -4px rgba(255, 117, 31, 0.45);
+  }
+  .btn-gradient:hover {
+    background-image: linear-gradient(135deg, #ff7f2b, #f06a10 55%, #e35c05);
+    box-shadow: 0 8px 20px -6px rgba(255, 117, 31, 0.6);
+  }
+}
+
+/* ── Page transitions (~0.4s seamless) ─────────────────────────── */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* ── Entrance / scroll animation helpers ───────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float,
+  .page-enter-active,
+  .page-leave-active {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Depth & layering utilities (warm-tinted) ──────────────────── */
+.depth-card {
+  box-shadow: var(--shadow-card);
+}
+.depth-card-lg {
+  box-shadow:
+    0 2px 4px rgba(28, 20, 16, 0.06),
+    0 24px 60px -20px rgba(255, 117, 31, 0.28);
+}
+
+/* Soft warm background wash for hero sections (echoes the body glow) */
+.bg-ember-wash {
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(255, 117, 31, 0.12), transparent 70%),
+    radial-gradient(50% 50% at 100% 0%, rgba(46, 158, 91, 0.08), transparent 70%);
+}
+
+/* ── Screenshot placeholder slots ──────────────────────────────
+   Reserve room for real app captures. Swap the inner content for a
+   <NuxtImg src="/images/screenshots/xyz.webp" /> when you have assets. */
+.screenshot-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 260px;
+  border: 2px dashed var(--color-ember-200);
+  border-radius: 1rem;
+  background:
+    linear-gradient(135deg, rgba(255, 117, 31, 0.07), rgba(46, 158, 91, 0.05)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(122, 111, 102, 0.06),
+      rgba(122, 111, 102, 0.06) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  color: var(--color-smoke);
+  text-align: center;
+  overflow: hidden;
+}
+.screenshot-slot__label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+/* Phone-frame variant for mobile screenshots */
+.screenshot-slot--phone {
+  max-width: 300px;
+  min-height: 560px;
+  border-radius: 2.25rem;
+  border-width: 8px;
+  border-style: solid;
+  border-color: var(--color-ink);
+}
+
+/* ── reCAPTCHA badge ──────────────────────────────────────────────
+   Google permits hiding the floating badge only when the equivalent
+   disclosure is shown next to the form. That text lives at the bottom
+   of the contact form — if it is ever removed, remove this rule too. */
+.grecaptcha-badge {
+  visibility: hidden;
+}

@@ -1,0 +1,26 @@
+export default {
+  es: {
+    home: 'Inicio',
+    features: 'Funciones',
+    pricing: 'Precios',
+    blog: 'Blog',
+    support: 'Soporte',
+    contact: 'Contacto',
+    cta: 'Empieza gratis',
+    openMenu: 'Abrir menú',
+    closeMenu: 'Cerrar menú',
+    language: 'Idioma',
+  },
+  en: {
+    home: 'Home',
+    features: 'Features',
+    pricing: 'Pricing',
+    blog: 'Blog',
+    support: 'Support',
+    contact: 'Contact',
+    cta: 'Start free',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    language: 'Language',
+  },
+}

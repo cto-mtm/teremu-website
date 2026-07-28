@@ -1,0 +1,3 @@
+# Drop real lifestyle photos + customer headshots here
+# (e.g. kitchen.jpg, marta.jpg). Then run `npm run optimize:images`
+# from www/ to generate .webp, and pass `src` to <PhotoSlot>.

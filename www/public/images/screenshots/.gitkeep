@@ -1,0 +1,4 @@
+# Drop real app screenshots here (e.g. pulse-dashboard.png, scanner.png,
+# triage.png, menu.png, pantry.png). Then run `npm run optimize:images`
+# from www/ to generate .webp versions and swap the .screenshot-slot
+# placeholders in the pages.
