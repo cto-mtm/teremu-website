@@ -114,7 +114,7 @@ const features = computed(() => [
           <!-- Hero screenshot slot -->
           <div class="animate-fade-up animate-delay-200">
             <div class="depth-card-lg rounded-3xl bg-white p-2.5 sm:p-3">
-              <ScreenshotSlot :label="t('home.heroScreenshot')" class="!min-h-[240px] sm:!min-h-[340px]" />
+              <ScreenshotSlot :label="t('home.heroScreenshot')" src="/images/screenshots/dashboard.webp" class="!min-h-[240px] sm:!min-h-[340px]" />
             </div>
           </div>
         </div>
@@ -202,7 +202,7 @@ const features = computed(() => [
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <div class="grid items-center gap-12 lg:grid-cols-2">
         <div class="order-2 lg:order-1">
-          <ScreenshotSlot :label="t('home.showcaseScreenshot')" phone />
+          <ScreenshotSlot :label="t('home.showcaseScreenshot')" src="/images/screenshots/menu.webp" phone />
         </div>
         <div class="order-1 lg:order-2">
           <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.showcaseTitle') }}</h2>

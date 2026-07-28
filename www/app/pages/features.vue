@@ -10,15 +10,15 @@ useSeoMeta({
 
 // Ordered feature deep-dives; alternating layout, each with a screenshot slot.
 const sections = computed(() => [
-  { icon: 'i-lucide-scan-line', title: t('features.scannerTitle'), body: t('features.scannerBody'), shot: t('features.scannerShot') },
-  { icon: 'i-lucide-workflow', title: t('features.pipelineTitle'), body: t('features.pipelineBody'), shot: t('features.pipelineShot') },
-  { icon: 'i-lucide-list-checks', title: t('features.triageTitle'), body: t('features.triageBody'), shot: t('features.triageShot') },
-  { icon: 'i-lucide-activity', title: t('features.pulseTitle'), body: t('features.pulseBody'), shot: t('features.pulseShot') },
-  { icon: 'i-lucide-utensils', title: t('features.menuTitle'), body: t('features.menuBody'), shot: t('features.menuShot') },
-  { icon: 'i-lucide-package', title: t('features.pantryTitle'), body: t('features.pantryBody'), shot: t('features.pantryShot') },
-  { icon: 'i-lucide-truck', title: t('features.vendorsTitle'), body: t('features.vendorsBody'), shot: t('features.vendorsShot') },
-  { icon: 'i-lucide-sparkles', title: t('features.assistantTitle'), body: t('features.assistantBody'), shot: t('features.assistantShot') },
-  { icon: 'i-lucide-users', title: t('features.teamTitle'), body: t('features.teamBody'), shot: t('features.teamShot') },
+  { icon: 'i-lucide-scan-line', title: t('features.scannerTitle'), body: t('features.scannerBody'), shot: t('features.scannerShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'i-lucide-workflow', title: t('features.pipelineTitle'), body: t('features.pipelineBody'), shot: t('features.pipelineShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'i-lucide-list-checks', title: t('features.triageTitle'), body: t('features.triageBody'), shot: t('features.triageShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'i-lucide-activity', title: t('features.pulseTitle'), body: t('features.pulseBody'), shot: t('features.pulseShot'), src: '/images/screenshots/dashboard.webp' },
+  { icon: 'i-lucide-utensils', title: t('features.menuTitle'), body: t('features.menuBody'), shot: t('features.menuShot'), src: '/images/screenshots/menu.webp' },
+  { icon: 'i-lucide-package', title: t('features.pantryTitle'), body: t('features.pantryBody'), shot: t('features.pantryShot'), src: '/images/screenshots/pantry.webp' },
+  { icon: 'i-lucide-truck', title: t('features.vendorsTitle'), body: t('features.vendorsBody'), shot: t('features.vendorsShot'), src: '/images/screenshots/vendor-details.webp' },
+  { icon: 'i-lucide-sparkles', title: t('features.assistantTitle'), body: t('features.assistantBody'), shot: t('features.assistantShot'), src: '/images/screenshots/assistant.webp' },
+  { icon: 'i-lucide-users', title: t('features.teamTitle'), body: t('features.teamBody'), shot: t('features.teamShot'), src: '/images/screenshots/settings.webp' },
 ])
 </script>
 
@@ -56,7 +56,7 @@ const sections = computed(() => [
           <!-- Screenshot slot -->
           <div :class="i % 2 === 1 ? 'lg:order-1' : ''">
             <div class="depth-card rounded-2xl bg-white p-3">
-              <ScreenshotSlot :label="s.shot" />
+              <ScreenshotSlot :label="s.shot" :src="s.src" />
             </div>
           </div>
         </article>

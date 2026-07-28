@@ -10,7 +10,7 @@ export default {
     introBody:
       'Teremu (“nosotros”) opera el sitio web teremu.com. Esta política explica el tratamiento de datos personales que realizamos a través de este sitio de marketing. El tratamiento de datos dentro de la aplicación Teremu se rige por el acuerdo de servicio que firmas al crear una cuenta.',
     controllerLabel: 'Responsable del tratamiento',
-    controllerBody: 'Teremu · USA · info@teremu.com',
+    controllerBody: "Teremu · USA · info{'@'}teremu.com",
 
     collectTitle: 'Qué datos recogemos',
     collectIntro: 'Solo recogemos datos en dos situaciones concretas:',
@@ -53,7 +53,7 @@ export default {
 
     rightsTitle: 'Tus derechos',
     rightsIntro:
-      'Puedes ejercer en cualquier momento los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición, así como retirar tu consentimiento. Escríbenos a info@teremu.com y te responderemos en un plazo máximo de 30 días.',
+      "Puedes ejercer en cualquier momento los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición, así como retirar tu consentimiento. Escríbenos a info{'@'}teremu.com y te responderemos en un plazo máximo de 30 días.",
     rightsComplaint:
       'Si consideras que no hemos atendido correctamente tu solicitud, puedes reclamar ante la autoridad de control de tu país. En España es la Agencia Española de Protección de Datos (aepd.es).',
 
@@ -71,7 +71,7 @@ export default {
 
     contactTitle: '¿Dudas?',
     contactBody:
-      'Escríbenos a info@teremu.com y te contestamos. Sin formularios interminables.',
+      "Escríbenos a info{'@'}teremu.com y te contestamos. Sin formularios interminables.",
     contactCta: 'Ir a contacto',
   },
 
@@ -86,7 +86,7 @@ export default {
     introBody:
       'Teremu (“we”) operates the teremu.com website. This policy covers personal data processed through this marketing site. Data handled inside the Teremu application is governed by the service agreement you accept when you create an account.',
     controllerLabel: 'Data controller',
-    controllerBody: 'Teremu · USA · info@teremu.com',
+    controllerBody: "Teremu · USA · info{'@'}teremu.com",
 
     collectTitle: 'What we collect',
     collectIntro: 'We collect data in exactly two situations:',
@@ -129,7 +129,7 @@ export default {
 
     rightsTitle: 'Your rights',
     rightsIntro:
-      'You may at any time request access, rectification, erasure, restriction, portability, or object to processing, and withdraw consent. Email info@teremu.com and we will respond within 30 days.',
+      "You may at any time request access, rectification, erasure, restriction, portability, or object to processing, and withdraw consent. Email info{'@'}teremu.com and we will respond within 30 days.",
     rightsComplaint:
       'If you believe we have not handled your request properly, you may lodge a complaint with your national supervisory authority. In Spain that is the Agencia Española de Protección de Datos (aepd.es).',
 
@@ -147,7 +147,7 @@ export default {
 
     contactTitle: 'Questions?',
     contactBody:
-      'Email info@teremu.com and a human will reply. No endless forms.',
+      "Email info{'@'}teremu.com and a human will reply. No endless forms.",
     contactCta: 'Go to contact',
   },
 }

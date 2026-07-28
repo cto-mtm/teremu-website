@@ -2,6 +2,15 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
 
+  // ── SSG: fully pre-render to static HTML ──────────────────────────
+  ssr: true,
+  nitro: {
+    preset: 'static',
+    output: {
+      publicDir: '../firebase/www',
+    },
+  },
+
   devtools: {
     enabled: true,
     timeline: { enabled: true },

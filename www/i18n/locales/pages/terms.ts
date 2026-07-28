@@ -94,7 +94,7 @@ export default {
 
     contactTitle: '¿Alguna duda?',
     contactBody:
-      'Escríbenos a info@teremu.com. Preferimos aclarar las cosas antes que discutirlas después.',
+      "Escríbenos a info{'@'}teremu.com. Preferimos aclarar las cosas antes que discutirlas después.",
     contactCta: 'Ir a contacto',
     privacyCta: 'Ver política de privacidad',
   },
@@ -189,7 +189,7 @@ export default {
 
     contactTitle: 'Questions?',
     contactBody:
-      'Email info@teremu.com. We would rather clear things up in advance than argue about them later.',
+      "Email info{'@'}teremu.com. We would rather clear things up in advance than argue about them later.",
     contactCta: 'Go to contact',
     privacyCta: 'Read the privacy policy',
   },
