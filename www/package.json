@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --host 0.0.0.0 --port 3000",
+    "dev:remote": "set TAILSCALE_HOST=ks-mini.tail0293ef.ts.net&& set TAILSCALE_PORT=8443&& nuxt dev --host 0.0.0.0 --port 3005",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

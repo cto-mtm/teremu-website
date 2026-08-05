@@ -74,8 +74,17 @@ const features = computed(() => [
   <div>
     <!-- ── Hero ─────────────────────────────────────────────── -->
     <section class="relative overflow-hidden bg-ember-wash pt-16">
-      <!-- animated cooking scene behind everything -->
+      <!-- animated cooking scene — also the reduced-motion / loading fallback -->
       <CookingBackdrop class="absolute inset-0" :intensity="0.85" />
+
+      <!-- background video, layered above the backdrop -->
+      <HeroVideo src="/videos/hero.mp4" class="absolute inset-0" />
+
+      <!-- legibility scrim: lifts the dark hero copy off a busy video -->
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/85 via-white/60 to-white/25"
+        aria-hidden="true"
+      />
 
       <!-- floating decorative elements -->
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">

@@ -2,7 +2,7 @@ export default {
   es: {
     // Hero
     heroBadge: 'Food-cost para restaurantes independientes',
-    heroTitle: 'Tu trastienda cabe en la cámara de tu teléfono',
+    heroTitle: 'Control de food-cost para hacer crecer tus márgenes',
     heroSubtitle:
       'Escanea las facturas arrugadas de tus proveedores y la IA mantiene al día tus costes, los márgenes de cada plato, el inventario y los precios — sin hojas de cálculo ni introducir datos a mano.',
     heroCtaPrimary: 'Empieza gratis',
@@ -103,7 +103,7 @@ export default {
   },
   en: {
     heroBadge: 'Food-cost for independent restaurants',
-    heroTitle: "Your back office fits in your phone's camera",
+    heroTitle: 'Food-cost control to grow your margins',
     heroSubtitle:
       "Scan your suppliers' crumpled invoices and let AI keep your costs, dish margins, inventory, and prices current — no spreadsheets, no manual data entry.",
     heroCtaPrimary: 'Start free',

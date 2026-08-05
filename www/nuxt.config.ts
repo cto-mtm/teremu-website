@@ -1,4 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// ── CodePipe remote dev (Tailscale) ─────────────────────────────────
+const tailscaleHost = process.env.TAILSCALE_HOST // e.g. ks-mini.tail0293ef.ts.net
+const tailscalePort = Number(process.env.TAILSCALE_PORT) || undefined // e.g. 8443
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
 
@@ -14,6 +19,16 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
     timeline: { enabled: true },
+  },
+
+  // ── Vite dev server: HMR over Tailscale when TAILSCALE_HOST is set ──
+  vite: {
+    server: {
+      allowedHosts: true,
+      hmr: tailscaleHost
+        ? { protocol: 'wss', host: tailscaleHost, clientPort: tailscalePort }
+        : undefined,
+    },
   },
 
   css: ['~/assets/css/main.css'],
