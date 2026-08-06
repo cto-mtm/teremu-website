@@ -12,20 +12,20 @@ const billing = ref<'monthly' | 'annual'>('monthly')
 const isAnnual = computed(() => billing.value === 'annual')
 const perSuffix = computed(() => (isAnnual.value ? t('pricing.perLocYear') : t('pricing.perLocMonth')))
 const proPrice = computed(() => (isAnnual.value ? t('pricing.proAnnual') : t('pricing.proMonthly')))
-const grupoPrice = computed(() => (isAnnual.value ? t('pricing.grupoAnnual') : t('pricing.grupoMonthly')))
+const maxPrice = computed(() => (isAnnual.value ? t('pricing.maxAnnual') : t('pricing.maxMonthly')))
 
 const freeFeatures = computed(() => [
-  t('pricing.freeF1'), t('pricing.freeF2'), t('pricing.freeF3'), t('pricing.freeF4'),
-  t('pricing.freeF5'), t('pricing.freeF6'), t('pricing.freeF7'), t('pricing.freeF8'),
-  t('pricing.freeF9'), t('pricing.freeF10'),
+  t('pricing.freeF1'), t('pricing.freeF11'), t('pricing.freeF2'), t('pricing.freeF3'),
+  t('pricing.freeF4'), t('pricing.freeF5'), t('pricing.freeF6'), t('pricing.freeF7'),
+  t('pricing.freeF8'), t('pricing.freeF9'), t('pricing.freeF10'),
 ])
 const proFeatures = computed(() => [
-  t('pricing.proF1'), t('pricing.proF2'), t('pricing.proF3'), t('pricing.proF4'),
-  t('pricing.proF5'), t('pricing.proF6'), t('pricing.proF7'), t('pricing.proF8'),
+  t('pricing.proF1'), t('pricing.proF2'), t('pricing.proF9'), t('pricing.proF3'),
+  t('pricing.proF4'), t('pricing.proF5'), t('pricing.proF6'), t('pricing.proF7'),
+  t('pricing.proF10'), t('pricing.proF8'),
 ])
-const grupoFeatures = computed(() => [
-  t('pricing.grupoF1'), t('pricing.grupoF2'), t('pricing.grupoF3'),
-  t('pricing.grupoF4'), t('pricing.grupoF5'), t('pricing.grupoF6'),
+const maxFeatures = computed(() => [
+  t('pricing.maxF1'), t('pricing.maxF2'), t('pricing.maxF3'),
 ])
 
 const faqs = computed(() => [
@@ -35,6 +35,7 @@ const faqs = computed(() => [
   { q: t('pricing.faq4Q'), a: t('pricing.faq4A') },
   { q: t('pricing.faq5Q'), a: t('pricing.faq5A') },
   { q: t('pricing.faq6Q'), a: t('pricing.faq6A') },
+  { q: t('pricing.faq7Q'), a: t('pricing.faq7A') },
 ])
 const openFaq = ref<number | null>(0)
 
@@ -149,28 +150,48 @@ useHead(() => ({
           </ul>
         </div>
 
-        <!-- Grupo -->
+        <!-- Max -->
         <div class="flex flex-col rounded-3xl border border-stone-200 bg-white p-8">
-          <h2 class="font-display text-xl font-bold text-stone-900">{{ t('pricing.grupoName') }}</h2>
-          <p class="mt-1 text-sm text-stone-500">{{ t('pricing.grupoTagline') }}</p>
+          <h2 class="font-display text-xl font-bold text-stone-900">{{ t('pricing.maxName') }}</h2>
+          <p class="mt-1 text-sm text-stone-500">{{ t('pricing.maxTagline') }}</p>
           <div class="mt-6 flex items-baseline gap-1.5">
-            <span class="font-display text-4xl font-bold text-stone-900">{{ grupoPrice }}</span>
+            <span class="font-display text-4xl font-bold text-stone-900">{{ maxPrice }}</span>
             <span class="text-stone-500">{{ perSuffix }}</span>
           </div>
-          <p class="mt-1 text-sm text-stone-500">
-            {{ isAnnual ? t('pricing.billedAnnual') : t('pricing.grupoMin') }}
+          <!-- min-h reserves the line height so the tier cards stay aligned
+               when this tier has no billing note to show. -->
+          <p class="mt-1 min-h-5 text-sm text-stone-500">
+            {{ isAnnual ? t('pricing.billedAnnual') : '' }}
           </p>
           <UButton :to="appUrl" external color="neutral" variant="outline" block size="lg" class="mt-6">
-            {{ t('pricing.grupoCta') }}
+            {{ t('pricing.maxCta') }}
           </UButton>
-          <p class="mt-8 text-sm font-medium text-stone-900">{{ t('pricing.grupoEverything') }}</p>
+          <p class="mt-8 text-sm font-medium text-stone-900">{{ t('pricing.maxEverything') }}</p>
           <ul class="mt-3 space-y-3 text-sm text-stone-600">
-            <li v-for="(f, i) in grupoFeatures" :key="i" class="flex gap-2.5">
+            <li v-for="(f, i) in maxFeatures" :key="i" class="flex gap-2.5">
               <UIcon name="i-lucide-check" class="mt-0.5 h-4 w-4 shrink-0 text-secondary-500" />
               <span>{{ f }}</span>
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- Multi-location (Grupo) -->
+    <section class="mx-auto max-w-6xl px-4 pt-8 sm:px-6">
+      <div class="flex flex-col gap-6 rounded-3xl border border-stone-200 bg-stone-50 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-700 ring-1 ring-primary-200">
+            <UIcon name="i-lucide-building-2" class="h-3.5 w-3.5" />
+            {{ t('pricing.multiBadge') }}
+          </span>
+          <h3 class="mt-4 text-xl font-bold text-stone-900">{{ t('pricing.multiTitle') }}</h3>
+          <p class="mt-3 text-stone-600">{{ t('pricing.multiBody') }}</p>
+          <p class="mt-2 text-sm text-stone-500">{{ t('pricing.multiSoon') }}</p>
+        </div>
+        <UButton :to="appUrl" external color="neutral" variant="outline" size="lg" class="shrink-0">
+          {{ t('pricing.multiCta') }}
+        </UButton>
       </div>
     </section>
 

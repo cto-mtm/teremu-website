@@ -7,7 +7,7 @@ useSeoMeta({
   description: () => t('terms.heroSubtitle'),
 })
 
-const plans = computed(() => [t('terms.plan1'), t('terms.plan2'), t('terms.plan3')])
+const plans = computed(() => [t('terms.plan1'), t('terms.plan2'), t('terms.plan3'), t('terms.plan4')])
 
 const accountDuties = computed(() => [
   t('terms.account1'),

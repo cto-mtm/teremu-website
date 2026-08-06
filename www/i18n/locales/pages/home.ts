@@ -93,7 +93,7 @@ export default {
     // Pricing teaser
     pricingTeaserTitle: 'Cuesta menos que medio cubierto al mes',
     pricingTeaserBody:
-      'Empieza gratis. Cuando Teremu se vuelva tu forma de comprar, Pro cuesta $29 por local al mes — una décima parte de lo que recuperas. ¿Varios locales? El plan Grupo los reúne en un panel consolidado.',
+      'Empieza gratis. Cuando Teremu se vuelva tu forma de comprar, Pro cuesta $39 por local al mes — una décima parte de lo que recuperas. ¿Varios locales? Grupo los reúne en una sola cuenta, cada uno con su propio plan.',
     pricingTeaserCta: 'Ver precios',
 
     // Final CTA
@@ -189,7 +189,7 @@ export default {
 
     pricingTeaserTitle: 'Costs less than half a cover a month',
     pricingTeaserBody:
-      'Start free. When Teremu becomes how you buy, Pro is $29 per location a month — a tenth of what you recover. Multiple locations? The Group plan brings them into one consolidated dashboard.',
+      'Start free. When Teremu becomes how you buy, Pro is $39 per location a month — a tenth of what you recover. Multiple locations? Group keeps them all in one account, each on its own plan.',
     pricingTeaserCta: 'See pricing',
 
     finalCtaTitle: 'Scan your first invoice today',

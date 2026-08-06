@@ -23,7 +23,7 @@ prices current without data entry. This repo is the public marketing site.
 
 ## Brand & Content Notes
 - Product surfaces referenced in copy: Scanner, Triage, Pulse (dashboard), Menu, Pantry, Vendors, Assistant, Team & permissions.
-- Pricing tiers (all paid tiers billed **per location**, monthly or annual — annual = 2 months free): **Gratis** ($0, 1 location, owner only), **Pro** ($29/location/mo — *el plan del chef*, up to 5 members), **Grupo** (live & self-serve, $79/location/mo, min 2 locations, unlimited members + consolidated dashboards). Multi-member teams and multi-location are shipped.
+- Pricing tiers (all paid tiers billed **per location**, monthly or annual — annual = 2 months free): **Gratis** ($0, 1 location, owner only, 25 scans/mo, unlimited menu), **Pro** ($39/location/mo — *el plan del chef*, up to 5 members, 500 scans/mo), **Max** ($59/location/mo, up to 10 members, 1,500 scans/mo). **Grupo** is *not* a separate SKU — it's the multi-location capability: each location is its own Pro/Max subscription with per-location roles and billing (consolidated cross-location dashboards are **not built yet**). Pro/Max add the Kitchen Assistant (AI Q&A over your data), email digest, CSV export, and POS integration (roadmap); unlimited menu (dishes + drinks) is a free-tier feature. Multi-member teams and multi-location are shipped.
 - Positioning: the self-serve food-cost tool an independent can adopt on a Tuesday for the price of two covers.
 - **Screenshots:** every feature/hero section reserves a clearly-marked slot (`.screenshot-slot`) — drop real app captures into `www/public/images/screenshots/` and swap the placeholder.
 

@@ -29,9 +29,11 @@ export default {
     plan1:
       'Gratis — 0 $. Un local, solo la persona propietaria. Sin caducidad.',
     plan2:
-      'Pro — 29 $ por local y mes. Hasta cinco miembros de equipo.',
+      'Pro — 39 $ por local y mes. Hasta cinco miembros de equipo.',
     plan3:
-      'Grupo — 79 $ por local y mes, mínimo dos locales. Miembros ilimitados y panel consolidado.',
+      'Max — 59 $ por local y mes. Hasta diez miembros de equipo.',
+    plan4:
+      'Grupo — no es un plan aparte: cada local se factura por separado en su propio plan Pro o Max, con sus propios roles y permisos.',
     plansBilling:
       'El cobro se realiza por adelantado al inicio de cada ciclo y se renueva automáticamente hasta que canceles. Si añades locales a mitad de ciclo, se prorratea el importe restante. Los precios se muestran sin impuestos; los aplicables se añaden en la factura.',
     plansChanges:
@@ -126,9 +128,10 @@ export default {
     plansIntro:
       'Paid plans are billed per location, monthly or annually. Annual billing charges twelve months at the price of ten.',
     plan1: 'Gratis — $0. One location, owner only. No expiry.',
-    plan2: 'Pro — $29 per location per month. Up to five team members.',
-    plan3:
-      'Grupo — $79 per location per month, minimum two locations. Unlimited members and consolidated dashboards.',
+    plan2: 'Pro — $39 per location per month. Up to five team members.',
+    plan3: 'Max — $59 per location per month. Up to ten team members.',
+    plan4:
+      'Grupo — not a separate plan: each location is billed independently on its own Pro or Max plan, with its own roles and permissions.',
     plansBilling:
       'Charges are taken in advance at the start of each cycle and renew automatically until you cancel. Locations added mid-cycle are prorated for the remainder. Prices exclude tax; applicable taxes are added at invoice.',
     plansChanges:
