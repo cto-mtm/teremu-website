@@ -16,6 +16,10 @@ export function useCookieConsent() {
   // useState keeps the banner and any other consumer in sync within a session.
   const choice = useState<ConsentChoice | null>('analytics-consent', () => null)
 
+  // Withdrawing consent must be as easy as giving it, so the footer and the
+  // privacy page can force the banner back open after a decision was stored.
+  const open = useState('analytics-consent-open', () => false)
+
   function read(): ConsentChoice | null {
     if (import.meta.server) return null
     try {
@@ -38,13 +42,18 @@ export function useCookieConsent() {
   function accept() {
     choice.value = 'granted'
     persist('granted')
+    open.value = false
     useGtag().initialize()
   }
 
   function decline() {
     choice.value = 'denied'
     persist('denied')
-    // Nothing to tear down — with initMode 'manual' the tag never loaded.
+    open.value = false
+    // With initMode 'manual' the tag never loaded on this page view. On a
+    // withdrawal the script may already be running, so set Google's opt-out
+    // flag too — it suppresses any further collection until reload.
+    useGtag().disableAnalytics()
   }
 
   /** Re-applies a stored choice on load. Call once, client-side. */
@@ -54,5 +63,5 @@ export function useCookieConsent() {
     if (stored === 'granted') useGtag().initialize()
   }
 
-  return { choice, accept, decline, restore }
+  return { choice, open, accept, decline, restore }
 }

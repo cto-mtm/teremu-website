@@ -1,0 +1,8 @@
+{
+  "name": "teremu-website-root",
+  "private": true,
+  "scripts": {
+    "deploy": "node scripts/deploy.mjs",
+    "optimize:screenshots": "node scripts/optimize-screenshots.mjs"
+  }
+}

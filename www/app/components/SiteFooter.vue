@@ -2,6 +2,9 @@
 const { t } = useI18n()
 const localePath = useLocalePath()
 const year = new Date().getFullYear()
+
+// Lets visitors reopen the consent banner to change or withdraw their choice.
+const { open: cookieSettingsOpen } = useCookieConsent()
 </script>
 
 <template>
@@ -87,12 +90,34 @@ const year = new Date().getFullYear()
                 {{ t('AppFooter.terms') }}
               </NuxtLink>
             </li>
+            <li>
+              <button
+                type="button"
+                class="text-left text-stone-500 transition-colors hover:text-primary-600"
+                @click="cookieSettingsOpen = true"
+              >
+                {{ t('consent.reopen') }}
+              </button>
+            </li>
           </ul>
         </div>
       </div>
 
       <div class="mt-12 flex flex-col items-start justify-between gap-3 border-t border-stone-200 pt-6 text-sm text-stone-500 sm:flex-row sm:items-center">
-        <p>© {{ year }} Teremu. {{ t('AppFooter.rights') }}</p>
+        <!-- The operating company is disclosed on every page, not only in the
+             legal pages — mtmcya.com is where the group is documented. -->
+        <p>
+          © {{ year }} Teremu. {{ t('AppFooter.rights') }}
+          <span class="block sm:inline">
+            {{ t('AppFooter.operatedBy') }}
+            <a
+              href="https://mtmcya.com"
+              target="_blank"
+              rel="noopener"
+              class="underline underline-offset-2 transition-colors hover:text-primary-600"
+            >MTM Cofounders &amp; Associates</a>.
+          </span>
+        </p>
         <p>{{ t('AppFooter.builtFor') }}</p>
       </div>
     </div>

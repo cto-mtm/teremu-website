@@ -13,6 +13,7 @@ export default {
     privacy: 'Privacidad',
     terms: 'Términos',
     rights: 'Todos los derechos reservados.',
+    operatedBy: 'Un producto de MTM CYA Corp —',
     builtFor: 'Hecho para restaurantes independientes en LATAM y España.',
   },
   en: {
@@ -29,6 +30,7 @@ export default {
     privacy: 'Privacy',
     terms: 'Terms',
     rights: 'All rights reserved.',
+    operatedBy: 'A product of MTM CYA Corp —',
     builtFor: 'Built for independent restaurants across LATAM and Spain.',
   },
 }

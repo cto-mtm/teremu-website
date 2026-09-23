@@ -38,10 +38,15 @@ placeholders. Real captures go in `public/images/screenshots/`; run
 
 ## Build & Hosting
 
-The Nuxt site is generated so its static output lands in `firebase/www/`.
-Firebase Hosting's `public` is `"www"` (relative to `firebase/firebase.json`),
-so it serves that generated output. Long-cache headers are applied to
-`_nuxt/**`, `_fonts/**`, `images/**`, and `videos/**`.
+The Nuxt site is generated so its static output lands in `firebase/www/` —
+`www/nuxt.config.ts` sets `nitro.output.publicDir` to `../firebase/www`, so
+`npm run generate` writes straight onto the Hosting target with no copy step.
+
+There is exactly one Firebase config, `firebase.json` at the repo root, and its
+Hosting `public` is `firebase/www`. Everything — `npm run deploy`, the CI
+workflow, and any ad-hoc `firebase` command — runs from the repo root so they
+all read that one file. Long-cache headers are applied to `_nuxt/**`,
+`_fonts/**`, `images/**`, and `videos/**`.
 
 ## Backend — Cloud Functions
 

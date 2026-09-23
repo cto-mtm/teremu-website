@@ -56,11 +56,28 @@ firebase functions:secrets:set GMAIL_SENDER
 firebase functions:secrets:set RECAPTCHA_SECRET_KEY
 ```
 
-## Deploy notes
+## Deploy
 
-Build the Nuxt site so its static output lands in `firebase/www/`, then
-`firebase deploy`. Hosting `public` is set to `www` (relative to `firebase/`),
-which is why the generated site is written there. See `docs/architecture.md`.
+Run the automated deploy script from the repo root:
+
+```bash
+npm run deploy                      # functions + hosting
+npm run deploy -- --only-hosting    # skip the functions deploy
+npm run deploy -- --dry-run         # print the steps, change nothing
+```
+
+It builds `firebase/functions/`, runs `npm run generate` in `www/`, and runs
+`firebase deploy` from the repo root.
+
+`www/nuxt.config.ts` sets `nitro.output.publicDir` to `../firebase/www`, so the
+generated site is written straight onto the Hosting target — there is no copy
+step. The single `firebase.json` lives at the repo root and sets Hosting
+`public` to `firebase/www`; the project id comes from `.firebaserc`. Run
+`firebase` commands from the repo root. See `docs/architecture.md`.
+
+Pushes to `main` that touch `www/` also deploy via
+`.github/workflows/deploy.yml`, which calls the shared reusable workflow in
+`mtmcya-marketing`.
 
 ## Keeping dependencies fresh
 

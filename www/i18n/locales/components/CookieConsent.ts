@@ -5,6 +5,11 @@ export default {
     policyLink: 'Ver política de privacidad',
     accept: 'Aceptar',
     decline: 'Rechazar',
+    reopen: 'Preferencias de cookies',
+    close: 'Cerrar',
+    current: 'Tu elección actual: {choice}.',
+    granted: 'analítica aceptada',
+    denied: 'analítica rechazada',
   },
   en: {
     title: 'Analytics cookies',
@@ -12,5 +17,10 @@ export default {
     policyLink: 'Read the privacy policy',
     accept: 'Accept',
     decline: 'Decline',
+    reopen: 'Cookie preferences',
+    close: 'Close',
+    current: 'Your current choice: {choice}.',
+    granted: 'analytics accepted',
+    denied: 'analytics declined',
   },
 }

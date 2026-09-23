@@ -14,6 +14,7 @@ const accountDuties = computed(() => [
   t('terms.account2'),
   t('terms.account3'),
   t('terms.account4'),
+  t('terms.account5'),
 ])
 
 const prohibited = computed(() => [
@@ -22,8 +23,16 @@ const prohibited = computed(() => [
   t('terms.use3'),
   t('terms.use4'),
   t('terms.use5'),
+  t('terms.use6'),
 ])
 
+const misc = computed(() => [
+  t('terms.misc1'),
+  t('terms.misc2'),
+  t('terms.misc3'),
+  t('terms.misc4'),
+  t('terms.misc5'),
+])
 </script>
 
 <template>
@@ -34,21 +43,37 @@ const prohibited = computed(() => [
     :updated-date="t('terms.updatedDate')"
     icon="i-lucide-scroll-text"
   >
-    <LegalSection :title="t('terms.acceptTitle')" :body="t('terms.acceptBody')" />
+    <!-- Who the counterparty actually is comes first: a visitor should never
+         have to guess which company stands behind the product. -->
+    <LegalSection :title="t('terms.partiesTitle')" :body="t('terms.partiesBody')">
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.partiesGroup') }}</p>
+    </LegalSection>
+
+    <LegalSection :title="t('terms.acceptTitle')" :body="t('terms.acceptBody')">
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.acceptOrder') }}</p>
+    </LegalSection>
+
     <LegalSection :title="t('terms.serviceTitle')" :body="t('terms.serviceBody')" />
 
     <LegalSection :title="t('terms.accountTitle')" :body="t('terms.accountIntro')">
       <LegalList :items="accountDuties" icon="i-lucide-check" icon-class="text-secondary-600" />
+      <p class="mt-4 leading-relaxed text-stone-600">{{ t('terms.accountNote') }}</p>
     </LegalSection>
 
     <LegalSection :title="t('terms.plansTitle')" :body="t('terms.plansIntro')">
       <LegalList :items="plans" icon="i-lucide-tag" icon-class="text-primary-600" />
       <p class="mt-4 leading-relaxed text-stone-600">{{ t('terms.plansBilling') }}</p>
       <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.plansChanges') }}</p>
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.plansFailure') }}</p>
     </LegalSection>
 
-    <LegalSection :title="t('terms.cancelTitle')" :body="t('terms.cancelBody')" />
-    <LegalSection :title="t('terms.dataTitle')" :body="t('terms.dataBody')" />
+    <LegalSection :title="t('terms.cancelTitle')" :body="t('terms.cancelBody')">
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.cancelConsumer') }}</p>
+    </LegalSection>
+
+    <LegalSection :title="t('terms.dataTitle')" :body="t('terms.dataBody')">
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.dataResponsibility') }}</p>
+    </LegalSection>
 
     <!-- Called out rather than buried: the accuracy limits of invoice OCR are
          the most consequential thing on this page for a restaurant. -->
@@ -64,15 +89,32 @@ const prohibited = computed(() => [
       <p class="mt-4 leading-relaxed text-stone-600">{{ t('terms.useConsequence') }}</p>
     </LegalSection>
 
-    <LegalSection :title="t('terms.ipTitle')" :body="t('terms.ipBody')" />
+    <LegalSection :title="t('terms.thirdPartyTitle')" :body="t('terms.thirdPartyBody')" />
+
+    <LegalSection :title="t('terms.ipTitle')" :body="t('terms.ipBody')">
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.ipFeedback') }}</p>
+    </LegalSection>
+
     <LegalSection :title="t('terms.availabilityTitle')" :body="t('terms.availabilityBody')" />
+    <LegalSection :title="t('terms.indemnityTitle')" :body="t('terms.indemnityBody')" />
 
     <LegalSection :title="t('terms.liabilityTitle')" :body="t('terms.liabilityBody')">
       <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.liabilityCarveout') }}</p>
     </LegalSection>
 
     <LegalSection :title="t('terms.terminationTitle')" :body="t('terms.terminationBody')" />
+
+    <LegalSection :title="t('terms.disputesTitle')" :body="t('terms.disputesBody')">
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('terms.disputesCarveout') }}</p>
+    </LegalSection>
+
     <LegalSection :title="t('terms.lawTitle')" :body="t('terms.lawBody')" />
+    <LegalSection :title="t('terms.forceTitle')" :body="t('terms.forceBody')" />
+
+    <LegalSection :title="t('terms.miscTitle')" :body="t('terms.miscIntro')">
+      <LegalList :items="misc" icon="i-lucide-dot" />
+    </LegalSection>
+
     <LegalSection :title="t('terms.changesTitle')" :body="t('terms.changesBody')" />
 
     <LegalContact :title="t('terms.contactTitle')" :body="t('terms.contactBody')">

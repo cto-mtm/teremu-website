@@ -285,6 +285,17 @@ async function onSubmit() {
                 {{ status === 'submitting' ? t('contact.submitting') : t('contact.submit') }}
               </UButton>
 
+              <!-- Privacy notice at the point of collection: the policy has to
+                   be one click away from the field that collects the data, not
+                   only from the footer. -->
+              <p class="mt-4 text-center text-xs leading-relaxed text-stone-500">
+                {{ t('contact.privacyNotice') }}
+                <NuxtLink
+                  :to="localePath('privacy')"
+                  class="font-medium text-primary-600 underline underline-offset-2 hover:text-primary-700"
+                >{{ t('contact.privacyLink') }}</NuxtLink>
+              </p>
+
               <!--
                 Google's reCAPTCHA terms require either the floating badge or
                 this disclosure. The badge is hidden in main.css, so this text
