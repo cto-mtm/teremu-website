@@ -75,9 +75,7 @@ step. The single `firebase.json` lives at the repo root and sets Hosting
 `public` to `firebase/www`; the project id comes from `.firebaserc`. Run
 `firebase` commands from the repo root. See `docs/architecture.md`.
 
-Pushes to `main` that touch `www/` also deploy via
-`.github/workflows/deploy.yml`, which calls the shared reusable workflow in
-`mtmcya-marketing`.
+Deploys are run manually via `npm run deploy` from the repo root.
 
 ## Keeping dependencies fresh
 
