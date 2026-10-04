@@ -12,7 +12,7 @@ Contact / demo forms  ──POST (CORS)──▶  Cloud Function: submitForm  �
                                           ├─ verify reCAPTCHA v3 (score ≥ 0.5)
                                           ├─ validate with zod (per formType)
                                           ├─ send notification email  ─┐
-                                          └─ send confirmation email  ─┴─ Gmail SMTP (nodemailer)
+                                          └─ send confirmation email  ─┴─ mtmcya-mailer (HTTPS → SES)
 ```
 
 ## Frontend — `www/`
@@ -56,14 +56,31 @@ all read that one file. Long-cache headers are applied to `_nuxt/**`,
 2. Looks up `formConfigs[formType]` (`models.ts`); 400 if unknown.
 3. Verifies reCAPTCHA v3 (bypassed under the emulator).
 4. Validates `data` against the form's zod schema.
-5. Emails the internal notification (`notifyEmail`) and, if the payload has an
-   `email`, a confirmation to the submitter.
+5. Emails the internal notification (`notifyEmail`, visitor in `replyTo`) and,
+   if the payload has an `email`, a fixed-content confirmation to the submitter.
+   A refused notification returns 502; the confirmation is best-effort.
 
-## Secrets & Email
+## Email
 
-Secrets (`GMAIL_USER`, `GMAIL_APP_PASSWORD`, `GMAIL_SENDER`,
-`RECAPTCHA_SECRET_KEY`) live in Firebase Secret Manager. Email goes out via
-Gmail SMTP through nodemailer. Templates are inline-styled, email-client safe.
+All email goes through **mtmcya-mailer** — see
+[`mtmcya-mailer.md`](./mtmcya-mailer.md) for the rules. `helpers/mailer.ts`
+(`sendMail`) is the only sender: an HTTPS POST authenticated with the
+function's own service account (Google ID token), so there are no email
+secrets. `MAILER_URL` lives in the committed `firebase/functions/.env`; under
+the emulator mail is logged and skipped. If a deploy is missing `MAILER_URL`,
+sending fails loudly (error log + 502 to the visitor) rather than silently
+dropping submissions. Mail goes out as `no-reply@teremu.com`.
+
+Templates (`src/templates/`) return `{ html, text }` — inline-styled, email-client
+safe HTML plus a real plain-text part. Every interpolated value is escaped.
+
+**Languages:** the site sends the visitor's `locale` with each submission
+(validated against `es`/`en` in `helpers/locale.ts`, fallback `es`). The
+confirmation goes out in that language; the internal notification stays in
+Spanish and shows the visitor's language. Email copy lives in the functions
+code (`confirmationSubject` in `models.ts`, `COPY` in `confirmationEmail.ts`),
+not `www/i18n/locales/` — the function can't read the Nuxt locale files.
+Spanish is the source of truth; keep `en` in step.
 
 ## Content
 

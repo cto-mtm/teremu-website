@@ -18,6 +18,8 @@ node_modules/
 # Env
 .env
 .env.*
+# Functions config, not secrets (MAILER_URL)
+!firebase/functions/.env
 
 # OS
 .DS_Store

@@ -6,6 +6,7 @@
  * in every client (email can't use local SVGs). Update SITE_URL / LOGO_URL if
  * the domain changes.
  */
+import type { EmailLocale } from "../helpers/locale.js";
 
 // REPLACE_ME if the marketing domain differs.
 const SITE_URL = "https://teremu.com";
@@ -21,11 +22,12 @@ const HAIRLINE = "#f0e6dc";
 
 /**
  * Wrap inner body HTML in the branded card (header + footer).
- * `preheader` is the hidden inbox-preview snippet.
+ * `preheader` is the hidden inbox-preview snippet; `lang` sets the document
+ * language (screen readers use it to pick a voice).
  */
-export function emailShell(innerHtml: string, preheader = ""): string {
+export function emailShell(innerHtml: string, preheader = "", lang: EmailLocale = "es"): string {
   return `<!doctype html>
-<html lang="es">
+<html lang="${lang}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -6,7 +6,7 @@ camera into a restaurant's back office.
 ## What's in the box
 
 - **`www/`** — a Nuxt 4 marketing site (bilingual ES/EN, Nuxt UI, Tailwind, SEO, image optimization).
-- **`firebase/`** — Firebase Hosting config + Cloud Functions that handle form submissions (contact & demo requests) with reCAPTCHA v3 and Gmail SMTP email.
+- **`firebase/`** — Firebase Hosting config + Cloud Functions that handle form submissions (contact & demo requests) with reCAPTCHA Enterprise and email via mtmcya-mailer (see `docs/mtmcya-mailer.md`).
 
 ## Quick start
 
@@ -38,7 +38,7 @@ Drop real app captures into `www/public/images/screenshots/` and swap the
 
 ## Adding a new form type
 
-1. Edit `firebase/functions/src/models.ts` — add an entry to `formConfigs` with a zod `schema`, `notifyEmail`, and subjects.
+1. Edit `firebase/functions/src/models.ts` — add an entry to `formConfigs` with a zod `schema`, `notifyEmail`, the internal `subject`, and a `confirmationSubject` per language (`es`, `en`).
 2. Redeploy functions: `npm run deploy` in `firebase/functions/`.
 3. Call it from the site: `useSubmitForm('your-type', { ...fields })`.
 
@@ -47,14 +47,13 @@ Drop real app captures into `www/public/images/screenshots/` and swap the
 1. Add a `routeRules` entry in `www/nuxt.config.ts`.
 2. Record it in `/legacy_urls.md`.
 
-## Required secrets (before deploying functions)
+## Email
 
-```bash
-firebase functions:secrets:set GMAIL_USER
-firebase functions:secrets:set GMAIL_APP_PASSWORD
-firebase functions:secrets:set GMAIL_SENDER
-firebase functions:secrets:set RECAPTCHA_SECRET_KEY
-```
+Functions send mail through **mtmcya-mailer** — no secrets to set. The mailer
+URL is in the committed `firebase/functions/.env`, and the project's service
+account is already onboarded (`teremu-website`, `no-reply@teremu.com`). A
+`403` from the mailer means onboarding, not code. Read
+[`docs/mtmcya-mailer.md`](docs/mtmcya-mailer.md) before writing any email code.
 
 ## Deploy
 

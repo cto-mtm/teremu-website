@@ -10,6 +10,13 @@ prices current without data entry. This repo is the public marketing site.
 - `firebase/` — Firebase Hosting config + Cloud Functions (form backend)
 - `docs/` — Internal documentation
 
+## Email
+
+All email goes through mtmcya-mailer via `sendMail()` in
+`firebase/functions/src/helpers/mailer.ts`. Read `docs/mtmcya-mailer.md` before
+touching any email code — no SMTP/nodemailer/SES SDKs, never untrusted input in
+`to`, always an `idempotencyKey`, no personal data in logs.
+
 ## Development
 
 - **Do not** run `nuxi build`, `npm run build`, or any build commands unless explicitly asked.

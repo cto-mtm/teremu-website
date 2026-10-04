@@ -1,4 +1,5 @@
 import type { FormConfig } from "../models.js";
+import { type EmailLocale, LOCALE_LABELS } from "../helpers/locale.js";
 import { escapeHtml } from "../helpers/escapeHtml.js";
 import { emailShell, emailTokens } from "./layout.js";
 
@@ -6,13 +7,21 @@ const { INK, SMOKE, HAIRLINE } = emailTokens;
 
 /**
  * Internal notification email — sent to the team when a form is submitted.
+ * Always Spanish; `locale` is the visitor's site language, shown so the team
+ * knows which language to reply in.
  * Brand-styled via the shared email shell. Inline styles only (client-safe).
  */
 export function buildNotificationEmail(
   config: FormConfig,
   data: Record<string, unknown>,
-): string {
-  const rows = Object.entries(data)
+  locale: EmailLocale,
+): { html: string; text: string } {
+  const entries: [string, unknown][] = [
+    ...Object.entries(data),
+    ["idioma", LOCALE_LABELS[locale]],
+  ];
+
+  const rows = entries
     .map(
       ([key, value]) => `
         <tr>
@@ -33,5 +42,15 @@ export function buildNotificationEmail(
       ${rows}
     </table>`;
 
-  return emailShell(inner, `Nuevo envío: ${escapeHtml(config.subject)}`);
+  const text = [
+    config.subject,
+    "Se ha recibido un nuevo envío desde el sitio web.",
+    "",
+    ...entries.map(([key, value]) => `${key}: ${String(value ?? "")}`),
+  ].join("\n");
+
+  return {
+    html: emailShell(inner, `Nuevo envío: ${escapeHtml(config.subject)}`),
+    text,
+  };
 }

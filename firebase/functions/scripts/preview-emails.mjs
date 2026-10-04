@@ -2,7 +2,8 @@
  * Render the email templates to static HTML for visual review in a browser.
  *
  * Usage: npm run preview:emails
- * Output: firebase/functions/preview/{notification,confirmation}.html
+ * Output: firebase/functions/preview/notification.{html,txt} and
+ *         firebase/functions/preview/confirmation.{es,en}.{html,txt}
  *
  * Requires the templates to be compiled first (handled by the npm script,
  * which runs `npm run build` before this file).
@@ -29,7 +30,14 @@ const sampleData = {
 
 mkdirSync(previewDir, { recursive: true });
 
-writeFileSync(join(previewDir, "notification.html"), buildNotificationEmail(config, sampleData));
-writeFileSync(join(previewDir, "confirmation.html"), buildConfirmationEmail(config, sampleData));
+const notification = buildNotificationEmail(config, sampleData, "en");
+writeFileSync(join(previewDir, "notification.html"), notification.html);
+writeFileSync(join(previewDir, "notification.txt"), notification.text);
 
-console.log("✓ Wrote preview/notification.html and preview/confirmation.html");
+for (const locale of ["es", "en"]) {
+  const confirmation = buildConfirmationEmail(config, locale);
+  writeFileSync(join(previewDir, `confirmation.${locale}.html`), confirmation.html);
+  writeFileSync(join(previewDir, `confirmation.${locale}.txt`), confirmation.text);
+}
+
+console.log("✓ Wrote preview/notification.{html,txt} and preview/confirmation.{es,en}.{html,txt}");

@@ -1,18 +1,14 @@
+import { randomUUID } from "node:crypto";
 import { onRequest } from "firebase-functions/v2/https";
-import { defineSecret } from "firebase-functions/params";
 import * as logger from "firebase-functions/logger";
 import { ZodError } from "zod";
 
 import formConfigs from "./models.js";
-import { createTransporter, formatFrom } from "./helpers/mailer.js";
+import { sendMail } from "./helpers/mailer.js";
+import { parseLocale } from "./helpers/locale.js";
 import { verifyRecaptcha, normalizeAction } from "./helpers/recaptcha.js";
 import { buildNotificationEmail } from "./templates/notificationEmail.js";
 import { buildConfirmationEmail } from "./templates/confirmationEmail.js";
-
-// ── Secrets (set via `firebase functions:secrets:set ...`) ──────
-const GMAIL_USER = defineSecret("GMAIL_USER");
-const GMAIL_APP_PASSWORD = defineSecret("GMAIL_APP_PASSWORD");
-const GMAIL_SENDER = defineSecret("GMAIL_SENDER");
 
 // ── reCAPTCHA Enterprise ────────────────────────────────────────
 // The site key is public (it ships in the browser bundle), so it lives here
@@ -33,13 +29,14 @@ interface SubmitBody {
   formType?: string;
   data?: Record<string, unknown>;
   recaptchaToken?: string;
+  /** Visitor's site language; validated by parseLocale (fallback: es). */
+  locale?: string;
 }
 
 export const submitForm = onRequest(
   {
     region: "us-central1",
     maxInstances: 10,
-    secrets: [GMAIL_USER, GMAIL_APP_PASSWORD, GMAIL_SENDER],
   },
   async (req, res) => {
     // ── CORS ──
@@ -62,6 +59,7 @@ export const submitForm = onRequest(
 
     const body = (req.body ?? {}) as SubmitBody;
     const { formType, data, recaptchaToken } = body;
+    const locale = parseLocale(body.locale);
 
     // ── Look up form config ──
     if (!formType || !formConfigs[formType]) {
@@ -98,40 +96,54 @@ export const submitForm = onRequest(
       throw err;
     }
 
-    // ── Send email(s) ──
-    try {
-      const transporter = createTransporter(
-        GMAIL_USER.value(),
-        GMAIL_APP_PASSWORD.value(),
-      );
-      const from = formatFrom(GMAIL_SENDER.value());
+    // ── Send email(s) via mtmcya-mailer (see docs/mtmcya-mailer.md) ──
+    const submissionId = randomUUID();
+    const email = typeof parsed.email === "string" && parsed.email ? parsed.email : undefined;
+    const safeName = String((parsed.name as string) ?? "Unknown").replace(/[\r\n]/g, "");
 
-      const safeName = String((parsed.name as string) ?? "Unknown").replace(/[\r\n]/g, "");
-
-      // Internal notification
-      await transporter.sendMail({
-        from,
-        to: config.notifyEmail,
-        subject: `${config.subject} — ${safeName}`,
-        html: buildNotificationEmail(config, parsed),
-        replyTo: typeof parsed.email === "string" ? parsed.email : undefined,
+    // Internal notification — hardcoded destination, visitor only in replyTo.
+    // Nothing else stores the submission, so if the mailer refuses it the
+    // visitor has to know it didn't go through.
+    const notification = buildNotificationEmail(config, parsed, locale);
+    const notified = await sendMail({
+      to: config.notifyEmail,
+      replyTo: email,
+      subject: `${config.subject} — ${safeName}`.slice(0, 200),
+      html: notification.html,
+      text: notification.text,
+      kind: formType,
+      idempotencyKey: `${formType}-${submissionId}`,
+    });
+    // (skipped_emulator = local dev: skipped on purpose, not a failure.)
+    if (!notified.ok && notified.error !== "skipped_emulator") {
+      logger.error("Form notification not sent", {
+        formType,
+        status: notified.status,
+        error: notified.error,
       });
-
-      // User confirmation (only if we have an email)
-      if (typeof parsed.email === "string" && parsed.email) {
-        await transporter.sendMail({
-          from,
-          to: parsed.email,
-          subject: config.confirmationSubject,
-          html: buildConfirmationEmail(config, parsed),
-        });
-      }
-
-      logger.info("Form submitted", { formType, name: safeName });
-      res.status(200).json({ success: true });
-    } catch (err) {
-      logger.error("Failed to send email", { formType, error: (err as Error).message });
-      res.status(500).json({ error: "Failed to send email" });
+      res.status(502).json({ error: "Failed to send email" });
+      return;
     }
+
+    // Submitter confirmation — fixed content only (rule 1), in the visitor's
+    // site language, best-effort. Replies go to the team, since no-reply@ bounces.
+    if (email) {
+      const confirmation = buildConfirmationEmail(config, locale);
+      await sendMail({
+        to: email,
+        replyTo: config.notifyEmail,
+        subject: confirmation.subject,
+        html: confirmation.html,
+        text: confirmation.text,
+        kind: `${formType}-confirmation`,
+        idempotencyKey: `${formType}-confirmation-${submissionId}`,
+      });
+    }
+
+    logger.info("Form submitted", {
+      formType,
+      mailId: "mailId" in notified ? notified.mailId : undefined,
+    });
+    res.status(200).json({ success: true });
   },
 );

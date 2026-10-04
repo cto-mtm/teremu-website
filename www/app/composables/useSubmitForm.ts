@@ -15,6 +15,8 @@ export interface SubmitFormResult {
 
 export function useSubmitForm() {
   const config = useRuntimeConfig()
+  // Sent so the confirmation email matches the visitor's site language.
+  const { locale } = useI18n()
 
   const endpoint = config.public.submitFormUrl as string
 
@@ -26,7 +28,7 @@ export function useSubmitForm() {
     try {
       const res = await $fetch<{ success?: boolean; error?: string }>(endpoint, {
         method: 'POST',
-        body: { formType, data, recaptchaToken },
+        body: { formType, data, recaptchaToken, locale: locale.value },
       })
       if (res?.success) return { success: true }
       return { success: false, error: res?.error ?? 'Unknown error' }
