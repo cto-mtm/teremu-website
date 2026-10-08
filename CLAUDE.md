@@ -26,7 +26,7 @@ touching any email code — no SMTP/nodemailer/SES SDKs, never untrusted input i
 
 ## Nuxt & i18n Guardrails
 - **Internationalized Routing:** NEVER hardcode standard links (e.g., `<NuxtLink to="/about">`). You must ALWAYS use `localePath()` for internal navigation (e.g., `<NuxtLink :to="localePath('about')">`) so the i18n module can correctly route users based on their active language.
-- **Spanish is the source of truth.** Teremu launches in LATAM/Spain first. Author copy in Spanish (`es`) and keep English (`en`) as the fallback. Every user-facing string lives in `www/i18n/locales/`.
+- **Spanish is the source of truth.** Author copy in Spanish (`es`) and keep English (`en`) as the fallback. The US is the main market; LATAM, Spain, and other countries are also served — never word copy as if Teremu were limited to LATAM/Spain, and don't list regions in marketing copy at all (currency/billing notes and legal text are the exceptions). Every user-facing string lives in `www/i18n/locales/`.
 
 ## Brand & Content Notes
 - Product surfaces referenced in copy: Scanner, Triage, Pulse (dashboard), Menu, Pantry, Vendors, Assistant, Team & permissions.

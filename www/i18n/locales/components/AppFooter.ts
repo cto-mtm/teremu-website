@@ -14,7 +14,7 @@ export default {
     terms: 'Términos',
     rights: 'Todos los derechos reservados.',
     operatedBy: 'Un producto de MTM CYA Corp —',
-    builtFor: 'Hecho para restaurantes independientes en LATAM y España.',
+    builtFor: 'Hecho para restaurantes independientes.',
   },
   en: {
     tagline: "Your restaurant's back office, in your phone's camera.",
@@ -31,6 +31,6 @@ export default {
     terms: 'Terms',
     rights: 'All rights reserved.',
     operatedBy: 'A product of MTM CYA Corp —',
-    builtFor: 'Built for independent restaurants across LATAM and Spain.',
+    builtFor: 'Built for independent restaurants.',
   },
 }

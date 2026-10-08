@@ -4,7 +4,7 @@ export default {
     heroTitle: 'No es software. Es margen recuperado.',
     heroSubtitle:
       'Un restaurante que compra $20,000/mes y caza la subida de precios de un proveedor recupera $200–$400 al mes. Pro cuesta una décima parte de eso. Es aritmética, no persuasión.',
-    priceNote: 'Precios de referencia por local, calibrados para el lanzamiento en LATAM/España. Cobramos en moneda local.',
+    priceNote: 'Precios por local en dólares estadounidenses. Fuera de EE. UU. cobramos en moneda local con precios regionales.',
 
     // Billing toggle
     toggleMonthly: 'Mensual',
@@ -91,7 +91,7 @@ export default {
     faq5Q: '¿Puedo invitar a mi equipo?',
     faq5A: 'Sí. Pro incluye hasta 5 miembros y Max hasta 10, con permisos granulares por área (escaneo, triage, menú, despensa, finanzas). Si tienes varios locales, cada uno tiene su propio equipo.',
     faq6Q: '¿Puedo pagar en moneda local?',
-    faq6A: 'Sí. Cobramos en moneda local con precios regionales — un precio en dólares en LATAM añade fricción silenciosa.',
+    faq6A: 'Sí. En EE. UU. cobramos en dólares; en Latinoamérica, España y otros países cobramos en tu moneda local con precios regionales.',
     faq7Q: '¿Qué pasa con mis recetas y mis datos?',
     faq7A: 'Son tuyos. Teremu solo necesita los ingredientes y sus cantidades para costear cada plato — nunca los pasos ni tu técnica. No vendemos ni compartimos tu información, y puedes exportarla o borrarla cuando quieras.',
 
@@ -104,7 +104,7 @@ export default {
     heroTitle: "It's not software. It's recovered margin.",
     heroSubtitle:
       'A restaurant buying $20,000/mo that catches a vendor\'s price creep recovers $200–$400 a month. Pro costs a tenth of that. It\'s arithmetic, not persuasion.',
-    priceNote: 'Reference per-location prices, calibrated for the LATAM/Spain launch. We bill in local currency.',
+    priceNote: 'Per-location prices in US dollars. Outside the US, we bill in local currency with regional pricing.',
 
     toggleMonthly: 'Monthly',
     toggleAnnual: 'Annual',
@@ -184,7 +184,7 @@ export default {
     faq5Q: 'Can I invite my team?',
     faq5A: 'Yes. Pro includes up to 5 members and Max up to 10, with granular per-area permissions (scanning, triage, menu, pantry, finance). If you run several locations, each has its own team.',
     faq6Q: 'Can I pay in local currency?',
-    faq6A: 'Yes. We bill in local currency with regional pricing — a USD price in LATAM adds silent friction.',
+    faq6A: 'Yes. In the US we bill in USD; in Latin America, Spain, and other countries we bill in your local currency with regional pricing.',
     faq7Q: 'What happens to my recipes and my data?',
     faq7A: 'They\'re yours. Teremu only needs the ingredients and their quantities to cost each dish — never the steps or your technique. We don\'t sell or share your information, and you can export or delete it whenever you want.',
 
