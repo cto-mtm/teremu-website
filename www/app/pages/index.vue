@@ -176,6 +176,8 @@ const features = computed(() => [
       </ol>
     </section>
 
+    <SectionDivider icon="i-lucide-chef-hat" />
+
     <!-- ── Features overview ────────────────────────────────── -->
     <section class="bg-stone-50 py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
@@ -207,6 +209,8 @@ const features = computed(() => [
       </div>
     </section>
 
+    <SectionDivider icon="i-lucide-smartphone" />
+
     <!-- ── Screenshot showcase ──────────────────────────────── -->
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <div class="grid items-center gap-12 lg:grid-cols-2">
@@ -227,6 +231,8 @@ const features = computed(() => [
         </div>
       </div>
     </section>
+
+    <SectionDivider icon="i-lucide-lock" />
 
     <!-- ── Trust / privacy ──────────────────────────────────── -->
     <section class="bg-stone-50 py-20">
@@ -260,15 +266,24 @@ const features = computed(() => [
       </div>
     </section>
 
-    <!-- ── Testimonials / real kitchens ─────────────────────── -->
+    <!-- ── Testimonials / real kitchens ─────────────────────────────
+         DISABLED until we have real reviews + photography. The quotes
+         (home.t1Quote … t3Role) are sample copy and the headshots /
+         lifestyle photo are PhotoSlot placeholders — shipping them live
+         would present invented people as real customers. To re-enable:
+         drop real avatars in www/public/images/photos/, pass `src`/`alt`
+         to each PhotoSlot, replace the sample quotes in
+         i18n/locales/pages/home.ts, then uncomment this block.
+    -->
+    <!--
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-        <!-- Lifestyle photo -->
+        &lt;!&ndash; Lifestyle photo &ndash;&gt;
         <div class="order-1">
           <PhotoSlot :label="t('home.humanPhoto')" class="aspect-[4/5] w-full depth-card sm:aspect-[3/4]" />
         </div>
 
-        <!-- Heading + testimonials -->
+        &lt;!&ndash; Heading + testimonials &ndash;&gt;
         <div class="order-2">
           <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.humanTitle') }}</h2>
           <p class="mt-3 text-lg text-stone-600">{{ t('home.humanSubtitle') }}</p>
@@ -296,6 +311,7 @@ const features = computed(() => [
         </div>
       </div>
     </section>
+    -->
 
     <!-- ── Pricing teaser ───────────────────────────────────── -->
     <section class="bg-stone-900 py-20 text-white">
