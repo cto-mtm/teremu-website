@@ -54,19 +54,28 @@ useHead(() => ({
 }))
 
 const loop = computed(() => [
-  { icon: 'i-lucide-camera', title: t('home.loopStep1Title'), body: t('home.loopStep1Body') },
-  { icon: 'i-lucide-list-checks', title: t('home.loopStep2Title'), body: t('home.loopStep2Body') },
-  { icon: 'i-lucide-refresh-cw', title: t('home.loopStep3Title'), body: t('home.loopStep3Body') },
-  { icon: 'i-lucide-bell-ring', title: t('home.loopStep4Title'), body: t('home.loopStep4Body') },
+  { icon: 'scan', title: t('home.loopStep1Title'), body: t('home.loopStep1Body') },
+  { icon: 'triage', title: t('home.loopStep2Title'), body: t('home.loopStep2Body') },
+  { icon: 'update', title: t('home.loopStep3Title'), body: t('home.loopStep3Body') },
+  { icon: 'alert', title: t('home.loopStep4Title'), body: t('home.loopStep4Body') },
 ])
 
+// Features cards rotate through the three brand accents so the grid reads
+// as a set rather than six identical boxes. ember = brand, herb = positive,
+// coral = watch-outs — the same semantic palette the product uses.
+// Full static class strings (no runtime concatenation) so Tailwind keeps them.
+const featureAccents = [
+  { chip: 'bg-ember-50 text-ember-600', edge: 'group-hover:border-ember-300' },
+  { chip: 'bg-herb-50 text-herb-600', edge: 'group-hover:border-herb-300' },
+  { chip: 'bg-coral-50 text-coral-600', edge: 'group-hover:border-coral-300' },
+] as const
 const features = computed(() => [
-  { icon: 'i-lucide-scan-line', title: t('home.feat1Title'), body: t('home.feat1Body') },
-  { icon: 'i-lucide-activity', title: t('home.feat2Title'), body: t('home.feat2Body') },
-  { icon: 'i-lucide-utensils', title: t('home.feat3Title'), body: t('home.feat3Body') },
-  { icon: 'i-lucide-package', title: t('home.feat4Title'), body: t('home.feat4Body') },
-  { icon: 'i-lucide-truck', title: t('home.feat5Title'), body: t('home.feat5Body') },
-  { icon: 'i-lucide-sparkles', title: t('home.feat6Title'), body: t('home.feat6Body') },
+  { icon: 'scanner', title: t('home.feat1Title'), body: t('home.feat1Body') },
+  { icon: 'pulse', title: t('home.feat2Title'), body: t('home.feat2Body') },
+  { icon: 'menu', title: t('home.feat3Title'), body: t('home.feat3Body') },
+  { icon: 'pantry', title: t('home.feat4Title'), body: t('home.feat4Body') },
+  { icon: 'vendors', title: t('home.feat5Title'), body: t('home.feat5Body') },
+  { icon: 'assistant', title: t('home.feat6Title'), body: t('home.feat6Body') },
 ])
 </script>
 
@@ -132,9 +141,9 @@ const features = computed(() => [
         <dl class="animate-fade-up animate-delay-300 mt-12 grid grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-3 sm:gap-6">
           <div
             v-for="(s, i) in [
-              { icon: 'i-lucide-camera', v: t('home.stat1Value'), l: t('home.stat1Label') },
-              { icon: 'i-lucide-piggy-bank', v: t('home.stat2Value'), l: t('home.stat2Label') },
-              { icon: 'i-lucide-sparkles', v: t('home.stat3Value'), l: t('home.stat3Label') },
+              { icon: 'i-lucide-camera', v: t('home.stat1Value'), l: t('home.stat1Label'), chips: false },
+              { icon: 'i-lucide-piggy-bank', v: t('home.stat2Value'), l: t('home.stat2Label'), chips: true },
+              { icon: 'i-lucide-sparkles', v: t('home.stat3Value'), l: t('home.stat3Label'), chips: false },
             ]"
             :key="i"
             class="flex items-center gap-4 rounded-2xl bg-white/70 p-5 ring-1 ring-stone-200"
@@ -143,8 +152,13 @@ const features = computed(() => [
               <UIcon :name="s.icon" class="h-6 w-6" />
             </span>
             <div>
-              <dt class="font-display text-2xl font-bold leading-none text-stone-900">{{ s.v }}</dt>
+              <dt class="num-display text-3xl font-bold leading-none text-stone-900 sm:text-4xl">{{ s.v }}</dt>
               <dd class="mt-1.5 text-sm leading-snug text-stone-600">{{ s.l }}</dd>
+              <!-- Semantic color story: coral = a price hike you caught, herb = the drop you lock in. -->
+              <div v-if="s.chips" class="mt-2 flex gap-1.5" aria-hidden="true">
+                <span class="price-chip is-up"><UIcon name="i-lucide-trending-up" class="h-3.5 w-3.5" /> +8%</span>
+                <span class="price-chip is-down"><UIcon name="i-lucide-trending-down" class="h-3.5 w-3.5" /> −5%</span>
+              </div>
             </div>
           </div>
         </dl>
@@ -154,35 +168,47 @@ const features = computed(() => [
     <!-- ── Core loop ────────────────────────────────────────── -->
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.loopTitle') }}</h2>
+        <span class="eyebrow">{{ t('home.loopEyebrow') }}</span>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.loopTitle') }}</span></h2>
         <p class="mt-4 text-lg text-stone-600">{{ t('home.loopSubtitle') }}</p>
       </div>
 
-      <ol class="mt-14 grid gap-6 md:grid-cols-4">
+      <!-- The loop reads as one connected path: numbered nodes strung on a
+           dashed ember line, not four separate boxes. -->
+      <ol class="relative mt-16 grid gap-x-6 gap-y-10 md:grid-cols-4">
+        <!-- dashed connector (desktop only), sits behind the nodes -->
+        <span
+          class="pointer-events-none absolute left-[12.5%] right-[12.5%] top-7 hidden border-t-2 border-dashed border-primary-200 md:block"
+          aria-hidden="true"
+        />
         <li
           v-for="(step, i) in loop"
           :key="i"
-          class="group relative rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:depth-card"
+          class="group relative flex flex-col items-center text-center"
         >
-          <span class="absolute right-4 top-4 font-display text-4xl font-bold text-stone-100 transition-colors group-hover:text-primary-100">
-            {{ i + 1 }}
+          <!-- numbered node -->
+          <span
+            class="relative z-10 grid h-14 w-14 place-items-center rounded-full border-2 border-primary-200 bg-white text-primary-600 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary-500 group-hover:bg-primary-500 group-hover:text-white"
+          >
+            <BrandIcon :name="step.icon" class="h-7 w-7" />
+            <span
+              class="num-display absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-primary-500 text-sm font-bold text-white shadow"
+            >{{ i + 1 }}</span>
           </span>
-          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-600 transition-colors group-hover:bg-primary-500 group-hover:text-white">
-            <UIcon :name="step.icon" class="h-6 w-6" />
-          </span>
-          <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ step.title }}</h3>
-          <p class="mt-2 text-sm text-stone-600">{{ step.body }}</p>
+          <h3 class="mt-5 text-lg font-semibold text-stone-900">{{ step.title }}</h3>
+          <p class="mt-2 max-w-xs text-sm text-stone-600">{{ step.body }}</p>
         </li>
       </ol>
     </section>
 
-    <SectionDivider icon="i-lucide-chef-hat" />
+    <SectionDivider />
 
     <!-- ── Features overview ────────────────────────────────── -->
-    <section class="bg-stone-50 py-20">
+    <section class="bg-grain bg-stone-50 py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <div class="mx-auto max-w-2xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.featuresTitle') }}</h2>
+          <span class="eyebrow">{{ t('home.featuresEyebrow') }}</span>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.featuresTitle') }}</span></h2>
           <p class="mt-4 text-lg text-stone-600">{{ t('home.featuresSubtitle') }}</p>
         </div>
 
@@ -191,9 +217,13 @@ const features = computed(() => [
             v-for="(f, i) in features"
             :key="i"
             class="group rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:depth-card"
+            :class="featureAccents[i % featureAccents.length].edge"
           >
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary-50 text-secondary-600 transition-transform duration-300 group-hover:scale-110">
-              <UIcon :name="f.icon" class="h-6 w-6" />
+            <span
+              class="inline-flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
+              :class="featureAccents[i % featureAccents.length].chip"
+            >
+              <BrandIcon :name="f.icon" class="h-6 w-6" />
             </span>
             <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ f.title }}</h3>
             <p class="mt-2 text-sm text-stone-600">{{ f.body }}</p>
@@ -209,7 +239,7 @@ const features = computed(() => [
       </div>
     </section>
 
-    <SectionDivider icon="i-lucide-smartphone" />
+    <SectionDivider />
 
     <!-- ── Screenshot showcase ──────────────────────────────── -->
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -232,32 +262,33 @@ const features = computed(() => [
       </div>
     </section>
 
-    <SectionDivider icon="i-lucide-lock" />
+    <SectionDivider />
 
     <!-- ── Trust / privacy ──────────────────────────────────── -->
-    <section class="bg-stone-50 py-20">
+    <section class="bg-scallop-field bg-stone-50 py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <div class="mx-auto max-w-2xl text-center">
           <span class="inline-flex items-center gap-2 rounded-full bg-secondary-50 px-3 py-1 text-sm font-medium text-secondary-700 ring-1 ring-secondary-200">
             <UIcon name="i-lucide-lock" class="h-4 w-4" />
             {{ t('home.trustBadge') }}
           </span>
-          <h2 class="mt-5 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.trustTitle') }}</h2>
+          <h2 class="mt-5 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.trustTitle') }}</span></h2>
           <p class="mt-4 text-lg text-stone-600">{{ t('home.trustSubtitle') }}</p>
         </div>
 
         <div class="mt-14 grid gap-6 md:grid-cols-3">
           <div
             v-for="item in [
-              { icon: 'i-lucide-chef-hat', title: t('home.trust1Title'), body: t('home.trust1Body') },
-              { icon: 'i-lucide-shield-check', title: t('home.trust2Title'), body: t('home.trust2Body') },
-              { icon: 'i-lucide-sliders-horizontal', title: t('home.trust3Title'), body: t('home.trust3Body') },
+              { icon: 'chef', title: t('home.trust1Title'), body: t('home.trust1Body') },
+              { icon: 'shield', title: t('home.trust2Title'), body: t('home.trust2Body') },
+              { icon: 'controls', title: t('home.trust3Title'), body: t('home.trust3Body') },
             ]"
             :key="item.title"
-            class="rounded-2xl border border-stone-200 bg-white p-6"
+            class="rounded-2xl border border-ember-100/70 p-6 shadow-[0_1px_2px_rgba(28,20,16,0.04),0_12px_30px_-18px_rgba(255,117,31,0.25)]"
+            style="background-image: linear-gradient(165deg, #fffaf4 0%, #fff4ec 100%)"
           >
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-secondary-50 text-secondary-600">
-              <UIcon :name="item.icon" class="h-6 w-6" />
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/70 text-ember-600 ring-1 ring-ember-100">
+              <BrandIcon :name="item.icon" class="h-6 w-6" />
             </span>
             <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ item.title }}</h3>
             <p class="mt-2 text-sm text-stone-600">{{ item.body }}</p>
@@ -312,6 +343,8 @@ const features = computed(() => [
       </div>
     </section>
     -->
+
+    <SectionDivider />
 
     <!-- ── Pricing teaser ───────────────────────────────────── -->
     <section class="bg-stone-900 py-20 text-white">

@@ -1,141 +1,155 @@
 <script setup lang="ts">
 /**
- * SectionDivider — a slim, on-brand break between page sections.
+ * SectionDivider — an on-brand wavy squiggle between page sections.
  *
- * Purely decorative (aria-hidden). Three variants let you match the
- * seam to the sections around it:
+ * Echoes the scalloped / wavy edge of the Teremu seal logo: a single
+ * ember-gradient squiggle that ripples across the content column and
+ * fades out at both ends. Purely decorative (aria-hidden), pure SVG,
+ * no icons.
  *
- *   line  — a hairline ember→herb gradient rule with a centered brand
- *           ember dot. Default. Good between two light sections.
- *   icon  — the same rule, but with a small circular brand chip holding
- *           a Lucide icon in the middle. Pass `icon` to choose it.
- *   wave  — a soft ember-wash wave, for easing into/out of a tinted or
- *           dark section. Pass `flip` to point it the other way.
+ *   variant="squiggle"  default — the wavy brand line.
+ *   variant="line"      a plain refined hairline (fallback / quieter seam).
  *
  * Usage:
  *   <SectionDivider />
- *   <SectionDivider variant="icon" icon="i-lucide-utensils-crossed" />
- *   <SectionDivider variant="wave" />
- *   <SectionDivider variant="wave" flip />
+ *   <SectionDivider variant="line" />
  */
 withDefaults(
   defineProps<{
-    variant?: 'line' | 'icon' | 'wave'
-    /** Lucide icon name for the `icon` variant (and implies it when set). */
-    icon?: string
-    /** Mirror the `wave` variant vertically. */
-    flip?: boolean
+    variant?: 'squiggle' | 'line'
   }>(),
-  {
-    variant: 'line',
-    icon: '',
-    flip: false,
-  },
+  { variant: 'squiggle' },
 )
+
+// Respect prefers-reduced-motion. SSR-safe: false on the server, resolved
+// on mount so the SMIL animation never ships to users who opt out.
+const reduceMotion = ref(false)
+onMounted(() => {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+  reduceMotion.value = mq.matches
+  mq.addEventListener?.('change', (e) => (reduceMotion.value = e.matches))
+})
+
+// A uniform sine-like wave: identical, mirror-symmetric half-period humps.
+// Full period = 80u (two 40u humps); midline y = 14, amplitude 7 (crest 7,
+// trough 21). Each half-period is a single cubic whose control points sit
+// at 1/3 and 2/3 of the span, both at the peak — a clean, regular wave.
+//
+// Seamless loop: the viewBox shows 0..960. We draw the path from one period
+// BEFORE 0 to one period AFTER 960 (so −80..1040) and translate left by one
+// full period (−80) on repeat. Because the path extends past both edges, its
+// endpoints — and their round linecaps — stay off-screen for the whole
+// cycle, so nothing "pops" in at the wrap: the restart is invisible.
+const MID = 14
+const AMP = 7
+const HALF = 40 // half-wavelength (one hump)
+const START = -2 // humps before x=0 (gives one full period of lead-in)
+const HUMPS = 28 // enough half-periods to cover 960 + a period of overhang
+const WAVE_PATH =
+  `M${START * HALF},${MID} ` +
+  Array.from({ length: HUMPS }, (_, i) => {
+    const k = START + i
+    const x0 = k * HALF
+    // peak alternates above (crest) / below (trough); keyed to k so the
+    // phase is identical before and after a one-period (−80u) shift.
+    const peak = ((k % 2) + 2) % 2 === 0 ? MID - AMP : MID + AMP
+    const c1 = x0 + HALF / 3
+    const c2 = x0 + (2 * HALF) / 3
+    return `C ${c1},${peak} ${c2},${peak} ${x0 + HALF},${MID}`
+  }).join(' ')
 </script>
 
 <template>
   <div
     class="section-divider"
-    :class="`section-divider--${icon ? 'icon' : variant}`"
+    :class="`section-divider--${variant}`"
     aria-hidden="true"
   >
-    <!-- Wave: soft brand-tinted easing between sections -->
     <svg
-      v-if="variant === 'wave' && !icon"
-      class="section-divider__wave"
-      :class="{ 'section-divider__wave--flip': flip }"
-      viewBox="0 0 1440 48"
+      v-if="variant === 'squiggle'"
+      class="section-divider__squiggle"
+      viewBox="0 0 960 28"
       preserveAspectRatio="none"
       role="presentation"
     >
-      <path
-        d="M0,24 C240,48 480,0 720,16 C960,32 1200,48 1440,20 L1440,48 L0,48 Z"
-        fill="url(#section-divider-wave)"
-      />
-      <defs>
-        <linearGradient id="section-divider-wave" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="rgba(255,117,31,0.14)" />
-          <stop offset="55%" stop-color="rgba(255,117,31,0.08)" />
-          <stop offset="100%" stop-color="rgba(46,158,91,0.10)" />
-        </linearGradient>
-      </defs>
+      <g class="section-divider__wave" :class="{ 'is-animated': !reduceMotion }">
+        <path
+          :d="WAVE_PATH"
+          fill="none"
+          stroke="var(--color-ember-500)"
+          stroke-width="4"
+          stroke-linecap="round"
+          vector-effect="non-scaling-stroke"
+        />
+      </g>
     </svg>
-
-    <!-- Line / icon: a hairline brand rule with a centered mark -->
-    <template v-else>
-      <span class="section-divider__rule" />
-      <span class="section-divider__mark">
-        <UIcon v-if="icon" :name="icon" class="h-4 w-4 text-primary-600" />
-      </span>
-      <span class="section-divider__rule" />
-    </template>
   </div>
 </template>
 
 <style scoped>
 .section-divider {
-  display: flex;
-  align-items: center;
   width: 100%;
-}
-
-/* ── line / icon ─────────────────────────────────────────────── */
-.section-divider--line,
-.section-divider--icon {
-  gap: 1rem;
   max-width: 72rem; /* matches the page's max-w-6xl content column */
   margin-inline: auto;
   padding-inline: 1.5rem;
-  padding-block: 0.25rem;
+  position: relative;
+  z-index: 1;
 }
 
-.section-divider__rule {
+/* ── squiggle ───────────────────────────────────────────────────────
+   The divider adds ZERO layout height: it is a 0-height line sitting in
+   normal flow exactly between the two sections' paddings, and the wave is
+   absolutely centred on that line. So the vertical gap is purely the two
+   sections' own (symmetric) paddings and the wave straddles their seam —
+   no magic margins, independent of each neighbour's padding. */
+.section-divider--squiggle {
+  height: 0;
+}
+.section-divider__squiggle {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 100dvw;
+  height: 2.25rem;
+}
+.section-divider__wave {
+  will-change: transform;
+  /* Animate in the SVG's own user-unit coordinate space so a translate of
+     80 == exactly one wave period (not CSS px, which would desync once the
+     SVG is scaled to full width). */
+  transform-box: view-box;
+}
+/* Seamless travelling ripple: shift left by exactly one period (80u). The
+   path tiles perfectly at 80u, so the 100% frame is pixel-identical to the
+   0% frame — a CSS linear-infinite loop restarts with no visible jump
+   (unlike SMIL's repeat reset). Only applied when motion is allowed. */
+.section-divider__wave.is-animated {
+  animation: section-divider-ripple 6s linear infinite;
+}
+@keyframes section-divider-ripple {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-80px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-divider__wave.is-animated {
+    animation: none;
+  }
+}
+
+/* ── line (quiet fallback) ──────────────────────────────────────── */
+.section-divider--line::before {
+  content: "";
+  display: block;
   height: 1px;
-  flex: 1;
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-ember-200) 35%,
-    var(--color-herb-200) 65%,
+    var(--color-ember-300) 38%,
+    var(--color-herb-300) 62%,
     transparent
   );
-}
-
-.section-divider__mark {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-
-/* line variant: a small ember dot */
-.section-divider--line .section-divider__mark {
-  height: 0.5rem;
-  width: 0.5rem;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, var(--color-ember-400), var(--color-ember-600));
-  box-shadow: 0 0 0 4px rgba(255, 117, 31, 0.1);
-}
-
-/* icon variant: a circular brand chip */
-.section-divider--icon .section-divider__mark {
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  background: var(--color-ember-50);
-  box-shadow: 0 0 0 1px var(--color-ember-100), var(--shadow-card);
-}
-
-/* ── wave ────────────────────────────────────────────────────── */
-.section-divider--wave {
-  line-height: 0; /* kill inline-svg whitespace */
-}
-.section-divider__wave {
-  display: block;
-  width: 100%;
-  height: 48px;
-}
-.section-divider__wave--flip {
-  transform: scaleY(-1);
+  opacity: 0.6;
 }
 </style>

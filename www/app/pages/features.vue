@@ -8,17 +8,24 @@ useSeoMeta({
   description: () => t('features.heroSubtitle'),
 })
 
+// Rotating brand accents so the deep-dive icons read as a set.
+const sectionAccents = [
+  { chip: 'bg-ember-50 text-ember-600' },
+  { chip: 'bg-herb-50 text-herb-600' },
+  { chip: 'bg-coral-50 text-coral-600' },
+] as const
+
 // Ordered feature deep-dives; alternating layout, each with a screenshot slot.
 const sections = computed(() => [
-  { icon: 'i-lucide-scan-line', title: t('features.scannerTitle'), body: t('features.scannerBody'), shot: t('features.scannerShot'), src: '/images/screenshots/triage.webp' },
-  { icon: 'i-lucide-workflow', title: t('features.pipelineTitle'), body: t('features.pipelineBody'), shot: t('features.pipelineShot'), src: '/images/screenshots/triage.webp' },
-  { icon: 'i-lucide-list-checks', title: t('features.triageTitle'), body: t('features.triageBody'), shot: t('features.triageShot'), src: '/images/screenshots/triage.webp' },
-  { icon: 'i-lucide-activity', title: t('features.pulseTitle'), body: t('features.pulseBody'), shot: t('features.pulseShot'), src: '/images/screenshots/dashboard.webp' },
-  { icon: 'i-lucide-utensils', title: t('features.menuTitle'), body: t('features.menuBody'), shot: t('features.menuShot'), src: '/images/screenshots/menu.webp' },
-  { icon: 'i-lucide-package', title: t('features.pantryTitle'), body: t('features.pantryBody'), shot: t('features.pantryShot'), src: '/images/screenshots/pantry.webp' },
-  { icon: 'i-lucide-truck', title: t('features.vendorsTitle'), body: t('features.vendorsBody'), shot: t('features.vendorsShot'), src: '/images/screenshots/vendor-details.webp' },
-  { icon: 'i-lucide-sparkles', title: t('features.assistantTitle'), body: t('features.assistantBody'), shot: t('features.assistantShot'), src: '/images/screenshots/assistant.webp' },
-  { icon: 'i-lucide-users', title: t('features.teamTitle'), body: t('features.teamBody'), shot: t('features.teamShot'), src: '/images/screenshots/settings.webp' },
+  { icon: 'scanner', title: t('features.scannerTitle'), body: t('features.scannerBody'), shot: t('features.scannerShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'update', title: t('features.pipelineTitle'), body: t('features.pipelineBody'), shot: t('features.pipelineShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'triage', title: t('features.triageTitle'), body: t('features.triageBody'), shot: t('features.triageShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'pulse', title: t('features.pulseTitle'), body: t('features.pulseBody'), shot: t('features.pulseShot'), src: '/images/screenshots/dashboard.webp' },
+  { icon: 'menu', title: t('features.menuTitle'), body: t('features.menuBody'), shot: t('features.menuShot'), src: '/images/screenshots/menu.webp' },
+  { icon: 'pantry', title: t('features.pantryTitle'), body: t('features.pantryBody'), shot: t('features.pantryShot'), src: '/images/screenshots/pantry.webp' },
+  { icon: 'vendors', title: t('features.vendorsTitle'), body: t('features.vendorsBody'), shot: t('features.vendorsShot'), src: '/images/screenshots/vendor-details.webp' },
+  { icon: 'assistant', title: t('features.assistantTitle'), body: t('features.assistantBody'), shot: t('features.assistantShot'), src: '/images/screenshots/assistant.webp' },
+  { icon: 'triage', title: t('features.teamTitle'), body: t('features.teamBody'), shot: t('features.teamShot'), src: '/images/screenshots/settings.webp' },
 ])
 </script>
 
@@ -46,10 +53,13 @@ const sections = computed(() => [
         >
           <!-- Text: alternate side on desktop -->
           <div :class="i % 2 === 1 ? 'lg:order-2' : ''">
-            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-600">
-              <UIcon :name="s.icon" class="h-6 w-6" />
+            <span
+              class="inline-flex h-12 w-12 items-center justify-center rounded-xl"
+              :class="sectionAccents[i % sectionAccents.length].chip"
+            >
+              <BrandIcon :name="s.icon" class="h-6 w-6" />
             </span>
-            <h2 class="mt-4 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl">{{ s.title }}</h2>
+            <h2 class="mt-4 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"><span class="ink-underline">{{ s.title }}</span></h2>
             <p class="mt-4 text-stone-600">{{ s.body }}</p>
           </div>
 
@@ -62,6 +72,8 @@ const sections = computed(() => [
         </article>
       </div>
     </section>
+
+    <SectionDivider />
 
     <!-- CTA -->
     <section class="bg-stone-900 text-white">

@@ -19,6 +19,7 @@ export default {
     stat3Label: 'hojas de cálculo o tecleo manual',
 
     // Core loop
+    loopEyebrow: 'Cómo funciona',
     loopTitle: 'El bucle central',
     loopSubtitle:
       'Todo en Teremu cuelga de un solo flujo. Tú escaneas; la IA hace el resto; tú corriges lo que importa.',
@@ -36,6 +37,7 @@ export default {
       'Alertas cuando un proveedor sube precios o un plato baja del margen objetivo.',
 
     // Features overview
+    featuresEyebrow: 'En tu cocina',
     featuresTitle: 'Lo que hace por tu cocina',
     featuresSubtitle: 'Aproximación inteligente en vez de contabilidad. Nunca te pide registrar nada a diario.',
     feat1Title: 'Escáner',
@@ -60,6 +62,7 @@ export default {
 
     // Trust / privacy
     trustBadge: 'Privacidad',
+    trustEyebrow: 'Privacidad primero',
     trustTitle: 'Tus recetas son tuyas',
     trustSubtitle:
       'Teremu solo necesita los ingredientes y sus cantidades para costear cada plato — nunca los pasos, la técnica ni tus secretos de cocina. Y tus datos no se comparten ni se venden.',
@@ -118,6 +121,7 @@ export default {
     stat3Value: 'Zero',
     stat3Label: 'spreadsheets or manual data entry',
 
+    loopEyebrow: 'How it works',
     loopTitle: 'The core loop',
     loopSubtitle:
       'Everything in Teremu hangs off one flow. You scan; AI does the rest; you correct what matters.',
@@ -134,6 +138,7 @@ export default {
     loopStep4Body:
       'Alerts when a vendor raises prices or a dish slips below its target margin.',
 
+    featuresEyebrow: 'In your kitchen',
     featuresTitle: 'What it does for your kitchen',
     featuresSubtitle: 'Intelligent approximation over bookkeeping. It never asks you to log anything daily.',
     feat1Title: 'Scanner',
@@ -157,6 +162,7 @@ export default {
 
     // Trust / privacy
     trustBadge: 'Privacy',
+    trustEyebrow: 'Privacy first',
     trustTitle: 'Your recipes are yours',
     trustSubtitle:
       'Teremu only needs the ingredients and their quantities to cost each dish — never the steps, the technique, or your kitchen secrets. And your data is never shared or sold.',

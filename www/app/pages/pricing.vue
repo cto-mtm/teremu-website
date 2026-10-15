@@ -213,7 +213,7 @@ useHead(() => ({
 
     <!-- FAQ -->
     <section class="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
-      <h2 class="text-center text-3xl font-bold tracking-tight text-stone-900">{{ t('pricing.faqTitle') }}</h2>
+      <h2 class="text-center text-3xl font-bold tracking-tight text-stone-900"><span class="ink-underline">{{ t('pricing.faqTitle') }}</span></h2>
       <div class="mt-10 divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white">
         <div v-for="(faq, i) in faqs" :key="i">
           <button
@@ -235,6 +235,8 @@ useHead(() => ({
         </div>
       </div>
     </section>
+
+    <SectionDivider />
 
     <!-- CTA -->
     <section class="bg-ember-wash">
