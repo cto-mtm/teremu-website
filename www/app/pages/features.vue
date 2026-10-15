@@ -17,15 +17,15 @@ const sectionAccents = [
 
 // Ordered feature deep-dives; alternating layout, each with a screenshot slot.
 const sections = computed(() => [
-  { icon: 'scanner', title: t('features.scannerTitle'), body: t('features.scannerBody'), shot: t('features.scannerShot'), src: '/images/screenshots/triage.webp' },
-  { icon: 'update', title: t('features.pipelineTitle'), body: t('features.pipelineBody'), shot: t('features.pipelineShot'), src: '/images/screenshots/triage.webp' },
-  { icon: 'triage', title: t('features.triageTitle'), body: t('features.triageBody'), shot: t('features.triageShot'), src: '/images/screenshots/triage.webp' },
-  { icon: 'pulse', title: t('features.pulseTitle'), body: t('features.pulseBody'), shot: t('features.pulseShot'), src: '/images/screenshots/dashboard.webp' },
-  { icon: 'menu', title: t('features.menuTitle'), body: t('features.menuBody'), shot: t('features.menuShot'), src: '/images/screenshots/menu.webp' },
-  { icon: 'pantry', title: t('features.pantryTitle'), body: t('features.pantryBody'), shot: t('features.pantryShot'), src: '/images/screenshots/pantry.webp' },
-  { icon: 'vendors', title: t('features.vendorsTitle'), body: t('features.vendorsBody'), shot: t('features.vendorsShot'), src: '/images/screenshots/vendor-details.webp' },
-  { icon: 'assistant', title: t('features.assistantTitle'), body: t('features.assistantBody'), shot: t('features.assistantShot'), src: '/images/screenshots/assistant.webp' },
-  { icon: 'triage', title: t('features.teamTitle'), body: t('features.teamBody'), shot: t('features.teamShot'), src: '/images/screenshots/settings.webp' },
+  { icon: 'scanner', id: 'scanner', title: t('features.scannerTitle'), body: t('features.scannerBody'), benefit: t('features.scannerBenefit'), shot: t('features.scannerShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'update', id: 'pipeline', title: t('features.pipelineTitle'), body: t('features.pipelineBody'), benefit: t('features.pipelineBenefit'), shot: t('features.pipelineShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'triage', id: 'triage', title: t('features.triageTitle'), body: t('features.triageBody'), benefit: t('features.triageBenefit'), shot: t('features.triageShot'), src: '/images/screenshots/triage.webp' },
+  { icon: 'pulse', id: 'pulse', title: t('features.pulseTitle'), body: t('features.pulseBody'), benefit: t('features.pulseBenefit'), shot: t('features.pulseShot'), src: '/images/screenshots/dashboard.webp' },
+  { icon: 'menu', id: 'menu', title: t('features.menuTitle'), body: t('features.menuBody'), benefit: t('features.menuBenefit'), shot: t('features.menuShot'), src: '/images/screenshots/menu.webp' },
+  { icon: 'pantry', id: 'pantry', title: t('features.pantryTitle'), body: t('features.pantryBody'), benefit: t('features.pantryBenefit'), shot: t('features.pantryShot'), src: '/images/screenshots/pantry.webp' },
+  { icon: 'vendors', id: 'vendors', title: t('features.vendorsTitle'), body: t('features.vendorsBody'), benefit: t('features.vendorsBenefit'), shot: t('features.vendorsShot'), src: '/images/screenshots/vendor-details.webp' },
+  { icon: 'assistant', id: 'assistant', title: t('features.assistantTitle'), body: t('features.assistantBody'), benefit: t('features.assistantBenefit'), shot: t('features.assistantShot'), src: '/images/screenshots/assistant.webp' },
+  { icon: 'triage', id: 'team', title: t('features.teamTitle'), body: t('features.teamBody'), benefit: t('features.teamBenefit'), shot: t('features.teamShot'), src: '/images/screenshots/settings.webp' },
 ])
 </script>
 
@@ -48,8 +48,9 @@ const sections = computed(() => [
       <div class="space-y-20">
         <article
           v-for="(s, i) in sections"
+          :id="s.id"
           :key="i"
-          class="grid items-center gap-10 lg:grid-cols-2"
+          class="grid scroll-mt-24 items-center gap-10 lg:grid-cols-2"
         >
           <!-- Text: alternate side on desktop -->
           <div :class="i % 2 === 1 ? 'lg:order-2' : ''">
@@ -60,6 +61,7 @@ const sections = computed(() => [
               <BrandIcon :name="s.icon" class="h-6 w-6" />
             </span>
             <h2 class="mt-4 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"><span class="ink-underline">{{ s.title }}</span></h2>
+            <p class="mt-4 rounded-xl bg-herb-50 p-3 text-base font-semibold text-herb-800 ring-1 ring-herb-100">{{ s.benefit }}</p>
             <p class="mt-4 text-stone-600">{{ s.body }}</p>
           </div>
 
@@ -87,6 +89,9 @@ const sections = computed(() => [
           </UButton>
           <UButton :to="localePath('pricing')" color="neutral" variant="outline" size="lg">
             {{ t('features.ctaSecondary') }}
+          </UButton>
+          <UButton :to="localePath('why-teremu')" color="neutral" variant="ghost" size="lg" class="text-white hover:bg-white/10">
+            {{ t('features.ctaWhy') }}
           </UButton>
         </div>
       </div>

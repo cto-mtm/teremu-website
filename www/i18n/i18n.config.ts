@@ -3,6 +3,7 @@ import AppFooter from './locales/components/AppFooter'
 import CookieConsent from './locales/components/CookieConsent'
 import home from './locales/pages/home'
 import features from './locales/pages/features'
+import why from './locales/pages/why'
 import pricing from './locales/pages/pricing'
 import contact from './locales/pages/contact'
 import blog from './locales/pages/blog'
@@ -21,6 +22,7 @@ export default defineI18nConfig(() => ({
       consent: CookieConsent.es,
       home: home.es,
       features: features.es,
+      why: why.es,
       pricing: pricing.es,
       contact: contact.es,
       blog: blog.es,
@@ -34,6 +36,7 @@ export default defineI18nConfig(() => ({
       consent: CookieConsent.en,
       home: home.en,
       features: features.en,
+      why: why.en,
       pricing: pricing.en,
       contact: contact.en,
       blog: blog.en,

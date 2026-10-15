@@ -27,3 +27,5 @@ Calcularlo a mano exige registrar cada factura, cada precio y cada merma. En la 
 Teremu construye el food cost a partir de lo que ya existe: escaneas la factura del proveedor, la IA extrae las líneas, y los precios ruedan automáticamente hacia el coste de cada plato. No hay registro diario: el número se mantiene vivo solo, y tú corriges únicamente lo que importa.
 
 El resultado es un food cost siempre actual, con alertas cuando un proveedor sube precios o un plato baja de su margen objetivo.
+
+**¿Quieres saber cuánto margen podrías recuperar?** [Haz la cuenta con los números de tu cocina](/why-teremu#calculator) y mira [por qué construimos Teremu](/why-teremu#mission).

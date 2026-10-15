@@ -23,3 +23,5 @@ Un escandallo hecho una vez en una hoja de cálculo envejece mal. En cuanto tu p
 En Teremu, cada plato se costea en vivo desde los precios rodantes de tus facturas. Cuando escaneas una factura nueva y el precio de un ingrediente cambia, todos los platos que lo usan se recalculan al instante. La lista de platos se ordena de peor a mejor margen, así que los que necesitan atención flotan hacia arriba.
 
 Ese es el objetivo de Teremu: que tu escandallo nunca esté desactualizado, sin que tengas que tocar una hoja de cálculo.
+
+**¿Cuánto te cuesta un escandallo desactualizado?** Mira [un ejemplo con números](/why-teremu#example) y [haz la cuenta para tu cocina](/why-teremu#calculator).

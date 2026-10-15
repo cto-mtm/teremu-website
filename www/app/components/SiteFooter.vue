@@ -38,6 +38,11 @@ const { open: cookieSettingsOpen } = useCookieConsent()
           </h2>
           <ul class="mt-4 space-y-2 text-sm">
             <li>
+              <NuxtLink :to="localePath('why-teremu')" class="text-stone-500 transition-colors hover:text-primary-600">
+                {{ t('AppFooter.why') }}
+              </NuxtLink>
+            </li>
+            <li>
               <NuxtLink :to="localePath('features')" class="text-stone-500 transition-colors hover:text-primary-600">
                 {{ t('AppFooter.features') }}
               </NuxtLink>

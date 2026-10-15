@@ -3,7 +3,7 @@ export default {
     heroBadge: 'Precios',
     heroTitle: 'No es software. Es margen recuperado.',
     heroSubtitle:
-      'Un restaurante que compra $20,000/mes y caza la subida de precios de un proveedor recupera $200–$400 al mes. Pro cuesta una décima parte de eso. Es aritmética, no persuasión.',
+      'Un restaurante que compra $20,000/mes y caza la subida de precios de un proveedor recupera $200–$400 al mes. Pro cuesta una fracción de eso. Es aritmética, no persuasión.',
     priceNote: 'Precios por local en dólares estadounidenses. Fuera de EE. UU. cobramos en moneda local con precios regionales.',
 
     // Billing toggle
@@ -74,9 +74,11 @@ export default {
     valueTitle: 'Por qué el plan gratis es de verdad',
     valueBody:
       'Menú ilimitado —platos y bebidas— gratis para siempre: nunca escondemos tras un muro el margen de un plato. 25 escaneos ≈ una semana con mucho reparto: suficiente para probar el valor, no para llevar un mes entero. El límite de equipo convierte justo en el momento en que se forma el hábito, y la ventana de 90 días mantiene el panel vivo gratis mientras la historia año-a-año queda para Pro.',
+    worthItText: '¿Aún dudas si compensa?',
+    worthItLink: 'Haz la cuenta con los números de tu cocina',
     compareTitle: 'Comparado con la alternativa',
     compareBody:
-      'Nuestro Pro a $39 por local con 500 escaneos se sitúa donde los planes de entrada de la competencia cobran 85–159€ por 200–400 documentos — 3 a 6 veces más barato por documento digitalizado, con permisos granulares por miembro y onboarding self-service sin cuota de implementación.',
+      'Muchas herramientas comparables de control de costes se contratan con una llamada de ventas, cobran una cuota de implementación y cuestan varios cientos de dólares al mes. Teremu es de autoservicio: empiezas gratis y sin tarjeta, no hay cuota de implementación ni llamada de ventas, y Pro cuesta $39 por local al mes, con 500 escaneos y permisos granulares por miembro.',
 
     // FAQ
     faqTitle: 'Preguntas frecuentes',
@@ -103,7 +105,7 @@ export default {
     heroBadge: 'Pricing',
     heroTitle: "It's not software. It's recovered margin.",
     heroSubtitle:
-      'A restaurant buying $20,000/mo that catches a vendor\'s price creep recovers $200–$400 a month. Pro costs a tenth of that. It\'s arithmetic, not persuasion.',
+      'A restaurant buying $20,000/mo that catches a vendor\'s price creep recovers $200–$400 a month. Pro costs a fraction of that. It\'s arithmetic, not persuasion.',
     priceNote: 'Per-location prices in US dollars. Outside the US, we bill in local currency with regional pricing.',
 
     toggleMonthly: 'Monthly',
@@ -168,9 +170,11 @@ export default {
     valueTitle: 'Why the free plan is real',
     valueBody:
       'Unlimited menu — dishes and drinks — free forever: we never put a plate\'s margin behind a paywall. 25 scans ≈ one delivery-heavy week: enough to prove value, not enough to run a whole month. The team gate converts precisely at the moment habit forms, and the 90-day window keeps the dashboard alive for free while the year-over-year story is a Pro feature.',
+    worthItText: 'Still wondering if it pays off?',
+    worthItLink: "Do the math with your kitchen's numbers",
     compareTitle: 'Compared to the alternative',
     compareBody:
-      'Our Pro at $39 per location with 500 scans sits where the competition\'s entry plans charge €85–159 for 200–400 documents — 3 to 6× cheaper per digitized document, with granular per-member permissions and self-serve onboarding with no implementation fee.',
+      'Many comparable cost-control tools are bought through a sales call, charge an implementation fee, and cost several hundred dollars a month. Teremu is self-serve: you start free with no card, there is no implementation fee or sales call, and Pro is $39 per location per month, with 500 scans and granular per-member permissions.',
 
     faqTitle: 'Frequently asked questions',
     faq1Q: 'Do I need a card to start?',

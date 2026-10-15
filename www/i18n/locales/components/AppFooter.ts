@@ -2,6 +2,7 @@ export default {
   es: {
     tagline: 'La trastienda de tu restaurante, en la cámara de tu teléfono.',
     product: 'Producto',
+    why: 'Por qué Teremu',
     features: 'Funciones',
     pricing: 'Precios',
     company: 'Compañía',
@@ -19,6 +20,7 @@ export default {
   en: {
     tagline: "Your restaurant's back office, in your phone's camera.",
     product: 'Product',
+    why: 'Why Teremu',
     features: 'Features',
     pricing: 'Pricing',
     company: 'Company',

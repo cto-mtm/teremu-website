@@ -53,11 +53,31 @@ useHead(() => ({
   ],
 }))
 
+// "Where margin leaks": each card pairs a sourced number with what Teremu does
+// about it. Sources are listed once under the grid (leaksSources below).
+const leaks = computed(() => [
+  { value: t('home.leak1Value'), title: t('home.leak1Title'), body: t('home.leak1Body'), fix: t('home.leak1Fix') },
+  { value: t('home.leak2Value'), title: t('home.leak2Title'), body: t('home.leak2Body'), fix: t('home.leak2Fix') },
+  { value: t('home.leak3Value'), title: t('home.leak3Title'), body: t('home.leak3Body'), fix: t('home.leak3Fix') },
+])
+const leaksSources = computed(() => [
+  { label: t('home.leaksSource1'), href: 'https://pos.toasttab.com/blog/on-the-line/average-restaurant-profit-margin' },
+  { label: t('home.leaksSource2'), href: 'https://restaurant.org/education-and-resources/resource-library/rising-food-costs-tight-supplies-more-challenges-for-industry/' },
+  { label: t('home.leaksSource3'), href: 'https://www.fsrmagazine.com/industry-news/overcharges-continue-show-restaurant-invoices/' },
+])
+
+// Privacy / trust points, shown beside the mobile screenshot.
+const trustPoints = computed(() => [
+  { icon: 'chef', title: t('home.trust1Title'), body: t('home.trust1Body') },
+  { icon: 'shield', title: t('home.trust2Title'), body: t('home.trust2Body') },
+  { icon: 'controls', title: t('home.trust3Title'), body: t('home.trust3Body') },
+])
+
 const loop = computed(() => [
-  { icon: 'scan', title: t('home.loopStep1Title'), body: t('home.loopStep1Body') },
-  { icon: 'triage', title: t('home.loopStep2Title'), body: t('home.loopStep2Body') },
-  { icon: 'update', title: t('home.loopStep3Title'), body: t('home.loopStep3Body') },
-  { icon: 'alert', title: t('home.loopStep4Title'), body: t('home.loopStep4Body') },
+  { icon: 'scan', title: t('home.loopStep1Title'), body: t('home.loopStep1Body'), outcome: t('home.loopStep1Outcome') },
+  { icon: 'triage', title: t('home.loopStep2Title'), body: t('home.loopStep2Body'), outcome: t('home.loopStep2Outcome') },
+  { icon: 'update', title: t('home.loopStep3Title'), body: t('home.loopStep3Body'), outcome: t('home.loopStep3Outcome') },
+  { icon: 'alert', title: t('home.loopStep4Title'), body: t('home.loopStep4Body'), outcome: t('home.loopStep4Outcome') },
 ])
 
 // Features cards rotate through the three brand accents so the grid reads
@@ -116,12 +136,12 @@ const features = computed(() => [
                 {{ t('home.heroCtaPrimary') }}
                 <UIcon name="i-lucide-arrow-right" class="h-5 w-5" />
               </NuxtLink>
-              <NuxtLink
-                :to="localePath('features')"
+              <a
+                href="#calculator"
                 class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/70 px-5 py-3 text-base font-semibold text-stone-800 backdrop-blur-sm transition-colors hover:border-stone-400 hover:bg-white sm:w-auto"
               >
                 {{ t('home.heroCtaSecondary') }}
-              </NuxtLink>
+              </a>
             </div>
             <p class="mt-5 flex items-center gap-1.5 text-sm text-stone-500">
               <UIcon name="i-lucide-check-circle-2" class="h-4 w-4 shrink-0 text-secondary-500" />
@@ -143,7 +163,7 @@ const features = computed(() => [
             v-for="(s, i) in [
               { icon: 'i-lucide-camera', v: t('home.stat1Value'), l: t('home.stat1Label'), chips: false },
               { icon: 'i-lucide-piggy-bank', v: t('home.stat2Value'), l: t('home.stat2Label'), chips: true },
-              { icon: 'i-lucide-sparkles', v: t('home.stat3Value'), l: t('home.stat3Label'), chips: false },
+              { icon: 'i-lucide-clock', v: t('home.stat3Value'), l: t('home.stat3Label'), chips: false },
             ]"
             :key="i"
             class="flex items-center gap-4 rounded-2xl bg-white/70 p-5 ring-1 ring-stone-200"
@@ -164,6 +184,47 @@ const features = computed(() => [
         </dl>
       </div>
     </section>
+
+    <!-- ── Where margin leaks ───────────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <span class="eyebrow">{{ t('home.leaksEyebrow') }}</span>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.leaksTitle') }}</span></h2>
+        <p class="mt-4 text-lg text-stone-600">{{ t('home.leaksSubtitle') }}</p>
+      </div>
+
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <article
+          v-for="(l, i) in leaks"
+          :key="i"
+          class="flex flex-col rounded-2xl border border-stone-200 bg-white p-6"
+        >
+          <p class="num-display text-5xl font-bold leading-none text-coral-600">{{ l.value }}</p>
+          <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ l.title }}</h3>
+          <p class="mt-2 text-sm text-stone-600">{{ l.body }}</p>
+          <p class="mt-4 flex gap-2 rounded-xl bg-herb-50 p-3 text-sm text-herb-800 md:mt-auto md:pt-3">
+            <UIcon name="i-lucide-check-circle-2" class="mt-0.5 h-4 w-4 shrink-0 text-herb-600" />
+            <span>{{ l.fix }}</span>
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-8 text-center">
+        <NuxtLink :to="localePath('why-teremu')" class="inline-flex items-center gap-1.5 font-semibold text-primary-700 hover:text-primary-800">
+          {{ t('home.leaksMoreLink') }}
+          <UIcon name="i-lucide-arrow-right" class="h-4 w-4" />
+        </NuxtLink>
+      </div>
+
+      <p class="mt-6 text-center text-xs text-stone-500">
+        {{ t('home.leaksSourcesLabel') }}:
+        <template v-for="(s, i) in leaksSources" :key="s.href">
+          <a :href="s.href" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-stone-700">{{ s.label }}</a><span v-if="i < leaksSources.length - 1"> · </span>
+        </template>
+      </p>
+    </section>
+
+    <SectionDivider />
 
     <!-- ── Core loop ────────────────────────────────────────── -->
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -197,8 +258,23 @@ const features = computed(() => [
           </span>
           <h3 class="mt-5 text-lg font-semibold text-stone-900">{{ step.title }}</h3>
           <p class="mt-2 max-w-xs text-sm text-stone-600">{{ step.body }}</p>
+          <p class="mt-3 max-w-xs text-sm font-semibold text-primary-700">{{ step.outcome }}</p>
         </li>
       </ol>
+    </section>
+
+    <SectionDivider />
+
+    <!-- ── Savings calculator ───────────────────────────────── -->
+    <section id="calculator" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-20 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <span class="eyebrow">{{ t('home.calcEyebrow') }}</span>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.calcTitle') }}</span></h2>
+        <p class="mt-4 text-lg text-stone-600">{{ t('home.calcSubtitle') }}</p>
+      </div>
+      <div class="mt-12">
+        <SavingsCalculator />
+      </div>
     </section>
 
     <SectionDivider />
@@ -241,16 +317,16 @@ const features = computed(() => [
 
     <SectionDivider />
 
-    <!-- ── Screenshot showcase ──────────────────────────────── -->
-    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <div class="grid items-center gap-12 lg:grid-cols-2">
+    <!-- ── Built for the kitchen: mobile + privacy ───────────── -->
+    <section class="bg-scallop-field bg-stone-50 px-4 py-20 sm:px-6">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <div class="order-2 lg:order-1">
           <ScreenshotSlot :label="t('home.showcaseScreenshot')" src="/images/screenshots/menu.webp" phone />
         </div>
         <div class="order-1 lg:order-2">
           <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.showcaseTitle') }}</h2>
           <p class="mt-4 text-lg text-stone-600">{{ t('home.showcaseBody') }}</p>
-          <div class="mt-6 flex flex-wrap gap-3">
+          <div class="mt-5 flex flex-wrap gap-3">
             <span class="inline-flex items-center gap-2 rounded-full bg-stone-100 px-3 py-1.5 text-sm font-medium text-stone-700">
               <UIcon name="i-lucide-smartphone" class="h-4 w-4" /> iOS · Android · Web
             </span>
@@ -258,45 +334,25 @@ const features = computed(() => [
               <UIcon name="i-lucide-shield-check" class="h-4 w-4" /> Google sign-in
             </span>
           </div>
+
+          <h3 class="mt-8 flex items-center gap-2 text-lg font-semibold text-stone-900">
+            <UIcon name="i-lucide-lock" class="h-5 w-5 text-secondary-600" />
+            {{ t('home.trustTitle') }}
+          </h3>
+          <ul class="mt-4 space-y-4">
+            <li v-for="item in trustPoints" :key="item.title" class="flex gap-3">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ember-50 text-ember-600 ring-1 ring-ember-100">
+                <BrandIcon :name="item.icon" class="h-5 w-5" />
+              </span>
+              <div>
+                <p class="font-semibold text-stone-900">{{ item.title }}</p>
+                <p class="text-sm text-stone-600">{{ item.body }}</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
-
-    <SectionDivider />
-
-    <!-- ── Trust / privacy ──────────────────────────────────── -->
-    <section class="bg-scallop-field bg-stone-50 py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6">
-        <div class="mx-auto max-w-2xl text-center">
-          <span class="inline-flex items-center gap-2 rounded-full bg-secondary-50 px-3 py-1 text-sm font-medium text-secondary-700 ring-1 ring-secondary-200">
-            <UIcon name="i-lucide-lock" class="h-4 w-4" />
-            {{ t('home.trustBadge') }}
-          </span>
-          <h2 class="mt-5 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.trustTitle') }}</span></h2>
-          <p class="mt-4 text-lg text-stone-600">{{ t('home.trustSubtitle') }}</p>
-        </div>
-
-        <div class="mt-14 grid gap-6 md:grid-cols-3">
-          <div
-            v-for="item in [
-              { icon: 'chef', title: t('home.trust1Title'), body: t('home.trust1Body') },
-              { icon: 'shield', title: t('home.trust2Title'), body: t('home.trust2Body') },
-              { icon: 'controls', title: t('home.trust3Title'), body: t('home.trust3Body') },
-            ]"
-            :key="item.title"
-            class="rounded-2xl border border-ember-100/70 p-6 shadow-[0_1px_2px_rgba(28,20,16,0.04),0_12px_30px_-18px_rgba(255,117,31,0.25)]"
-            style="background-image: linear-gradient(165deg, #fffaf4 0%, #fff4ec 100%)"
-          >
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/70 text-ember-600 ring-1 ring-ember-100">
-              <BrandIcon :name="item.icon" class="h-6 w-6" />
-            </span>
-            <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ item.title }}</h3>
-            <p class="mt-2 text-sm text-stone-600">{{ item.body }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ── Testimonials / real kitchens ─────────────────────────────
          DISABLED until we have real reviews + photography. The quotes
          (home.t1Quote … t3Role) are sample copy and the headshots /
@@ -346,11 +402,27 @@ const features = computed(() => [
 
     <SectionDivider />
 
+    <!-- ── Mission strip (full story lives on /why-teremu) ───── -->
+    <section class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+      <span class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ember-50 text-ember-600 ring-1 ring-ember-100">
+        <BrandIcon name="chef" class="h-7 w-7" />
+      </span>
+      <p class="eyebrow mt-4">{{ t('home.missionEyebrow') }}</p>
+      <h2 class="mt-2 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"><span class="ink-underline">{{ t('home.missionTitle') }}</span></h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg text-stone-600">{{ t('home.missionStripBody') }}</p>
+      <NuxtLink :to="localePath('why-teremu') + '#mission'" class="mt-5 inline-flex items-center gap-1.5 font-semibold text-primary-700 hover:text-primary-800">
+        {{ t('home.missionStripLink') }}
+        <UIcon name="i-lucide-arrow-right" class="h-4 w-4" />
+      </NuxtLink>
+    </section>
+
+    <SectionDivider />
     <!-- ── Pricing teaser ───────────────────────────────────── -->
     <section class="bg-stone-900 py-20 text-white">
       <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{{ t('home.pricingTeaserTitle') }}</h2>
         <p class="mx-auto mt-4 max-w-2xl text-lg text-stone-300">{{ t('home.pricingTeaserBody') }}</p>
+        <p class="mx-auto mt-3 max-w-2xl text-sm font-medium text-ember-300">{{ t('home.pricingTeaserNote') }}</p>
         <div class="mt-8">
           <UButton :to="localePath('pricing')" color="primary" size="lg" class="font-semibold">
             {{ t('home.pricingTeaserCta') }}

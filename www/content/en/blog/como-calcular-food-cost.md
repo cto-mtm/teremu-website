@@ -27,3 +27,5 @@ Doing it by hand requires logging every invoice, every price, and every waste ev
 Teremu builds your food cost from what already exists: you scan the supplier invoice, AI extracts the line items, and prices automatically roll into the cost of each dish. There's no daily logging: the number stays alive on its own, and you only correct what matters.
 
 The result is an always-current food cost, with alerts when a supplier raises prices or a dish drops below its target margin.
+
+**Want to know how much margin you could recover?** [Do the math with your kitchen's numbers](/en/why-teremu#calculator) and see [why we built Teremu](/en/why-teremu#mission).

@@ -23,3 +23,5 @@ A recipe cost calculated once in a spreadsheet ages badly. The moment your suppl
 In Teremu, every dish is costed live from the rolling prices on your invoices. When you scan a new invoice and an ingredient price changes, every dish that uses it is recalculated instantly. The dish list sorts from worst to best margin, so the ones needing attention float to the top.
 
 That's the goal of Teremu: your recipe costs are never outdated, without you ever touching a spreadsheet.
+
+**What does an out-of-date recipe cost really cost you?** See [a worked example](/en/why-teremu#example) and [do the math for your kitchen](/en/why-teremu#calculator).

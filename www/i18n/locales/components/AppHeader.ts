@@ -1,6 +1,7 @@
 export default {
   es: {
     home: 'Inicio',
+    why: 'Por qué Teremu',
     features: 'Funciones',
     pricing: 'Precios',
     blog: 'Blog',
@@ -13,6 +14,7 @@ export default {
   },
   en: {
     home: 'Home',
+    why: 'Why Teremu',
     features: 'Features',
     pricing: 'Pricing',
     blog: 'Blog',

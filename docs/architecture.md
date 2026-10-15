@@ -24,8 +24,9 @@ fallback), `@nuxtjs/seo` for sitemap/meta, `@nuxt/image` for responsive images,
 
 Pages are **separate routes**, not a single long page:
 
-- `/` — landing (hero, core-loop, feature highlights, pricing teaser, CTA)
-- `/features` — deep dive on Scanner, Triage, Pulse, Menu, Pantry, Vendors, Assistant, Team
+- `/` — sales landing (hero, margin leaks, core loop, savings calculator, feature highlights, mission strip, pricing teaser, CTA)
+- `/why-teremu` — the evidence page: sourced problem stats, decisions, worked example, calculator, mission, objections FAQ, sources + assumptions. Carries WebPage/BreadcrumbList/FAQPage JSON-LD. Bump `UPDATED` in the page whenever a number or source changes.
+- `/features` — deep dive on Scanner, Triage, Pulse, Menu, Pantry, Vendors, Assistant, Team (sections have anchor ids, deep-linked from `/why-teremu`)
 - `/pricing` — Gratis / Pro / Grupo tiers
 - `/contact` — contact + demo request form wired to `submitForm`
 

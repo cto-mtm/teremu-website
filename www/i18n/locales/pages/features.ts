@@ -48,13 +48,25 @@ export default {
 
     teamTitle: 'Equipo y permisos',
     teamBody:
-      'Un restaurante es un espacio compartido. El dueño invita por email; al entrar con Google, cada miembro se adjunta con permisos granulares por área — escanear (sí/no) y triage / menú / despensa / finanzas en ninguno / solo-lectura / edición. «Camarero solo-cámara», «contable con finanzas de solo lectura» o «chef con todo menos el dinero» son solo combinaciones de permisos. Se aplica en el servidor en cada ruta. Y funciona igual con uno o con varios locales: en el plan Grupo, los mismos permisos se extienden a todo tu grupo con una vista consolidada.',
+      'Un restaurante es un espacio compartido. El dueño invita por email; al entrar con Google, cada miembro se adjunta con permisos granulares por área — escanear (sí/no) y triage / menú / despensa / finanzas en ninguno / solo-lectura / edición. «Camarero solo-cámara», «contable con finanzas de solo lectura» o «chef con todo menos el dinero» son solo combinaciones de permisos. Se aplica en el servidor en cada ruta. Y funciona igual con uno o con varios locales: cada local tiene su propio equipo y sus propios permisos.',
     teamShot: 'Captura de la gestión de permisos',
+
+    // "Qué significa para ti" — una línea de beneficio por sección
+    scannerBenefit: 'Para ti: una pila de facturas en un minuto y nada que teclear después.',
+    pipelineBenefit: 'Para ti: errores de lectura y de suma atrapados antes de que contaminen tus costes.',
+    triageBenefit: 'Para ti: pillas los cobros de más antes de pagar, mientras todavía puedes reclamar.',
+    pulseBenefit: 'Para ti: sabes cómo va el negocio esta semana, no cuando cierra el mes.',
+    menuBenefit: 'Para ti: sabes qué platos ganan dinero hoy y subes el precio solo de los que lo necesitan.',
+    pantryBenefit: 'Para ti: pides lo que vas a usar y evitas inmovilizar dinero en producto que sobra.',
+    vendorsBenefit: 'Para ti: comparas lo que pagas con lo que pagabas y negocias con datos, no con intuición.',
+    assistantBenefit: 'Para ti: respuestas en segundos sobre tu propio negocio, sin abrir una hoja de cálculo.',
+    teamBenefit: 'Para ti: tu equipo escanea y tú decides quién ve el dinero.',
 
     ctaTitle: '¿Listo para escanear tu primera factura?',
     ctaBody: 'Empieza gratis — 25 escaneos al mes, sin tarjeta.',
     ctaButton: 'Empieza gratis',
     ctaSecondary: 'Ver precios',
+    ctaWhy: 'Por qué Teremu',
   },
   en: {
     heroBadge: 'Features',
@@ -105,12 +117,24 @@ export default {
 
     teamTitle: 'Team & permissions',
     teamBody:
-      'One restaurant is a shared workspace. The owner invites by email; on Google sign-in each member is attached with granular per-area permissions — scan (yes/no) and triage / menu / pantry / finance at none / read-only / edit. "Camera-only runner", "accountant with finance read-only", or "chef with everything but the money" are just permission combinations. Enforced server-side on every route. And it works the same with one location or many: on the Group plan the same permissions extend across your whole group with a consolidated view.',
+      'One restaurant is a shared workspace. The owner invites by email; on Google sign-in each member is attached with granular per-area permissions — scan (yes/no) and triage / menu / pantry / finance at none / read-only / edit. "Camera-only runner", "accountant with finance read-only", or "chef with everything but the money" are just permission combinations. Enforced server-side on every route. And it works the same with one location or many: each location has its own team and its own permissions.',
     teamShot: 'Permission management screenshot',
+
+    // "What this means for you" — one benefit line per section
+    scannerBenefit: 'For you: a stack of invoices in a minute and nothing to type afterwards.',
+    pipelineBenefit: 'For you: reading and math errors caught before they pollute your costs.',
+    triageBenefit: 'For you: you catch overcharges before you pay, while you can still dispute them.',
+    pulseBenefit: "For you: you know how the business is doing this week, not after the month closes.",
+    menuBenefit: 'For you: you know which dishes earn money today and reprice only the ones that need it.',
+    pantryBenefit: "For you: you order what you'll use and avoid tying up cash in product that sits.",
+    vendorsBenefit: 'For you: compare what you pay to what you used to pay and negotiate with data, not gut feel.',
+    assistantBenefit: 'For you: answers in seconds about your own business, without opening a spreadsheet.',
+    teamBenefit: 'For you: your team scans and you decide who sees the money.',
 
     ctaTitle: 'Ready to scan your first invoice?',
     ctaBody: 'Start free — 25 scans a month, no card.',
     ctaButton: 'Start free',
     ctaSecondary: 'See pricing',
+    ctaWhy: 'Why Teremu',
   },
 }

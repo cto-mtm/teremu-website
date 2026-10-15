@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const appUrl = useRuntimeConfig().public.appUrl
+const localePath = useLocalePath()
 
 useSeoMeta({
   title: () => t('pricing.heroTitle'),
@@ -209,6 +210,10 @@ useHead(() => ({
           <p class="mt-3 text-stone-600">{{ t('pricing.compareBody') }}</p>
         </div>
       </div>
+      <p class="mt-8 text-center text-stone-600">
+        {{ t('pricing.worthItText') }}
+        <NuxtLink :to="localePath('why-teremu') + '#calculator'" class="font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-800">{{ t('pricing.worthItLink') }}</NuxtLink>
+      </p>
     </section>
 
     <!-- FAQ -->

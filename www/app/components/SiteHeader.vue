@@ -8,6 +8,7 @@ const appUrl = useRuntimeConfig().public.appUrl
 // ── Nav config (labels resolved via i18n) ──────────────────────
 const nav = computed(() => [
   { key: 'home', to: localePath('index'), label: t('AppHeader.home'), icon: 'i-lucide-home' },
+  { key: 'why', to: localePath('why-teremu'), label: t('AppHeader.why'), icon: 'i-lucide-target' },
   { key: 'features', to: localePath('features'), label: t('AppHeader.features'), icon: 'i-lucide-layers' },
   { key: 'pricing', to: localePath('pricing'), label: t('AppHeader.pricing'), icon: 'i-lucide-tag' },
   { key: 'blog', to: localePath('blog'), label: t('AppHeader.blog'), icon: 'i-lucide-newspaper' },
@@ -15,8 +16,10 @@ const nav = computed(() => [
   { key: 'contact', to: localePath('contact'), label: t('AppHeader.contact'), icon: 'i-lucide-mail' },
 ])
 
-// Desktop pill keeps a tighter set; Contact lives in the footer + support CTA.
-const desktopNav = computed(() => nav.value.filter((i) => i.key !== 'contact'))
+// Desktop pill keeps a tighter set: the logo already links home, and Contact
+// lives in the footer + support CTA. (Dropping Home keeps the pill the same
+// width now that "Why Teremu" is in it.)
+const desktopNav = computed(() => nav.value.filter((i) => i.key !== 'contact' && i.key !== 'home'))
 
 const availableLocales = computed(() =>
   (locales.value as Array<{ code: string; name?: string }>).filter((l) => l.code !== locale.value),
