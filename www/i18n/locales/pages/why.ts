@@ -134,13 +134,13 @@ export default {
       'Para eso existe Triage: ves la foto del documento junto a las líneas extraídas, con avisos donde las cuentas no cuadran. Cada número automático se puede corregir y tu corrección siempre gana.',
     faq4Q: '¿Mis recetas están seguras?',
     faq4A:
-      'Son tuyas. Teremu solo necesita los ingredientes y sus cantidades para costear cada plato, nunca los pasos ni tu técnica. No vendemos ni compartimos tu información, y puedes exportarla o borrarla cuando quieras.',
+      'Son tuyas. Teremu solo necesita los ingredientes y sus cantidades para costear cada plato, nunca los pasos ni tu técnica. No vendemos ni compartimos tu información, y puedes pedirnos una copia o su borrado cuando quieras.',
     faq5Q: '¿Cuánto tarda empezar?',
     faq5A:
       'El momento «ajá» tarda menos de cinco minutos: creas tu cuenta, escaneas una factura y ves cómo se actualiza el coste de tus platos. No necesitas llamada de ventas.',
     faq6Q: '¿Se conecta con mi TPV?',
     faq6A:
-      'La integración con TPV está en el plan de trabajo y todavía no está disponible. No la necesitas para costear tus platos desde las facturas, y los planes Pro y Max incluyen exportación de datos en CSV.',
+      'La integración con TPV está en el plan de trabajo y todavía no está disponible. No la necesitas para costear tus platos desde las facturas, y hoy puedes importar tus ventas diarias desde un CSV.',
 
     // Sources
     sourcesTitle: 'Fuentes y cómo calculamos',
@@ -298,13 +298,13 @@ export default {
       "That's what Triage is for: you see the photo of the document next to the extracted lines, with warnings where the math doesn't add up. Every automatic number is correctable and your correction always wins.",
     faq4Q: 'Are my recipes safe?',
     faq4A:
-      "They're yours. Teremu only needs the ingredients and their quantities to cost each dish, never the steps or your technique. We don't sell or share your information, and you can export or delete it whenever you want.",
+      "They're yours. Teremu only needs the ingredients and their quantities to cost each dish, never the steps or your technique. We don't sell or share your information, and you can ask us for a copy or to delete it whenever you want.",
     faq5Q: 'How long does it take to get started?',
     faq5A:
       'The "aha" moment takes under five minutes: you create your account, scan an invoice, and watch your dish costs update. No sales call needed.',
     faq6Q: 'Does it connect to my POS?',
     faq6A:
-      "POS integration is on the roadmap and isn't available yet. You don't need it to cost your dishes from invoices, and the Pro and Max plans include CSV data export.",
+      "POS integration is on the roadmap and isn't available yet. You don't need it to cost your dishes from invoices, and today you can import your daily sales from a CSV.",
 
     sourcesTitle: 'Sources and how we calculate',
     sourcesIntro:

@@ -40,7 +40,7 @@ export default {
     q11: '¿Compartís mis datos?',
     a11: 'No. Nunca vendemos ni compartimos tu información con terceros. Lo que subes es tuyo y solo tú lo ves.',
     q12: '¿Puedo exportar o borrar mis datos?',
-    a12: 'Sí. Puedes exportar tus datos en CSV y borrar tu información cuando quieras. Tú tienes el control.',
+    a12: 'Sí. Escríbenos y te enviamos una copia de tus datos o los borramos, cuando quieras. La exportación en CSV desde la app llegará pronto. Tú tienes el control.',
 
     stillTitle: '¿Sigues con dudas?',
     stillBody: 'Nuestro equipo responde en menos de 48 horas laborables.',
@@ -83,7 +83,7 @@ export default {
     q11: 'Do you share my data?',
     a11: 'No. We never sell or share your information with third parties. What you upload is yours, and only you can see it.',
     q12: 'Can I export or delete my data?',
-    a12: 'Yes. You can export your data as CSV and delete your information whenever you want. You\'re in control.',
+    a12: 'Yes. Write to us and we will send you a copy of your data or delete it, whenever you want. CSV export from the app is coming soon. You\'re in control.',
 
     stillTitle: 'Still have questions?',
     stillBody: 'Our team replies within 48 business hours.',

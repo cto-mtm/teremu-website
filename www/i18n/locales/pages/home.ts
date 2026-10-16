@@ -142,7 +142,7 @@ export default {
       'Nunca vendemos ni compartimos tu información con terceros. Lo que subes es tuyo y solo tú lo ves.',
     trust3Title: 'Tú tienes el control',
     trust3Body:
-      'Exporta o borra tus datos cuando quieras, y corrige cualquier número automático. La corrección del humano siempre gana.',
+      'Pide una copia de tus datos o su borrado cuando quieras, y corrige cualquier número automático. La corrección del humano siempre gana.',
 
     // Testimonials / "real kitchens" (sample quotes — reemplazar por reseñas reales)
     humanTitle: 'Cocinas de verdad, márgenes de verdad',
@@ -315,7 +315,7 @@ export default {
       'We never sell or share your information with third parties. What you upload is yours, and only you can see it.',
     trust3Title: "You're in control",
     trust3Body:
-      'Export or delete your data whenever you want, and correct any automatic number. The human\'s correction always wins.',
+      'Ask for a copy of your data or have it deleted whenever you want, and correct any automatic number. The human\'s correction always wins.',
 
     // Testimonials / "real kitchens" (sample quotes — replace with real reviews)
     humanTitle: 'Real kitchens, real margins',
