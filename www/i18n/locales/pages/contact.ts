@@ -43,7 +43,7 @@ export default {
     // Side info
     infoTitle: 'Otras formas de contactar',
     emailUsTitle: 'Correo',
-    emailUsValue: "hola{'@'}teremu.com",
+    emailUsValue: "info{'@'}teremu.com",
     responseTitle: 'Tiempo de respuesta',
     responseValue: 'Menos de 48 horas, de lunes a viernes.',
     betaTitle: '¿Quieres entrar en la beta?',
@@ -94,7 +94,7 @@ export default {
 
     infoTitle: 'Other ways to reach us',
     emailUsTitle: 'Email',
-    emailUsValue: "hola{'@'}teremu.com",
+    emailUsValue: "info{'@'}teremu.com",
     responseTitle: 'Response time',
     responseValue: 'Under 48 hours, Monday to Friday.',
     betaTitle: 'Want in on the beta?',

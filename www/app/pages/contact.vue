@@ -333,7 +333,7 @@ async function onSubmit() {
                 </span>
                 <div>
                   <p class="text-sm font-medium text-stone-900">{{ t('contact.emailUsTitle') }}</p>
-                  <a href="mailto:hola@teremu.com" class="text-sm text-primary-600 hover:underline">{{ t('contact.emailUsValue') }}</a>
+                  <a href="mailto:info@teremu.com" class="text-sm text-primary-600 hover:underline">{{ t('contact.emailUsValue') }}</a>
                 </div>
               </div>
             </div>

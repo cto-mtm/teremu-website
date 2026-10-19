@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
             alt="Teremu"
             width="36"
             height="36"
-            class="h-9 w-9 rounded-xl shadow-sm"
+            class="h-9 w-9 rounded-xl"
           >
           <span class="text-gradient">Teremu</span>
         </NuxtLink>
@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
             class="flex items-center gap-2.5 font-display text-2xl font-bold"
             @click="mobileOpen = false"
           >
-            <img src="/images/logo-color.svg" alt="Teremu" width="36" height="36" class="h-9 w-9 rounded-xl shadow-sm">
+            <img src="/images/logo-color.svg" alt="Teremu" width="36" height="36" class="h-9 w-9 rounded-xl">
             <span class="text-gradient">Teremu</span>
           </NuxtLink>
           <button
