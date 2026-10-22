@@ -12,13 +12,13 @@ export default {
     heroEyebrow: 'Tú cocinas. Teremu lleva los números.',
     heroTitle: 'Protege el margen de tu restaurante sin dejar de cocinar',
     heroSubtitle:
-      'Un buen plato no protege un margen que no ves. Teremu se ocupa de las facturas, los costes y los márgenes por ti, para que te dediques a lo que te apasiona.',
+      'Cocinar bien es la mitad del negocio. Teremu se ocupa de las facturas, los costes y los márgenes por ti, para que te dediques a lo que te apasiona.',
     heroCtaPrimary: 'Empieza gratis',
     heroCtaSecondary: 'Haz la cuenta',
     heroNote: 'Sin tarjeta. 25 escaneos al mes gratis, para siempre.',
 
     // Problem
-    problemTitle: 'Un buen plato no protege un margen que no ves',
+    problemTitle: 'Cocinar bien es la mitad del negocio',
     problemSubtitle:
       'Abriste tu restaurante por la comida. Pero el margen se decide en cifras que casi nadie tiene tiempo de mirar, y con tan poco colchón cada punto cuenta.',
     p1Value: '3–5%',
@@ -183,12 +183,12 @@ export default {
     heroEyebrow: 'You cook. Teremu handles the numbers.',
     heroTitle: "Protect your restaurant's margin without leaving the kitchen",
     heroSubtitle:
-      "A great dish doesn't protect a margin you can't see. Teremu takes care of the invoices, costs, and margins for you, so you can focus on what you love.",
+      "Great food is half the business. Teremu takes care of the invoices, costs, and margins for you, so you can focus on what you love.",
     heroCtaPrimary: 'Start free',
     heroCtaSecondary: 'Do the math',
     heroNote: 'No card. 25 free scans a month, forever.',
 
-    problemTitle: "A great dish doesn't protect a margin you can't see",
+    problemTitle: 'Great food is half the business',
     problemSubtitle:
       'You opened your restaurant for the food. But margin is decided by numbers almost nobody has time to watch, and with so little cushion every point counts.',
     p1Value: '3–5%',

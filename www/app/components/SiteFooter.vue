@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale, locales } = useI18n()
 const localePath = useLocalePath()
+const switchLocalePath = useSwitchLocalePath()
+const allLocales = computed(() => locales.value as Array<{ code: string; name?: string }>)
 const year = new Date().getFullYear()
 
 // Lets visitors reopen the consent banner to change or withdraw their choice.
@@ -29,6 +31,23 @@ const { open: cookieSettingsOpen } = useCookieConsent()
           <p class="mt-3 max-w-xs text-sm text-stone-500">
             {{ t('AppFooter.tagline') }}
           </p>
+
+          <!-- Language switch: every locale listed, the current one marked -->
+          <nav class="mt-5 flex items-center gap-1.5 text-sm" :aria-label="t('AppHeader.language')">
+            <UIcon name="i-lucide-globe" class="mr-0.5 h-4 w-4 text-stone-400" />
+            <NuxtLink
+              v-for="l in allLocales"
+              :key="l.code"
+              :to="switchLocalePath(l.code)"
+              :aria-current="l.code === locale ? 'true' : undefined"
+              class="rounded-full px-3 py-1 font-medium transition-colors"
+              :class="l.code === locale
+                ? 'bg-white text-stone-900 ring-1 ring-stone-200'
+                : 'text-stone-500 hover:bg-white hover:text-primary-600'"
+            >
+              {{ l.name }}
+            </NuxtLink>
+          </nav>
         </div>
 
         <!-- Product -->

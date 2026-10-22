@@ -1,7 +1,6 @@
 <script setup lang="ts">
-const { t, locale, locales } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
-const switchLocalePath = useSwitchLocalePath()
 const route = useRoute()
 const appUrl = useRuntimeConfig().public.appUrl
 
@@ -21,15 +20,17 @@ const nav = computed(() => [
 // width now that "Why Teremu" is in it.)
 const desktopNav = computed(() => nav.value.filter((i) => i.key !== 'contact' && i.key !== 'home'))
 
-const availableLocales = computed(() =>
-  (locales.value as Array<{ code: string; name?: string }>).filter((l) => l.code !== locale.value),
-)
-
 // ── Smart navbar: hide on scroll down, reveal on scroll up ─────
 const hidden = ref(false)
 const atTop = ref(true)
 const mobileOpen = ref(false)
 let lastY = 0
+
+// On the home page the mobile bar sits over the dark video hero: fully
+// transparent with white logo + controls until you scroll or open the menu.
+// (The desktop pill keeps its frosted-white look everywhere.)
+const isHome = computed(() => route.path === localePath('index'))
+const overHero = computed(() => isHome.value && atTop.value && !mobileOpen.value)
 
 function onScroll() {
   const y = window.scrollY
@@ -73,11 +74,18 @@ onBeforeUnmount(() => {
     class="fixed inset-x-0 top-0 z-50 transition-transform duration-300 will-change-transform md:px-4"
     :class="hidden ? '-translate-y-full' : 'translate-y-0'"
   >
+    <!-- z-[70] keeps this bar above the full-screen menu, so its logo and
+         toggle stay put (and double as the menu's header) while it opens and
+         closes, instead of a second copy fading in and out on top. -->
     <div
-      class="mx-auto border-b transition-all duration-300 md:mt-5 md:w-fit md:max-w-full md:rounded-full md:border md:backdrop-blur-xl"
-      :class="atTop && !mobileOpen
+      class="relative z-[70] mx-auto border-b transition-all duration-300 md:mt-5 md:w-fit md:max-w-full md:rounded-full md:border md:backdrop-blur-xl"
+      :class="overHero
         ? 'border-transparent md:bg-white/60 md:border-white/60 md:shadow-[0_12px_34px_-14px_rgba(28,20,16,0.20)]'
-        : 'border-stone-200 bg-white/85 backdrop-blur-xl depth-card md:border-white/70 md:shadow-[0_16px_40px_-16px_rgba(28,20,16,0.28)]'"
+        : mobileOpen
+          ? 'border-transparent md:bg-white/60 md:border-white/60'
+          : atTop
+            ? 'border-transparent bg-white/70 backdrop-blur-xl md:bg-white/60 md:border-white/60 md:shadow-[0_12px_34px_-14px_rgba(28,20,16,0.20)]'
+            : 'border-stone-200 bg-white/85 backdrop-blur-xl depth-card md:border-white/70 md:shadow-[0_16px_40px_-16px_rgba(28,20,16,0.28)]'"
     >
       <nav
         class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 md:h-14 md:max-w-none md:justify-center md:gap-6 md:pl-5 md:pr-4"
@@ -89,13 +97,22 @@ onBeforeUnmount(() => {
           class="flex items-center gap-2.5 font-display text-2xl font-bold tracking-tight"
         >
           <img
+            v-if="overHero"
+            src="/images/logo-white.svg"
+            alt="Teremu"
+            width="36"
+            height="36"
+            class="h-9 w-9 rounded-xl md:hidden"
+          >
+          <img
             src="/images/logo-color.svg"
             alt="Teremu"
             width="36"
             height="36"
             class="h-9 w-9 rounded-xl"
+            :class="overHero ? 'hidden md:block' : ''"
           >
-          <span class="text-gradient">Teremu</span>
+          <span class="text-gradient" :class="overHero ? 'max-md:text-white max-md:[background-image:none]' : ''">Teremu</span>
         </NuxtLink>
 
         <!-- Desktop nav -->
@@ -115,19 +132,8 @@ onBeforeUnmount(() => {
         </ul>
 
         <!-- Right controls -->
+        <!-- (The language switch lives in the footer.) -->
         <div class="flex items-center gap-2">
-          <!-- Language switch -->
-          <NuxtLink
-            v-for="l in availableLocales"
-            :key="l.code"
-            :to="switchLocalePath(l.code)"
-            class="hidden rounded-lg px-2.5 py-1.5 text-sm font-medium text-stone-500 transition-colors hover:bg-stone-100 hover:text-stone-900 sm:inline-flex"
-            :aria-label="t('AppHeader.language') + ': ' + l.name"
-          >
-            <UIcon name="i-lucide-globe" class="mr-1 h-4 w-4" />
-            {{ l.code.toUpperCase() }}
-          </NuxtLink>
-
           <NuxtLink
             :to="appUrl"
             external
@@ -139,8 +145,8 @@ onBeforeUnmount(() => {
           <!-- Mobile toggle -->
           <button
             type="button"
-            class="relative z-[70] inline-flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-stone-100 md:hidden"
-            :class="atTop && !mobileOpen ? 'text-primary-600' : 'text-stone-800'"
+            class="inline-flex items-center justify-center rounded-lg p-2 transition-colors md:hidden"
+            :class="overHero ? 'text-white hover:bg-white/10' : mobileOpen ? 'text-stone-800 hover:bg-white/60' : atTop ? 'text-primary-600 hover:bg-stone-100' : 'text-stone-800 hover:bg-stone-100'"
             :aria-label="mobileOpen ? t('AppHeader.closeMenu') : t('AppHeader.openMenu')"
             :aria-expanded="mobileOpen"
             aria-controls="mobile-menu"
@@ -169,25 +175,8 @@ onBeforeUnmount(() => {
         <!-- warm ambient glow -->
         <div class="bg-ember-wash pointer-events-none absolute inset-0" aria-hidden="true" />
 
-        <!-- Top bar: logo + close -->
-        <div class="relative flex h-16 items-center justify-between px-4 sm:px-6">
-          <NuxtLink
-            :to="localePath('index')"
-            class="flex items-center gap-2.5 font-display text-2xl font-bold"
-            @click="mobileOpen = false"
-          >
-            <img src="/images/logo-color.svg" alt="Teremu" width="36" height="36" class="h-9 w-9 rounded-xl">
-            <span class="text-gradient">Teremu</span>
-          </NuxtLink>
-          <button
-            type="button"
-            class="inline-flex items-center justify-center rounded-lg p-2 text-stone-800 transition-colors hover:bg-white/60"
-            :aria-label="t('AppHeader.closeMenu')"
-            @click="mobileOpen = false"
-          >
-            <UIcon name="i-lucide-x" class="h-6 w-6" />
-          </button>
-        </div>
+        <!-- room for the navbar, which stays on top as this menu's header -->
+        <div class="h-16 shrink-0" aria-hidden="true" />
 
         <!-- Big nav links (staggered entrance) -->
         <nav class="relative flex flex-1 flex-col justify-center px-6 py-6" aria-label="Mobile">
@@ -216,9 +205,9 @@ onBeforeUnmount(() => {
           </ul>
         </nav>
 
-        <!-- Bottom: CTA + language -->
+        <!-- Bottom: CTA -->
         <div
-          class="animate-fade-up relative space-y-4 px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2"
+          class="animate-fade-up relative px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2"
           :style="{ animationDelay: 80 + nav.length * 70 + 'ms' }"
         >
           <NuxtLink
@@ -230,20 +219,6 @@ onBeforeUnmount(() => {
             {{ t('AppHeader.cta') }}
             <UIcon name="i-lucide-arrow-right" class="h-5 w-5" />
           </NuxtLink>
-
-          <div class="flex items-center justify-center gap-2 text-sm text-stone-500">
-            <UIcon name="i-lucide-globe" class="h-4 w-4" />
-            <span>{{ t('AppHeader.language') }}:</span>
-            <NuxtLink
-              v-for="l in availableLocales"
-              :key="l.code"
-              :to="switchLocalePath(l.code)"
-              class="rounded-lg border border-stone-200 bg-white/70 px-3 py-1.5 font-medium text-stone-700 transition-colors hover:border-primary-300 hover:text-primary-600"
-              @click="mobileOpen = false"
-            >
-              {{ l.name }}
-            </NuxtLink>
-          </div>
         </div>
       </div>
     </Transition>

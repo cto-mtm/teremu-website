@@ -76,6 +76,9 @@ body {
   font-family: var(--font-sans);
   color: var(--color-ink);
   background-color: var(--color-cream);
+  /* Decorative bleeds (divider squiggles, hero orbs) must never cause a
+     sideways scroll; `clip` (unlike `hidden`) keeps sticky/fixed working. */
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* Ambient warmth: two soft brand-tinted glows over the cream canvas.
@@ -170,6 +173,131 @@ h1,
   mask-position: top left, bottom left;
   -webkit-mask-size: 120px 24px, 100% calc(100% - 23px);
   mask-size: 120px 24px, 100% calc(100% - 23px);
+}
+
+/* Cream scalloped strip for the bottom of a dark section (the video hero),
+   so it eases into the page instead of ending on a hard line. */
+.scallop-edge {
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='24' viewBox='0 0 120 24' preserveAspectRatio='none'%3E%3Cpath d='M0 24V12C15 4 30 4 45 10C60 16 75 16 90 10C105 4 120 4 120 12V24Z' fill='%23faf5f0'/%3E%3C/svg%3E") repeat-x bottom left / 120px 24px;
+}
+
+/* ── Restaurant-menu motifs ────────────────────────────────────────
+   Chalkboard menu (pricing teaser): dark slate with chalk haze, a wooden
+   frame, and chalk-soft text. `.menu-leader` is the dotted line that runs
+   from a dish name to its price. */
+.chalkboard {
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 25% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(80% 60% at 90% 100%, rgba(255, 255, 255, 0.05), transparent 60%),
+    #2b2825;
+  border: 10px solid #6e4b2c;
+  box-shadow:
+    inset 0 0 0 2px rgba(0, 0, 0, 0.35),
+    inset 0 0 60px rgba(0, 0, 0, 0.45),
+    0 24px 50px -20px rgba(0, 0, 0, 0.6);
+}
+.chalk {
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.45), 0 0 6px rgba(255, 255, 255, 0.08);
+}
+.menu-leader {
+  flex: 1;
+  min-width: 1.5rem;
+  transform: translateY(-0.35em);
+  border-bottom: 2px dotted rgba(255, 255, 255, 0.3);
+}
+
+/* ── Paper motifs: receipts and order tickets ──────────────────────
+   Torn edges are CSS masks (zigzag teeth --tooth wide, --tooth/2 deep).
+   A mask also clips drop-shadows, so shadows go on a wrapper:
+   `.paper-shadow` around `.receipt`, or the `.order-ticket` itself around
+   its `.order-ticket__paper`. */
+.paper-shadow {
+  filter: drop-shadow(0 12px 16px rgba(28, 20, 16, 0.1)) drop-shadow(0 1px 1px rgba(28, 20, 16, 0.12));
+}
+
+/* Till receipt: thermal-paper white, torn top and bottom. */
+.receipt {
+  --tooth: 14px;
+  background: linear-gradient(180deg, rgba(120, 90, 60, 0.04), transparent 18%), #fffdf8;
+  padding-block: calc(var(--tooth) / 2 + 1.25rem);
+  -webkit-mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / var(--tooth) 51% repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) 51% repeat-x;
+  mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / var(--tooth) 51% repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) 51% repeat-x;
+}
+
+/* Hand-drawn red-pen loop around a figure, as if someone checked the bill. */
+.pen-circle {
+  position: relative;
+  display: inline-block;
+  margin-inline: 0.5em 0.35em;
+  white-space: nowrap;
+}
+.pen-circle::after {
+  content: "";
+  position: absolute;
+  inset: -0.45em -0.6em;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40' preserveAspectRatio='none' fill='none'%3E%3Cpath d='M14 9C34 2 92 1 111 12c12 8-2 21-34 24-30 3-62 1-71-9C-1 19 12 8 40 5' stroke='%23dc3448' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* Pass rail: the steel bar order tickets hang from. */
+.ticket-rail {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: 2;
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fafaf9 0%, #d6d3d1 40%, #a8a29e 70%, #78716c 100%);
+  box-shadow: 0 6px 10px -4px rgba(28, 20, 16, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Paper sitting slightly askew (set --tilt); straightens on hover. */
+.paper-tilt {
+  rotate: var(--tilt, 0deg);
+  transition: rotate 0.3s ease, translate 0.3s ease;
+}
+.paper-tilt:hover {
+  rotate: 0deg;
+}
+@media (prefers-reduced-motion: reduce) {
+  .paper-tilt {
+    transition: none;
+  }
+}
+
+/* Order ticket hanging from the rail (pivots at the top, drops a touch on
+   hover). Torn bottom edge only; the top is tucked under the rail. */
+.order-ticket {
+  transform-origin: top center;
+}
+.order-ticket:hover {
+  translate: 0 3px;
+}
+.order-ticket__paper {
+  --tooth: 14px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(120, 90, 60, 0.06), transparent 14%), #fffdf8;
+  padding-bottom: calc(var(--tooth) / 2 + 1.25rem);
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) 100% repeat-x;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) 100% repeat-x;
+}
+
+/* Faint kitchen doodles (<KitchenDoodle>): thin strokes at large sizes,
+   barely there, so they add personality without competing with content. */
+.kitchen-doodle {
+  color: var(--color-ink);
+  opacity: 0.07;
+  stroke-width: 1.1;
+}
+.kitchen-doodle.is-ember {
+  color: var(--color-ember-700);
+  opacity: 0.12;
 }
 
 /* Semantic price-change chip. `.is-up` = coral (hike/bad for margin),

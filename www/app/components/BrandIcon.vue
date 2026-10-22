@@ -57,6 +57,34 @@ const PATHS: Record<string, string> = {
   assistant:
     '<path d="M4.5 8c0-1.4 1-2.5 2.4-2.5h9.2c1.4 0 2.4 1.1 2.4 2.5v5c0 1.4-1 2.5-2.4 2.5H10l-3.5 3v-3H6.9c-1.4 0-2.4-1.1-2.4-2.5Z"/><path d="M11.5 9l.8 1.6 1.7.8-1.7.8-.8 1.6-.8-1.6L9 11.4l1.7-.8Z"/>',
 
+  // ── Stats ───────────────────────────────────────────────────
+  // timer: a wind-up kitchen timer (time saved)
+  timer:
+    '<path d="M12 7.5c3.6 0 6.5 2.8 6.5 6.3S15.6 20 12 20s-6.5-2.8-6.5-6.2S8.4 7.5 12 7.5Z"/><path d="M10.4 4.4c1 .2 2.2.2 3.2-.1M12 4.5v3"/><path d="M12 13.8l2.7-2.3"/><path d="M17.3 7.6l1.2-1.2"/>',
+
+  // ── Doodles (faint background watermarks, see <KitchenDoodle>) ──
+  // whisk: balloon whisk, wires meeting at the handle
+  whisk:
+    '<path d="M12 21.5v-6.8"/><path d="M12 14.7C8.4 12 8.6 4 12 3.5c3.4.5 3.6 8.5 0 11.2Z"/><path d="M12 14.7c-1.7-3.2-1.6-9.7 0-11.2 1.6 1.5 1.7 8 0 11.2"/><path d="M10.5 14.8c1 .3 2 .3 3 0"/>',
+  // knife: a chef's knife on the diagonal
+  knife:
+    '<path d="M3.8 20.2c3.4-4.6 7.8-9.4 11.6-12.6l1.5 1.5C14 13 9.5 17.2 3.8 20.2Z"/><path d="M15.6 8.2l3.2-3.4c.5-.5 1.3-.5 1.7 0s.4 1.2-.1 1.7l-3.3 3.1"/><path d="M18.6 6.2h.01"/>',
+  // onion: bulb, layer lines, sprout and roots
+  onion:
+    '<path d="M12 6.5c-4 2.2-6.5 5-6.5 8.2 0 3.3 2.9 5.3 6.5 5.3s6.5-2 6.5-5.3c0-3.2-2.5-6-6.5-8.2Z"/><path d="M12 6.5c-1.5 3-1.8 9.5 0 13.5M12 6.5c1.5 3 1.8 9.5 0 13.5"/><path d="M12 6.5c-.3-1.4-.1-2.6.6-3.6M12 6.5c.6-1 1.6-1.6 2.7-1.8"/><path d="M10.6 20.2c.4.8.9 1.2 1.4 1.2s1-.4 1.4-1.2"/>',
+  // lemon: a lemon half, segments radiating from the middle
+  lemon:
+    '<path d="M12 4.5c4.2 0 7.5 3.3 7.5 7.5s-3.3 7.5-7.5 7.5-7.5-3.4-7.5-7.5S7.8 4.5 12 4.5Z"/><path d="M12 6.4c3.1 0 5.6 2.5 5.6 5.6s-2.5 5.6-5.6 5.6-5.6-2.5-5.6-5.6 2.5-5.6 5.6-5.6Z"/><path d="M12 7v10M7 12h10M8.5 8.5l7 7M15.5 8.5l-7 7"/>',
+  // chili: a curved pepper with its stem
+  chili:
+    '<path d="M17.4 8.2c-1.4 5.3-5.6 10.6-11.8 11.9-.8.2-1.1-.7-.4-1 4.4-2.3 7.2-6.3 8.5-11.4 1.2-.9 2.6-.8 3.7.5Z"/><path d="M15.6 7.5c0-1.6.6-2.8 1.9-3.6"/>',
+  // spoon: a wooden spoon
+  spoon:
+    '<path d="M12 3.5c2 0 3.3 1.8 3.3 4s-1.4 3.8-3.3 3.8-3.3-1.6-3.3-3.8S10 3.5 12 3.5Z"/><path d="M12 11.3c-.4 3.5-.4 6.8 0 9.6"/>',
+  // foodtruck: truck with a scalloped awning over the serving window
+  foodtruck:
+    '<path d="M3 16.5V8.2c0-.5.4-.9.9-.9h10.6c.5 0 .9.4.9.9v8.3"/><path d="M15.4 10h2.8c.4 0 .7.2.9.5l1.6 2.6c.2.3.3.6.3.9v2.5"/><path d="M3 16.5h2.4M8.6 16.5h6.8M18.6 16.5H21"/><circle cx="7" cy="17.3" r="1.6"/><circle cx="17" cy="17.3" r="1.6"/><path d="M5.3 10.6h7.4v3.1H5.3Z"/><path d="M5 10.4c.6.9 1.4.9 2 0 .6.9 1.4.9 2 0 .6.9 1.4.9 2 0 .6.9 1.4.9 2 0"/>',
+
   // ── Trust ───────────────────────────────────────────────────
   // chef: a chef hat
   chef:

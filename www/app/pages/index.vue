@@ -53,12 +53,27 @@ useHead(() => ({
   ],
 }))
 
+// Kinds of food business the hero headline cycles through (comma-separated in
+// the locale file; `|` would be read as a vue-i18n plural separator).
+const heroWords = computed(() => t('home.heroTitleWords').split(',').map(w => w.trim()))
+
 // "Where margin leaks": each card pairs a sourced number with what Teremu does
 // about it. Sources are listed once under the grid (leaksSources below).
 const leaks = computed(() => [
-  { value: t('home.leak1Value'), title: t('home.leak1Title'), body: t('home.leak1Body'), fix: t('home.leak1Fix') },
-  { value: t('home.leak2Value'), title: t('home.leak2Title'), body: t('home.leak2Body'), fix: t('home.leak2Fix') },
-  { value: t('home.leak3Value'), title: t('home.leak3Title'), body: t('home.leak3Body'), fix: t('home.leak3Fix') },
+  { value: t('home.leak1Value'), title: t('home.leak1Title'), body: t('home.leak1Body'), item: t('home.leak1ExampleItem'), delta: t('home.leak1ExampleDelta'), fix: t('home.leak1Fix') },
+  { value: t('home.leak2Value'), title: t('home.leak2Title'), body: t('home.leak2Body'), item: t('home.leak2ExampleItem'), delta: t('home.leak2ExampleDelta'), fix: t('home.leak2Fix') },
+  { value: t('home.leak3Value'), title: t('home.leak3Title'), body: t('home.leak3Body'), item: t('home.leak3ExampleItem'), delta: t('home.leak3ExampleDelta'), fix: t('home.leak3Fix') },
+])
+// Receipts and order tickets sit slightly askew, like paper on a counter.
+const leakTilts = ['-0.8deg', '0.6deg', '-0.4deg']
+const ticketTilts = ['-1.5deg', '1deg', '-0.6deg', '1.4deg']
+
+// Pricing teaser rendered as a chalkboard menu. Names and prices come from
+// the pricing page's strings so there's one source of truth for them.
+const menuBoard = computed(() => [
+  { name: t('pricing.freeName'), price: t('pricing.freePrice'), suffix: t('pricing.forever'), details: [t('pricing.freeF1'), t('pricing.freeF2'), t('pricing.freeF11')] },
+  { name: t('pricing.proName'), price: t('pricing.proMonthly'), suffix: t('pricing.perLocMonth'), tagline: t('pricing.proTagline'), details: [t('pricing.proF1'), t('pricing.proF2'), t('pricing.proF9')] },
+  { name: t('pricing.maxName'), price: t('pricing.maxMonthly'), suffix: t('pricing.perLocMonth'), tagline: t('pricing.maxTagline'), details: [t('pricing.maxF1'), t('pricing.maxF2')] },
 ])
 const leaksSources = computed(() => [
   { label: t('home.leaksSource1'), href: 'https://pos.toasttab.com/blog/on-the-line/average-restaurant-profit-margin' },
@@ -102,33 +117,37 @@ const features = computed(() => [
 <template>
   <div>
     <!-- ── Hero ─────────────────────────────────────────────── -->
-    <section class="relative overflow-hidden bg-ember-wash pt-16">
-      <!-- animated cooking scene — also the reduced-motion / loading fallback -->
-      <CookingBackdrop class="absolute inset-0" :intensity="0.85" />
+    <!-- Dark, video-forward hero: the kitchen footage is the first thing that
+         says "this is for restaurants", so the copy gets the left side and the
+         video gets the rest of the screen. The app screenshot and stats sit
+         below, overlapping the hero's bottom edge as the transition. -->
+    <section class="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-ink pt-16">
+      <!-- glowing-embers scene — the reduced-motion / loading fallback -->
+      <CookingBackdrop class="absolute inset-0" :intensity="0.55" />
 
       <!-- background video, layered above the backdrop -->
       <HeroVideo src="/videos/hero.mp4" class="absolute inset-0" />
 
-      <!-- legibility scrim: lifts the dark hero copy off a busy video -->
+      <!-- legibility scrim: even on phones (copy spans the screen), only
+           behind the copy from tablet up so the footage stays clear on the right -->
       <div
-        class="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/85 via-white/60 to-white/25"
+        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/65 via-ink/50 to-ink/70 md:bg-gradient-to-r md:from-ink/90 md:via-ink/55 md:to-ink/5"
         aria-hidden="true"
       />
+      <!-- bottom fade into the scalloped edge -->
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink/70 to-transparent" aria-hidden="true" />
 
-      <!-- floating decorative elements -->
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="animate-float absolute left-[8%] top-24 h-16 w-16 rounded-2xl bg-primary-200/40 blur-sm" />
-        <div class="animate-float absolute right-[12%] top-40 h-24 w-24 rounded-full bg-secondary-200/40 blur-md animate-delay-200" />
-        <div class="animate-float absolute bottom-10 left-[20%] h-10 w-10 rounded-xl bg-accent-200/50 animate-delay-300" />
-      </div>
-
-      <div class="relative mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:pt-20">
-        <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+      <div class="relative mx-auto w-full max-w-6xl px-4 pb-36 pt-10 sm:px-6 lg:pb-52 lg:pt-16">
+        <div class="max-w-2xl [text-shadow:0_1px_14px_rgb(28_20_16/0.55)]">
           <div class="animate-fade-up">
-            <h1 class="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">
-              {{ t('home.heroTitle') }}
+            <!-- The last word rotates through kinds of food business; crawlers
+                 and screen readers get the plain sentence (see RotatingWord).
+                 The period rides on each word so it never floats after a short one. -->
+            <h1 class="text-[2.5rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              {{ t('home.heroTitleLead') }}
+              <span class="text-ember-300"><RotatingWord :words="heroWords.map(w => `${w}.`)" /></span>
             </h1>
-            <p class="mt-5 max-w-xl text-lg text-stone-600">
+            <p class="mt-5 max-w-xl text-lg text-stone-200">
               {{ t('home.heroSubtitle') }}
             </p>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -138,51 +157,59 @@ const features = computed(() => [
               </NuxtLink>
               <a
                 href="#calculator"
-                class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/70 px-5 py-3 text-base font-semibold text-stone-800 backdrop-blur-sm transition-colors hover:border-stone-400 hover:bg-white sm:w-auto"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-5 py-3 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/60 hover:bg-white/20 sm:w-auto"
               >
                 {{ t('home.heroCtaSecondary') }}
               </a>
             </div>
-            <p class="mt-5 flex items-center gap-1.5 text-sm text-stone-500">
-              <UIcon name="i-lucide-check-circle-2" class="h-4 w-4 shrink-0 text-secondary-500" />
+            <p class="mt-5 flex items-center gap-1.5 text-sm text-stone-300">
+              <UIcon name="i-lucide-check-circle-2" class="h-4 w-4 shrink-0 text-herb-400" />
               {{ t('home.heroNote') }}
             </p>
           </div>
+        </div>
+      </div>
 
-          <!-- Hero screenshot slot -->
-          <div class="animate-fade-up animate-delay-200">
-            <div class="depth-card-lg rounded-3xl bg-white p-2.5 sm:p-3">
-              <ScreenshotSlot :label="t('home.heroScreenshot')" src="/images/screenshots/dashboard.webp" class="!min-h-[240px] sm:!min-h-[340px]" />
+      <!-- scalloped bottom edge (echoes the logo's seal) easing into the cream page -->
+      <div class="scallop-edge absolute inset-x-0 -bottom-px" aria-hidden="true" />
+    </section>
+
+    <!-- ── Hero → page transition: app screenshot + stats ───── -->
+    <!-- Pulled up over the hero's bottom edge so the video hands off to the
+         product without a hard break. -->
+    <section class="relative z-10 mx-auto -mt-28 max-w-6xl px-4 sm:px-6 lg:-mt-40">
+      <div class="animate-fade-up animate-delay-200 mx-auto max-w-5xl">
+        <div class="depth-card-lg rounded-3xl bg-white p-2.5 sm:p-3">
+          <ScreenshotSlot :label="t('home.heroScreenshot')" src="/images/screenshots/dashboard.webp" class="!min-h-[240px] sm:!min-h-[340px]" />
+        </div>
+      </div>
+
+      <!-- Stats strip -->
+      <dl class="animate-fade-up animate-delay-300 mt-10 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6">
+        <div
+          v-for="(s, i) in [
+            { icon: 'scan', v: t('home.stat1Value'), l: t('home.stat1Label'), chips: false },
+            { icon: 'menu', v: t('home.stat2Value'), l: t('home.stat2Label'), chips: true },
+            { icon: 'timer', v: t('home.stat3Value'), l: t('home.stat3Label'), chips: false },
+          ]"
+          :key="i"
+          class="flex items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-stone-200"
+        >
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary-50 text-primary-600">
+            <BrandIcon :name="s.icon" class="h-6 w-6" />
+          </span>
+          <div>
+            <dt class="num-display text-3xl font-bold leading-none text-stone-900 sm:text-4xl">{{ s.v }}</dt>
+            <dd class="mt-1.5 text-sm leading-snug text-stone-600">{{ s.l }}</dd>
+            <!-- Semantic color story: coral = a price hike you caught, herb = the drop you lock in.
+                 Named ingredients make it obvious these are food prices. -->
+            <div v-if="s.chips" class="mt-2 flex flex-wrap gap-1.5" aria-hidden="true">
+              <span class="price-chip is-up"><UIcon name="i-lucide-trending-up" class="h-3.5 w-3.5" /> {{ t('home.statChipUp') }} +8%</span>
+              <span class="price-chip is-down"><UIcon name="i-lucide-trending-down" class="h-3.5 w-3.5" /> {{ t('home.statChipDown') }} −5%</span>
             </div>
           </div>
         </div>
-
-        <!-- Stats strip -->
-        <dl class="animate-fade-up animate-delay-300 mt-12 grid grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-3 sm:gap-6">
-          <div
-            v-for="(s, i) in [
-              { icon: 'i-lucide-camera', v: t('home.stat1Value'), l: t('home.stat1Label'), chips: false },
-              { icon: 'i-lucide-piggy-bank', v: t('home.stat2Value'), l: t('home.stat2Label'), chips: true },
-              { icon: 'i-lucide-clock', v: t('home.stat3Value'), l: t('home.stat3Label'), chips: false },
-            ]"
-            :key="i"
-            class="flex items-center gap-4 rounded-2xl bg-white/70 p-5 ring-1 ring-stone-200"
-          >
-            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary-50 text-primary-600">
-              <UIcon :name="s.icon" class="h-6 w-6" />
-            </span>
-            <div>
-              <dt class="num-display text-3xl font-bold leading-none text-stone-900 sm:text-4xl">{{ s.v }}</dt>
-              <dd class="mt-1.5 text-sm leading-snug text-stone-600">{{ s.l }}</dd>
-              <!-- Semantic color story: coral = a price hike you caught, herb = the drop you lock in. -->
-              <div v-if="s.chips" class="mt-2 flex gap-1.5" aria-hidden="true">
-                <span class="price-chip is-up"><UIcon name="i-lucide-trending-up" class="h-3.5 w-3.5" /> +8%</span>
-                <span class="price-chip is-down"><UIcon name="i-lucide-trending-down" class="h-3.5 w-3.5" /> −5%</span>
-              </div>
-            </div>
-          </div>
-        </dl>
-      </div>
+      </dl>
     </section>
 
     <!-- ── Where margin leaks ───────────────────────────────── -->
@@ -193,20 +220,36 @@ const features = computed(() => [
         <p class="mt-4 text-lg text-stone-600">{{ t('home.leaksSubtitle') }}</p>
       </div>
 
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
-        <article
+      <!-- Each leak is a till receipt: torn edges, a line item, and the
+           figure that hurts circled in red pen. -->
+      <div class="mt-14 grid gap-8 md:grid-cols-3 md:gap-6">
+        <div
           v-for="(l, i) in leaks"
           :key="i"
-          class="flex flex-col rounded-2xl border border-stone-200 bg-white p-6"
+          class="paper-shadow paper-tilt"
+          :style="{ '--tilt': leakTilts[i] }"
         >
-          <p class="num-display text-5xl font-bold leading-none text-coral-600">{{ l.value }}</p>
-          <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ l.title }}</h3>
-          <p class="mt-2 text-sm text-stone-600">{{ l.body }}</p>
-          <p class="mt-4 flex gap-2 rounded-xl bg-herb-50 p-3 text-sm text-herb-800 md:mt-auto md:pt-3">
-            <UIcon name="i-lucide-check-circle-2" class="mt-0.5 h-4 w-4 shrink-0 text-herb-600" />
-            <span>{{ l.fix }}</span>
-          </p>
-        </article>
+          <article class="receipt flex h-full flex-col px-6">
+            <p class="flex justify-between border-b border-dashed border-stone-300 pb-2 font-mono text-[0.7rem] uppercase tracking-widest text-stone-400" aria-hidden="true">
+              <span>{{ t('home.leaksReceiptNo') }} #{{ 1041 + i }}</span>
+              <span>{{ t('home.leaksExampleLabel') }}</span>
+            </p>
+            <p class="num-display mt-5 text-5xl font-bold leading-none text-coral-600">{{ l.value }}</p>
+            <h3 class="mt-4 text-lg font-semibold text-stone-900">{{ l.title }}</h3>
+            <p class="mt-2 text-sm text-stone-600">{{ l.body }}</p>
+            <!-- the line item; its change is what the red pen circles -->
+            <p class="mt-5 flex items-baseline gap-2 border-y border-dashed border-stone-300 py-3 font-mono text-xs text-stone-700">
+              <span class="sr-only">{{ t('home.leaksExampleLabel') }}:</span>
+              <span>{{ l.item }}</span>
+              <span class="min-w-3 flex-1 translate-y-[-0.25em] border-b border-dotted border-stone-300" aria-hidden="true" />
+              <span class="pen-circle font-semibold text-coral-700">{{ l.delta }}</span>
+            </p>
+            <p class="mt-5 flex gap-2 rounded-xl bg-herb-50 p-3 text-sm text-herb-800 md:mt-auto">
+              <UIcon name="i-lucide-check-circle-2" class="mt-0.5 h-4 w-4 shrink-0 text-herb-600" />
+              <span>{{ l.fix }}</span>
+            </p>
+          </article>
+        </div>
       </div>
 
       <div class="mt-8 text-center">
@@ -234,39 +277,40 @@ const features = computed(() => [
         <p class="mt-4 text-lg text-stone-600">{{ t('home.loopSubtitle') }}</p>
       </div>
 
-      <!-- The loop reads as one connected path: numbered nodes strung on a
-           dashed ember line, not four separate boxes. -->
-      <ol class="relative mt-16 grid gap-x-6 gap-y-10 md:grid-cols-4">
-        <!-- dashed connector (desktop only), sits behind the nodes -->
-        <span
-          class="pointer-events-none absolute left-[12.5%] right-[12.5%] top-7 hidden border-t-2 border-dashed border-primary-200 md:block"
-          aria-hidden="true"
-        />
-        <li
-          v-for="(step, i) in loop"
-          :key="i"
-          class="group relative flex flex-col items-center text-center"
-        >
-          <!-- numbered node -->
-          <span
-            class="relative z-10 grid h-14 w-14 place-items-center rounded-full border-2 border-primary-200 bg-white text-primary-600 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary-500 group-hover:bg-primary-500 group-hover:text-white"
-          >
-            <BrandIcon :name="step.icon" class="h-7 w-7" />
-            <span
-              class="num-display absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-primary-500 text-sm font-bold text-white shadow"
-            >{{ i + 1 }}</span>
-          </span>
-          <h3 class="mt-5 text-lg font-semibold text-stone-900">{{ step.title }}</h3>
-          <p class="mt-2 max-w-xs text-sm text-stone-600">{{ step.body }}</p>
-          <p class="mt-3 max-w-xs text-sm font-semibold text-primary-700">{{ step.outcome }}</p>
-        </li>
-      </ol>
+      <!-- The loop as order tickets hanging from the pass rail, in the order
+           the kitchen works them. On mobile the rail scrolls sideways. -->
+      <div class="-mx-4 mt-14 snap-x snap-mandatory overflow-x-auto px-4 pb-6 sm:-mx-6 sm:px-6 md:mx-0 md:overflow-visible md:px-0">
+        <div class="relative w-max pt-1 md:w-auto">
+          <div class="ticket-rail" aria-hidden="true" />
+          <ol class="flex gap-5 px-3 pt-2 md:grid md:grid-cols-4 md:gap-6 md:px-5">
+            <li
+              v-for="(step, i) in loop"
+              :key="i"
+              class="order-ticket paper-tilt paper-shadow w-64 shrink-0 snap-center md:w-auto"
+              :style="{ '--tilt': ticketTilts[i] }"
+            >
+              <div class="order-ticket__paper flex flex-col px-5 pt-6">
+                <p class="flex items-center justify-between border-b border-dashed border-stone-300 pb-2 font-mono text-[0.7rem] uppercase tracking-widest text-stone-400">
+                  <span>{{ t('home.loopTicketLabel') }} #{{ i + 1 }}</span>
+                  <BrandIcon :name="step.icon" class="h-5 w-5 text-primary-600" />
+                </p>
+                <h3 class="mt-4 font-display text-3xl leading-none text-stone-900">{{ step.title }}</h3>
+                <p class="mt-3 flex-1 text-sm text-stone-600">{{ step.body }}</p>
+                <!-- the outcome reads like the chef's note scribbled on the ticket -->
+                <p class="mt-4 border-t border-dashed border-stone-300 pt-3 font-display text-lg leading-snug text-primary-700">→ {{ step.outcome }}</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
     </section>
 
     <SectionDivider />
 
     <!-- ── Savings calculator ───────────────────────────────── -->
-    <section id="calculator" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-20 sm:px-6">
+    <section id="calculator" class="relative mx-auto max-w-6xl scroll-mt-24 px-4 py-20 sm:px-6">
+      <KitchenDoodle name="whisk" class="left-6 top-14 h-36 w-36" :tilt="-14" />
+      <KitchenDoodle name="knife" class="right-8 top-24 h-32 w-32" :tilt="8" />
       <div class="mx-auto max-w-2xl text-center">
         <span class="eyebrow">{{ t('home.calcEyebrow') }}</span>
         <h2 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.calcTitle') }}</span></h2>
@@ -282,6 +326,8 @@ const features = computed(() => [
     <!-- ── Features overview ────────────────────────────────── -->
     <section class="bg-grain bg-stone-50 py-20">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <KitchenDoodle name="chili" class="left-6 -top-4 h-32 w-32" :tilt="-20" />
+        <KitchenDoodle name="spoon" class="right-10 top-2 h-36 w-36" :tilt="24" />
         <div class="mx-auto max-w-2xl text-center">
           <span class="eyebrow">{{ t('home.featuresEyebrow') }}</span>
           <h2 class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"><span class="ink-underline">{{ t('home.featuresTitle') }}</span></h2>
@@ -403,7 +449,9 @@ const features = computed(() => [
     <SectionDivider />
 
     <!-- ── Mission strip (full story lives on /why-teremu) ───── -->
-    <section class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+    <section class="relative mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+      <KitchenDoodle name="onion" class="-left-28 top-10 h-28 w-28" :tilt="-10" />
+      <KitchenDoodle name="lemon" class="-right-28 top-16 h-24 w-24" :tilt="12" />
       <span class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ember-50 text-ember-600 ring-1 ring-ember-100">
         <BrandIcon name="chef" class="h-7 w-7" />
       </span>
@@ -422,8 +470,28 @@ const features = computed(() => [
       <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{{ t('home.pricingTeaserTitle') }}</h2>
         <p class="mx-auto mt-4 max-w-2xl text-lg text-stone-300">{{ t('home.pricingTeaserBody') }}</p>
-        <p class="mx-auto mt-3 max-w-2xl text-sm font-medium text-ember-300">{{ t('home.pricingTeaserNote') }}</p>
-        <div class="mt-8">
+
+        <!-- Chalkboard menu: the plans read like the specials board -->
+        <div class="chalkboard mx-auto mt-10 max-w-2xl rounded-2xl px-5 py-8 text-left sm:px-10">
+          <p class="chalk text-center font-display text-3xl text-ember-300">{{ t('home.menuBoardTitle') }}</p>
+          <ul class="mt-6 space-y-6">
+            <li v-for="p in menuBoard" :key="p.name">
+              <div class="flex items-baseline gap-3">
+                <span class="chalk font-display text-3xl text-white">{{ p.name }}</span>
+                <span class="menu-leader" aria-hidden="true" />
+                <span class="chalk num-display whitespace-nowrap text-3xl text-white">
+                  {{ p.price }}<span class="ml-1 text-sm text-stone-400">{{ p.suffix }}</span>
+                </span>
+              </div>
+              <p v-if="p.tagline" class="chalk mt-1 font-display text-lg text-ember-200">{{ p.tagline }}</p>
+              <p class="mt-1 text-sm text-stone-300">{{ p.details.join(' · ') }}</p>
+            </li>
+          </ul>
+          <p class="mt-6 text-center text-xs text-stone-400">{{ t('home.menuBoardFootnote') }}</p>
+        </div>
+
+        <p class="mx-auto mt-8 max-w-2xl text-sm font-medium text-ember-300">{{ t('home.pricingTeaserNote') }}</p>
+        <div class="mt-6">
           <UButton :to="localePath('pricing')" color="primary" size="lg" class="font-semibold">
             {{ t('home.pricingTeaserCta') }}
             <UIcon name="i-lucide-arrow-right" class="h-4 w-4" />
@@ -433,7 +501,9 @@ const features = computed(() => [
     </section>
 
     <!-- ── Final CTA ────────────────────────────────────────── -->
-    <section class="bg-ember-wash">
+    <section class="relative bg-ember-wash">
+      <KitchenDoodle name="foodtruck" ember class="left-[5%] top-1/2 h-44 w-44 -translate-y-1/2" :tilt="-6" />
+      <KitchenDoodle name="chili" ember class="right-[7%] top-12 h-28 w-28" :tilt="18" />
       <div class="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
         <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ t('home.finalCtaTitle') }}</h2>
         <p class="mx-auto mt-4 max-w-xl text-lg text-stone-600">{{ t('home.finalCtaBody') }}</p>

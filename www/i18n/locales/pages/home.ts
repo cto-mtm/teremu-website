@@ -2,9 +2,13 @@ export default {
   es: {
     // Hero
     heroBadge: 'Food-cost para restaurantes independientes',
-    heroTitle: 'Deja de perder margen sin darte cuenta',
+    // Full headline (page <title>, og:title, screen readers). On the page the
+    // last word rotates through heroTitleWords, starting and ending on the first.
+    heroTitle: 'Escanea la factura. Teremu hace las cuentas de tu restaurante.',
+    heroTitleLead: 'Escanea la factura. Teremu hace las cuentas de tu',
+    heroTitleWords: 'restaurante, taquería, pizzería, cafetería, panadería, food truck',
     heroSubtitle:
-      'Los precios de tus proveedores no paran de moverse; el coste de tus platos, no. Escanea tus facturas y Teremu te muestra qué plato pierde margen, qué te cobraron de más y qué precio conviene subir — en minutos y sin hojas de cálculo.',
+      'Los precios de tus proveedores cambian cada semana; el coste de tus platos debería cambiar con ellos. Haz una foto a la factura y Teremu te muestra qué plato pierde margen, cuándo un proveedor cambió un precio y cuál conviene subir — en minutos y sin hojas de cálculo.',
     heroCtaPrimary: 'Empieza gratis',
     heroCtaSecondary: 'Haz la cuenta',
     heroNote: 'Sin tarjeta. 25 escaneos al mes gratis, para siempre.',
@@ -17,12 +21,15 @@ export default {
     stat2Label: 'al mes que puede recuperar un local que compra $20,000 en comida (estimado)',
     stat3Value: '2+ h',
     stat3Label: 'al mes que ahorras sin teclear facturas a mano (estimado)',
+    // Ingredient names on the price-change chips (illustrative)
+    statChipUp: 'Huevos',
+    statChipDown: 'Salmón',
 
     // The problem: where margin leaks
     leaksEyebrow: 'El problema',
     leaksTitle: 'El margen se pierde en silencio',
     leaksSubtitle:
-      'Abriste tu restaurante por la comida, pero un buen plato no protege un margen que no ves. Con 3–5 centavos de ganancia por dólar, lo que no ves te cuesta caro.',
+      'Abriste tu restaurante por la comida, pero cocinar bien es solo la mitad del negocio. Con 3–5 centavos de ganancia por dólar, lo que no ves te cuesta caro.',
     leaksMoreLink: 'Ver las cifras, el ejemplo y las fuentes',
     leak1Value: '3–5%',
     leak1Title: 'Es todo lo que queda',
@@ -37,11 +44,21 @@ export default {
     leak2Fix:
       'Cada factura aprobada actualiza el coste de tus platos al instante: ves el margen de hoy, no el de la última vez que abriste Excel.',
     leak3Value: '1 de 3',
-    leak3Title: 'Las facturas traen errores',
+    leak3Title: 'Las facturas no siempre cuadran',
     leak3Body:
       'En auditorías de miles de facturas, alrededor de un tercio incluía al menos un cobro de más. Casi nunca es fraude: es un precio que cambió, un sustituto o un formato distinto, y nadie lo revisa.',
     leak3Fix:
       'Teremu compara cada línea con lo que pagaste antes y con tu albarán, y te avisa mientras todavía puedes reclamar.',
+    // Illustrative invoice/menu line on each leak card, drawn as a receipt:
+    // the item, then the change that gets circled in red pen
+    leaksExampleLabel: 'Ejemplo',
+    leaksReceiptNo: 'Factura',
+    leak1ExampleItem: 'Hamburguesa clásica · food-cost',
+    leak1ExampleDelta: '31% → 34%',
+    leak2ExampleItem: 'Aceite de oliva, 5 L',
+    leak2ExampleDelta: '$38 → $51',
+    leak3ExampleItem: 'Cebolla blanca 50 lb · pactada $32',
+    leak3ExampleDelta: 'cobrada $38',
     leaksSourcesLabel: 'Fuentes',
     leaksSource1: 'Toast: márgenes del sector',
     leaksSource2: 'National Restaurant Association: costes de comida',
@@ -49,7 +66,7 @@ export default {
 
     // Core loop
     loopEyebrow: 'Cómo funciona',
-    loopTitle: 'El bucle central',
+    loopTitle: 'Los números de tu restaurante, al día con cada factura',
     loopSubtitle:
       'Todo en Teremu cuelga de un solo flujo. Tú escaneas; la IA hace el resto; tú corriges lo que importa.',
     loopStep1Title: 'Escanea',
@@ -59,15 +76,17 @@ export default {
     loopStep2Title: 'Revisa (Triage)',
     loopStep2Body:
       'Foto y líneas extraídas, lado a lado. Un toque para aprobar; las advertencias guían la vista.',
-    loopStep2Outcome: 'Pillas errores y cobros de más antes de pagar.',
+    loopStep2Outcome: 'Pagas lo que acordaste.',
     loopStep3Title: 'Todo se actualiza',
     loopStep3Body:
-      'Los precios ruedan, los márgenes de los platos se recalculan y la despensa se llena — automáticamente.',
+      'Sube el aguacate y el margen de tu guacamole se recalcula; los precios ruedan y la despensa se llena — automáticamente.',
     loopStep3Outcome: 'Ves el margen de hoy, no el de hace tres meses.',
     loopStep4Title: 'Pulse te avisa',
     loopStep4Body:
-      'Alertas cuando un proveedor sube precios o un plato baja del margen objetivo.',
+      'Alertas cuando un proveedor te sube la mantequilla o un plato baja del margen objetivo.',
     loopStep4Outcome: 'Reaccionas esta semana, no al cierre de mes.',
+    // Core loop drawn as order tickets on the pass rail
+    loopTicketLabel: 'Comanda',
 
 
     // Savings calculator
@@ -170,20 +189,25 @@ export default {
     // Pricing teaser
     pricingTeaserTitle: 'Cuesta menos que medio cubierto al mes',
     pricingTeaserBody:
-      'Empieza gratis. Cuando Teremu se vuelva tu forma de comprar, Pro cuesta $39 por local al mes — una fracción de lo que puedes recuperar. ¿Varios locales? Grupo los reúne en una sola cuenta, cada uno con su propio plan.',
+      'Empieza gratis. Cuando Teremu se vuelva tu forma de comprar, Pro cuesta $39 por local al mes — una fracción de lo que puedes recuperar. ¿Varios locales? Cada uno lleva su propio plan, su equipo y sus permisos.',
     pricingTeaserNote: 'Pruébalo gratis primero: sin tarjeta, sin cuota de implementación y sin llamada de ventas.',
     pricingTeaserCta: 'Ver precios',
+    // Menu-board styling of the pricing teaser (names/prices come from pricing.*)
+    menuBoardTitle: 'La carta',
+    menuBoardFootnote: 'Planes de pago por local al mes · pago anual: 2 meses gratis',
 
     // Final CTA
-    finalCtaTitle: 'Escanea tu primera factura hoy',
-    finalCtaBody: 'El momento «ajá» tarda menos de cinco minutos y no necesita ventas. Después, vuelve a lo que te apasiona: cocinar.',
+    finalCtaTitle: 'Cada plato de tu restaurante, con su margen real',
+    finalCtaBody: 'Escanea tu primera factura hoy: el momento «ajá» tarda menos de cinco minutos y no necesita ventas. Después, vuelve a lo que te apasiona: cocinar.',
     finalCtaButton: 'Empieza gratis',
   },
   en: {
     heroBadge: 'Food-cost for independent restaurants',
-    heroTitle: "Stop losing margin you don't know about",
+    heroTitle: 'Scan the invoice. Teremu does the math for your restaurant.',
+    heroTitleLead: 'Scan the invoice. Teremu does the math for your',
+    heroTitleWords: 'restaurant, taqueria, pizzeria, café, bakery, food truck',
     heroSubtitle:
-      "Your suppliers' prices keep moving. Your recipe costs don't. Scan your invoices and Teremu shows which dishes are losing margin, what you were overcharged, and what to reprice — in minutes, with no spreadsheets.",
+      "Your suppliers' prices change every week; your dish costs should change with them. Snap the invoice and Teremu shows which dishes are slipping, when a supplier changed a price, and what to reprice — in minutes, with no spreadsheets.",
     heroCtaPrimary: 'Start free',
     heroCtaSecondary: 'Do the math',
     heroNote: 'No card. 25 free scans a month, forever.',
@@ -195,11 +219,13 @@ export default {
     stat2Label: 'a month a location buying $20,000 of food can recover (estimate)',
     stat3Value: '2+ hrs',
     stat3Label: 'saved each month by not typing in invoices (estimate)',
+    statChipUp: 'Eggs',
+    statChipDown: 'Salmon',
 
     leaksEyebrow: 'The problem',
     leaksTitle: 'Margin leaks out quietly',
     leaksSubtitle:
-      "You opened your restaurant for the food, but a great dish doesn't protect a margin you can't see. With 3–5 cents of profit on the dollar, what you can't see costs you.",
+      "You opened your restaurant for the food, but great food is only half the business. With 3–5 cents of profit on the dollar, what you can't see costs you.",
     leaksMoreLink: 'See the numbers, the example, and the sources',
     leak1Value: '3–5%',
     leak1Title: "That's all that's left",
@@ -214,18 +240,26 @@ export default {
     leak2Fix:
       "Every approved invoice updates your dish costs instantly: you see today's margin, not the one from the last time you opened Excel.",
     leak3Value: '1 in 3',
-    leak3Title: 'Invoices carry errors',
+    leak3Title: "Invoices don't always add up",
     leak3Body:
       "In audits of thousands of invoices, about a third had at least one overcharge. It's rarely fraud: a price changed, an item was substituted, a pack size shifted, and nobody checked.",
     leak3Fix:
       'Teremu compares every line to what you paid before and to your delivery note, and flags the gap while you can still dispute it.',
+    leaksExampleLabel: 'Example',
+    leaksReceiptNo: 'Invoice',
+    leak1ExampleItem: 'Classic burger · food cost',
+    leak1ExampleDelta: '31% → 34%',
+    leak2ExampleItem: 'Olive oil, 5 L',
+    leak2ExampleDelta: '$38 → $51',
+    leak3ExampleItem: 'White onions 50 lb · agreed $32',
+    leak3ExampleDelta: 'billed $38',
     leaksSourcesLabel: 'Sources',
     leaksSource1: 'Toast: industry margins',
     leaksSource2: 'National Restaurant Association: food costs',
     leaksSource3: 'FSR Magazine: invoice overcharges',
 
     loopEyebrow: 'How it works',
-    loopTitle: 'The core loop',
+    loopTitle: "Your restaurant's numbers, up to date with every invoice",
     loopSubtitle:
       'Everything in Teremu hangs off one flow. You scan; AI does the rest; you correct what matters.',
     loopStep1Title: 'Scan',
@@ -235,15 +269,16 @@ export default {
     loopStep2Title: 'Triage',
     loopStep2Body:
       'Photo next to extracted line items, side by side. One tap to approve; warnings guide the eye.',
-    loopStep2Outcome: 'You catch errors and overcharges before you pay.',
+    loopStep2Outcome: 'You pay what you agreed to.',
     loopStep3Title: 'Everything updates',
     loopStep3Body:
-      'Prices roll, dish margins recalculate, and the pantry fills — automatically.',
+      "Avocados go up and your guacamole's margin recalculates; prices roll and the pantry fills — automatically.",
     loopStep3Outcome: "You see today's margin, not the one from three months ago.",
     loopStep4Title: 'Pulse alerts you',
     loopStep4Body:
-      'Alerts when a vendor raises prices or a dish slips below its target margin.',
+      'Alerts when a vendor raises the price of butter or a dish slips below its target margin.',
     loopStep4Outcome: "You react this week, not at month's end.",
+    loopTicketLabel: 'Order',
 
 
     calcEyebrow: 'Do the math',
@@ -342,12 +377,14 @@ export default {
 
     pricingTeaserTitle: 'Costs less than half a cover a month',
     pricingTeaserBody:
-      'Start free. When Teremu becomes how you buy, Pro is $39 per location a month — a fraction of what you can recover. Multiple locations? Group keeps them all in one account, each on its own plan.',
+      'Start free. When Teremu becomes how you buy, Pro is $39 per location a month — a fraction of what you can recover. Multiple locations? Each one gets its own plan, team, and permissions.',
     pricingTeaserNote: 'Try it free first: no card, no implementation fee, and no sales call.',
     pricingTeaserCta: 'See pricing',
+    menuBoardTitle: 'On the menu',
+    menuBoardFootnote: 'Paid plans per location a month · pay annually: 2 months free',
 
-    finalCtaTitle: 'Scan your first invoice today',
-    finalCtaBody: 'The "aha" moment takes under five minutes and needs no sales call. Then get back to what you love: cooking.',
+    finalCtaTitle: 'Every dish in your restaurant, with its real margin',
+    finalCtaBody: 'Scan your first invoice today: the "aha" moment takes under five minutes and needs no sales call. Then get back to what you love: cooking.',
     finalCtaButton: 'Start free',
   },
 }
