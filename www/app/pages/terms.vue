@@ -26,6 +26,12 @@ const prohibited = computed(() => [
   t('terms.use6'),
 ])
 
+const integrations = computed(() => [
+  t('terms.integration1'),
+  t('terms.integration2'),
+  t('terms.integration3'),
+])
+
 const misc = computed(() => [
   t('terms.misc1'),
   t('terms.misc2'),
@@ -87,6 +93,11 @@ const misc = computed(() => [
     <LegalSection :title="t('terms.useTitle')" :body="t('terms.useIntro')">
       <LegalList :items="prohibited" icon="i-lucide-x" icon-class="text-stone-400" />
       <p class="mt-4 leading-relaxed text-stone-600">{{ t('terms.useConsequence') }}</p>
+    </LegalSection>
+
+    <LegalSection :title="t('terms.integrationsTitle')" :body="t('terms.integrationsIntro')">
+      <LegalList :items="integrations" icon="i-lucide-plug" icon-class="text-primary-600" />
+      <p class="mt-4 leading-relaxed text-stone-600">{{ t('terms.integrationsNote') }}</p>
     </LegalSection>
 
     <LegalSection :title="t('terms.thirdPartyTitle')" :body="t('terms.thirdPartyBody')" />
