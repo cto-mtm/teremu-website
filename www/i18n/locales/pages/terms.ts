@@ -11,7 +11,7 @@ export default {
     heroSubtitle:
       'Las reglas de uso de teremu.com y de la aplicación Teremu. En lenguaje claro, sin letra pequeña escondida.',
     updatedLabel: 'Última actualización',
-    updatedDate: '23 de septiembre de 2026',
+    updatedDate: '25 de octubre de 2026',
 
     partiesTitle: 'Con quién contratas',
     partiesBody:
@@ -27,7 +27,7 @@ export default {
 
     serviceTitle: 'Qué es Teremu',
     serviceBody:
-      'Teremu digitaliza facturas de proveedores y mantiene al día tus costes de comida, márgenes por plato, inventario y precios de proveedor. El servicio se presta «tal cual»: añadimos y mejoramos funciones de forma continua, y podemos modificar o retirar funcionalidades avisando con antelación razonable cuando el cambio sea sustancial. Algunas funciones pueden ofrecerse en fase beta; se proporcionan sin garantía y pueden cambiar o desaparecer.',
+      'Teremu digitaliza facturas de proveedores —escaneadas con el móvil o importadas desde tu correo— y mantiene al día tus costes de comida, márgenes por plato, inventario y precios de proveedor; en los planes de pago incluye además un asistente de cocina y conexiones con tu punto de venta y con asistentes de IA externos. El servicio se presta «tal cual»: añadimos y mejoramos funciones de forma continua, y podemos modificar o retirar funcionalidades avisando con antelación razonable cuando el cambio sea sustancial. Algunas funciones pueden ofrecerse en fase beta; se proporcionan sin garantía y pueden cambiar o desaparecer.',
 
     accountTitle: 'Cuentas y responsabilidad',
     accountIntro:
@@ -51,11 +51,11 @@ export default {
     plan4:
       'Grupo — no es un plan aparte: cada local se factura por separado en su propio plan Pro o Max, con sus propios roles y permisos.',
     plansBilling:
-      'El cobro se realiza por adelantado al inicio de cada ciclo y se renueva automáticamente hasta que canceles. Si añades locales a mitad de ciclo, se prorratea el importe restante. Los precios se muestran sin impuestos; los aplicables se añaden en la factura y son a tu cargo.',
+      'El cobro se realiza por adelantado al inicio de cada ciclo y se renueva automáticamente hasta que canceles. Si añades locales a mitad de ciclo, se prorratea el importe restante. Los precios se muestran sin impuestos: el IVA o el impuesto sobre ventas que corresponda se calcula y añade al pagar según la dirección de facturación que indiques y es a tu cargo. Si eres una empresa de la Unión Europea, puedes indicar tu número de IVA intracomunitario para que se aplique correctamente.',
     plansChanges:
       'Podemos actualizar los precios avisando con al menos 30 días de antelación. El nuevo precio se aplica a partir de tu siguiente renovación, de modo que siempre puedas cancelar antes de que te afecte.',
     plansFailure:
-      'Los pagos se procesan a través de un proveedor externo de pagos; no almacenamos los datos completos de tu tarjeta. Si un cobro falla, intentaremos cobrarlo de nuevo y te avisaremos; si sigue sin completarse, podemos limitar o suspender el acceso a las funciones de pago hasta regularizar la situación.',
+      'Los pagos se procesan a través de Stripe; introduces la tarjeta directamente en Stripe y Teremu nunca ve ni almacena su número. Si un cobro falla, intentaremos cobrarlo de nuevo y te avisaremos; si sigue sin completarse, podemos limitar o suspender el acceso a las funciones de pago hasta regularizar la situación.',
 
     cancelTitle: 'Cancelación y reembolsos',
     cancelBody:
@@ -71,7 +71,7 @@ export default {
 
     aiTitle: 'Sobre los resultados generados por IA',
     aiBody:
-      'Teremu usa reconocimiento automático para leer facturas y calcular costes. La tecnología es buena, pero no infalible: puede interpretar mal una cifra, una unidad de medida o un producto, especialmente en documentos borrosos o manuscritos. Las cifras que ves son una ayuda a la decisión, no un asesoramiento contable, fiscal ni financiero.',
+      'Teremu usa modelos de inteligencia artificial para leer facturas, proponer escandallos y precios de carta y responder a las preguntas que haces al asistente de cocina. Para ello envía la imagen o el texto del documento, o tu pregunta junto con los datos necesarios de tu restaurante, a proveedores de modelos que actúan como encargados por cuenta nuestra (hoy NVIDIA y Google) y que no pueden usar tus datos para entrenar sus modelos. La tecnología es buena, pero no infalible: puede interpretar mal una cifra, una unidad de medida o un producto, especialmente en documentos borrosos o manuscritos. Todo lo que devuelve es una estimación que revisas antes de aprobarla; las cifras que ves son una ayuda a la decisión, no un asesoramiento contable, fiscal ni financiero.',
     aiResponsibility:
       'Antes de fijar precios, presentar impuestos o cerrar contabilidad, revisa los datos contra tus facturas originales. La responsabilidad de esa verificación es tuya.',
 
@@ -90,9 +90,21 @@ export default {
     useConsequence:
       'Podemos suspender o cerrar cuentas que incumplan estas reglas. Cuando sea razonable te avisaremos antes y te daremos ocasión de corregirlo; si el incumplimiento supone un riesgo inmediato para el servicio, para terceros o para nosotros, la suspensión puede ser inmediata.',
 
+    integrationsTitle: 'Integraciones que conectas',
+    integrationsIntro:
+      'Desde Ajustes puedes conectar servicios externos a tu restaurante. Ninguno se activa sin tu acción, todos son de solo lectura y todos se pueden desconectar cuando quieras:',
+    integration1:
+      'Gmail: Teremu solicita solo permiso de lectura, revisa tu correo en busca de facturas de proveedores y las pasa al mismo flujo de revisión que una factura escaneada. Nunca envía, modifica ni elimina mensajes. Puedes desconectarlo desde Ajustes o revocar el acceso en tu cuenta de Google.',
+    integration2:
+      'Punto de venta: si conectas tu TPV (hoy Square), importamos las ventas registradas para calcular tus ingresos. No modificamos nada en el TPV y puedes desconectarlo desde Ajustes.',
+    integration3:
+      'Asistentes de IA externos: la persona propietaria puede conectar un asistente como Claude o ChatGPT mediante MCP. El asistente solo puede leer los datos que esa persona tiene permiso para ver, y los envía a su proveedor bajo la política de ese proveedor. Registramos qué herramientas consulta y puedes revocar la conexión desde Ajustes.',
+    integrationsNote:
+      'Al conectar un servicio declaras que tienes derecho a hacerlo con esa cuenta y aceptas que el servicio conectado se rige por sus propios términos. Los datos que un asistente externo lea dejan de estar bajo nuestro control en cuanto salen de Teremu; elige con cuidado qué conectas y quién en tu equipo tiene acceso a qué.',
+
     thirdPartyTitle: 'Servicios de terceros',
     thirdPartyBody:
-      'El servicio se apoya en proveedores externos (alojamiento, correo, pagos, procesamiento de imágenes) y puede integrarse con herramientas que tú elijas conectar. No controlamos esos servicios y no respondemos de su disponibilidad ni de sus condiciones: su uso se rige por sus propios términos y políticas. Si un tercero deja de prestar un servicio del que dependa una función, podremos modificarla o retirarla.',
+      'El servicio se apoya en proveedores externos (alojamiento, correo, pagos, modelos de inteligencia artificial) y puede integrarse con herramientas que tú elijas conectar. No controlamos esos servicios y no respondemos de su disponibilidad ni de sus condiciones: su uso se rige por sus propios términos y políticas. Si un tercero deja de prestar un servicio del que dependa una función, podremos modificarla o retirarla.',
 
     ipTitle: 'Propiedad intelectual',
     ipBody:
@@ -161,7 +173,7 @@ export default {
     heroSubtitle:
       'The rules for using teremu.com and the Teremu app. Plain language, no buried fine print.',
     updatedLabel: 'Last updated',
-    updatedDate: 'September 23, 2026',
+    updatedDate: 'October 25, 2026',
 
     partiesTitle: 'Who you are contracting with',
     partiesBody:
@@ -177,7 +189,7 @@ export default {
 
     serviceTitle: 'What Teremu is',
     serviceBody:
-      'Teremu digitises supplier invoices and keeps your food costs, dish margins, inventory, and vendor prices current. The service is provided on an evolving basis: we add and improve features continuously, and may change or retire functionality with reasonable notice where the change is material. Some features may be offered in beta; those are provided without warranty and may change or disappear.',
+      'Teremu digitises supplier invoices — scanned with your phone or imported from your email — and keeps your food costs, dish margins, inventory, and vendor prices current; paid plans also include a kitchen assistant and connections to your point of sale and to external AI assistants. The service is provided on an evolving basis: we add and improve features continuously, and may change or retire functionality with reasonable notice where the change is material. Some features may be offered in beta; those are provided without warranty and may change or disappear.',
 
     accountTitle: 'Accounts and responsibility',
     accountIntro: 'Using Teremu requires an account. In creating one you agree to:',
@@ -199,11 +211,11 @@ export default {
     plan4:
       'Grupo — not a separate plan: each location is billed independently on its own Pro or Max plan, with its own roles and permissions.',
     plansBilling:
-      'Charges are taken in advance at the start of each cycle and renew automatically until you cancel. Locations added mid-cycle are prorated for the remainder. Prices exclude tax; applicable taxes are added at invoice and are your responsibility.',
+      'Charges are taken in advance at the start of each cycle and renew automatically until you cancel. Locations added mid-cycle are prorated for the remainder. Prices are shown exclusive of tax: the applicable VAT or sales tax is calculated and added at checkout based on the billing address you provide, and is your responsibility. If you are a European Union business, you can enter your VAT identification number so it is applied correctly.',
     plansChanges:
       'We may change prices with at least 30 days’ notice. New pricing takes effect at your next renewal, so you can always cancel before it reaches you.',
     plansFailure:
-      'Payments are handled by a third-party payment provider; we do not store full card details. If a charge fails we will retry and tell you; if it still does not complete, we may limit or suspend access to paid features until the account is brought up to date.',
+      'Payments are handled by Stripe; you enter your card directly with Stripe and Teremu never sees or stores its number. If a charge fails we will retry and tell you; if it still does not complete, we may limit or suspend access to paid features until the account is brought up to date.',
 
     cancelTitle: 'Cancellation and refunds',
     cancelBody:
@@ -219,7 +231,7 @@ export default {
 
     aiTitle: 'About AI-generated results',
     aiBody:
-      'Teremu uses automated recognition to read invoices and compute costs. The technology is good but not infallible: it can misread a figure, a unit of measure, or a product, particularly on blurred or handwritten documents. The numbers you see are decision support, not accounting, tax, or financial advice.',
+      'Teremu uses artificial-intelligence models to read invoices, suggest recipe costings and menu prices, and answer the questions you put to the kitchen assistant. To do so it sends the document’s image or text, or your question together with the necessary restaurant data, to model providers acting as processors on our behalf (currently NVIDIA and Google) who may not use your data to train their models. The technology is good but not infallible: it can misread a figure, a unit of measure, or a product, particularly on blurred or handwritten documents. Everything it returns is an estimate you review before approving it; the numbers you see are decision support, not accounting, tax, or financial advice.',
     aiResponsibility:
       'Before setting prices, filing taxes, or closing your books, check the data against your original invoices. That verification is your responsibility.',
 
@@ -238,9 +250,21 @@ export default {
     useConsequence:
       'We may suspend or close accounts that break these rules. Where reasonable we will warn you first and give you a chance to put it right; where the breach poses an immediate risk to the service, to others, or to us, suspension may be immediate.',
 
+    integrationsTitle: 'Integrations you connect',
+    integrationsIntro:
+      'From Settings you can connect external services to your restaurant. None is activated without your action, all are read-only, and all can be disconnected at any time:',
+    integration1:
+      'Gmail: Teremu requests read-only permission only, checks your mail for supplier invoices, and passes them into the same review flow as a scanned invoice. It never sends, modifies, or deletes messages. You can disconnect it from Settings or revoke access in your Google account.',
+    integration2:
+      'Point of sale: if you connect your POS (Square today), we import the recorded sales to compute your revenue. We change nothing in the POS, and you can disconnect it from Settings.',
+    integration3:
+      'External AI assistants: the owner can connect an assistant such as Claude or ChatGPT through MCP. The assistant can only read the data that person is allowed to see, and sends it to its provider under that provider’s policy. We log which tools it queries, and you can revoke the connection from Settings.',
+    integrationsNote:
+      'By connecting a service you confirm you are entitled to do so with that account and accept that the connected service is governed by its own terms. Data an external assistant reads leaves our control the moment it leaves Teremu; choose carefully what you connect and who on your team has access to what.',
+
     thirdPartyTitle: 'Third-party services',
     thirdPartyBody:
-      'The service depends on external providers (hosting, email, payments, image processing) and can integrate with tools you choose to connect. We do not control those services and are not responsible for their availability or their terms: your use of them is governed by their own terms and policies. If a third party stops providing something a feature depends on, we may change or withdraw that feature.',
+      'The service depends on external providers (hosting, email, payments, artificial-intelligence models) and can integrate with tools you choose to connect. We do not control those services and are not responsible for their availability or their terms: your use of them is governed by their own terms and policies. If a third party stops providing something a feature depends on, we may change or withdraw that feature.',
 
     ipTitle: 'Intellectual property',
     ipBody:

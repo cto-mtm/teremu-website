@@ -13,12 +13,57 @@ const summary = computed(() => [
   t('privacy.summary2'),
   t('privacy.summary3'),
   t('privacy.summary4'),
+  t('privacy.summary5'),
 ])
 
 const collected = computed(() => [
   { icon: 'i-lucide-mail', title: t('privacy.collect1Title'), body: t('privacy.collect1Body') },
   { icon: 'i-lucide-bar-chart-3', title: t('privacy.collect2Title'), body: t('privacy.collect2Body') },
-  { icon: 'i-lucide-server', title: t('privacy.collect3Title'), body: t('privacy.collect3Body') },
+  { icon: 'i-lucide-chef-hat', title: t('privacy.collect3Title'), body: t('privacy.collect3Body') },
+  { icon: 'i-lucide-server', title: t('privacy.collect4Title'), body: t('privacy.collect4Body') },
+])
+
+/**
+ * Each optional integration and processor gets its own block: a visitor (or
+ * Google's OAuth reviewer) should find what Gmail access does without reading
+ * the whole policy. `extra` holds the follow-up paragraphs in display order.
+ */
+const integrations = computed(() => [
+  {
+    key: 'gmail',
+    icon: 'i-lucide-inbox',
+    title: t('privacy.gmailTitle'),
+    body: t('privacy.gmailBody'),
+    extra: [t('privacy.gmailLimitedUse'), t('privacy.gmailRevoke')],
+  },
+  {
+    key: 'ai',
+    icon: 'i-lucide-sparkles',
+    title: t('privacy.aiTitle'),
+    body: t('privacy.aiBody'),
+    extra: [t('privacy.aiEstimate')],
+  },
+  {
+    key: 'mcp',
+    icon: 'i-lucide-bot',
+    title: t('privacy.mcpTitle'),
+    body: t('privacy.mcpBody'),
+    extra: [t('privacy.mcpRevoke')],
+  },
+  {
+    key: 'pos',
+    icon: 'i-lucide-receipt',
+    title: t('privacy.posTitle'),
+    body: t('privacy.posBody'),
+    extra: [],
+  },
+  {
+    key: 'billing',
+    icon: 'i-lucide-credit-card',
+    title: t('privacy.billingTitle'),
+    body: t('privacy.billingBody'),
+    extra: [],
+  },
 ])
 
 const bases = computed(() => [
@@ -26,18 +71,26 @@ const bases = computed(() => [
   t('privacy.basis2'),
   t('privacy.basis3'),
   t('privacy.basis4'),
+  t('privacy.basis5'),
+  t('privacy.basis6'),
 ])
 
 const processors = computed(() => [
   t('privacy.sharing1'),
   t('privacy.sharing2'),
   t('privacy.sharing3'),
+  t('privacy.sharing4'),
+  t('privacy.sharing5'),
+  t('privacy.sharing6'),
 ])
 
 const retention = computed(() => [
   t('privacy.retention1'),
   t('privacy.retention2'),
   t('privacy.retention3'),
+  t('privacy.retention4'),
+  t('privacy.retention5'),
+  t('privacy.retention6'),
 ])
 
 /** Sections that are just a heading and a paragraph. */
@@ -102,6 +155,32 @@ const plainSections = computed(() =>
       <p class="mt-2 leading-relaxed text-stone-600">{{ t('privacy.collectNoneBody') }}</p>
     </LegalSection>
 
+    <!-- Optional integrations and AI processing. Each block is anchored so the
+         Gmail paragraph can be linked from the OAuth consent screen. -->
+    <LegalSection :title="t('privacy.integrationsTitle')" :body="t('privacy.integrationsIntro')">
+      <div class="mt-6 space-y-4">
+        <div
+          v-for="i in integrations"
+          :id="`integration-${i.key}`"
+          :key="i.key"
+          class="scroll-mt-24 rounded-2xl border border-stone-200 bg-white p-5"
+        >
+          <h3 class="flex items-center gap-2 font-semibold text-stone-900">
+            <UIcon :name="i.icon" class="h-4 w-4 text-primary-600" />
+            {{ i.title }}
+          </h3>
+          <p class="mt-2 leading-relaxed text-stone-600">{{ i.body }}</p>
+          <p
+            v-for="(p, n) in i.extra"
+            :key="n"
+            class="mt-3 leading-relaxed text-stone-600"
+          >
+            {{ p }}
+          </p>
+        </div>
+      </div>
+    </LegalSection>
+
     <LegalSection :title="t('privacy.basisTitle')" :body="t('privacy.basisIntro')">
       <LegalList :items="bases" icon="i-lucide-check" icon-class="text-secondary-600" />
       <p class="mt-4 rounded-xl bg-secondary-50 p-4 text-secondary-800 ring-1 ring-secondary-200">
@@ -112,7 +191,8 @@ const plainSections = computed(() =>
 
     <LegalSection :title="t('privacy.sharingTitle')" :body="t('privacy.sharingIntro')">
       <LegalList :items="processors" />
-      <p class="mt-4 leading-relaxed text-stone-600">{{ t('privacy.sharingOther') }}</p>
+      <p class="mt-4 leading-relaxed text-stone-600">{{ t('privacy.sharingYourChoice') }}</p>
+      <p class="mt-3 leading-relaxed text-stone-600">{{ t('privacy.sharingOther') }}</p>
       <p class="mt-3 leading-relaxed text-stone-600">{{ t('privacy.sharingTransfer') }}</p>
     </LegalSection>
 
