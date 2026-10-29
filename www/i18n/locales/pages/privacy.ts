@@ -74,7 +74,7 @@ export default {
 
     aiTitle: 'Procesamiento con inteligencia artificial',
     aiBody:
-      'Tres funciones usan modelos de lenguaje: la extracción de datos de facturas (la imagen o el texto del documento), las sugerencias de carta y escandallos, y el asistente de cocina integrado (tu pregunta junto con los datos del restaurante necesarios para responderla). Para ello enviamos esa información a proveedores de modelos que actúan como encargados del tratamiento por cuenta nuestra: actualmente NVIDIA y Google. Sus condiciones prohíben usar tus datos para entrenar sus modelos.',
+      'Tres funciones usan modelos de lenguaje: la extracción de datos de facturas (la imagen o el texto del documento), las sugerencias de carta y escandallos, y el asistente de cocina integrado (tu pregunta junto con los datos del restaurante necesarios para responderla). Para ello enviamos esa información a proveedores de modelos que actúan como encargados del tratamiento por cuenta nuestra, cuyas condiciones prohíben usar tus datos para entrenar sus modelos. Los datos procedentes de Gmail —cualquier factura importada de tu bandeja conectada, ya se lea como texto o como imagen de página— los trata únicamente Google (Gemini en Google Cloud Vertex AI, dentro de nuestro propio proyecto de Google Cloud) y nunca se envían a ningún otro proveedor de IA.',
     aiEstimate:
       'Todo lo que devuelve la IA es una estimación: los importes, unidades y proveedores extraídos, y las sugerencias de precios o recetas, se te presentan para que los revises antes de aprobarlos. Nada se incorpora a tus registros sin tu confirmación.',
 
@@ -124,7 +124,7 @@ export default {
     sharing4:
       'Google Maps Platform — búsqueda de tu restaurante al configurar la cuenta.',
     sharing5:
-      'NVIDIA y Google (modelos de lenguaje) — extracción de datos de facturas, sugerencias de carta y escandallos y el asistente de cocina.',
+      'Google (Gemini en Vertex AI) — extracción de datos de facturas, sugerencias de carta y escandallos y el asistente de cocina. Las facturas importadas de una bandeja de Gmail conectada las trata únicamente Google.',
     sharing6:
       'MTM CYA Corp y su personal autorizado — soporte, administración y gestión comercial, según se describe más arriba.',
     sharingYourChoice:
@@ -264,7 +264,7 @@ export default {
 
     aiTitle: 'AI processing',
     aiBody:
-      'Three features use language models: invoice data extraction (the document’s image or text), menu and recipe suggestions, and the built-in kitchen assistant (your question together with the restaurant data needed to answer it). For that we send the information to model providers acting as processors on our behalf: currently NVIDIA and Google. Their terms prohibit using your data to train their models.',
+      'Three features use language models: invoice data extraction (the document’s image or text), menu and recipe suggestions, and the built-in kitchen assistant (your question together with the restaurant data needed to answer it). For that we send the information to model providers acting as processors on our behalf, whose terms prohibit using your data to train their models. Data derived from Gmail — any invoice imported from your connected inbox, whether read as text or as a page image — is processed only by Google (Gemini on Google Cloud Vertex AI, within our own Google Cloud project) and is never sent to any other AI provider.',
     aiEstimate:
       'Everything the AI returns is an estimate: the extracted amounts, units, and suppliers, and the pricing or recipe suggestions, are presented for you to review before you approve them. Nothing enters your records without your confirmation.',
 
@@ -313,7 +313,7 @@ export default {
       'Stripe — subscription payments, billing address, and tax calculation.',
     sharing4: 'Google Maps Platform — looking up your restaurant during account setup.',
     sharing5:
-      'NVIDIA and Google (language models) — invoice data extraction, menu and recipe suggestions, and the kitchen assistant.',
+      'Google (Gemini on Vertex AI) — invoice data extraction, menu and recipe suggestions, and the kitchen assistant. Invoices imported from a connected Gmail inbox are processed only by Google.',
     sharing6:
       'MTM CYA Corp and its authorised personnel — support, administration, and commercial management, as described above.',
     sharingYourChoice:
