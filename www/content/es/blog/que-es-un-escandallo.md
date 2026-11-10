@@ -1,14 +1,15 @@
 ---
 title: "Qué es un escandallo y por qué tu carta lo necesita"
-description: "El escandallo es el desglose del coste de un plato ingrediente a ingrediente. Te explicamos cómo hacerlo y cómo mantenerlo actualizado cuando los precios cambian cada semana."
+description: "El escandallo es el desglose del costo de un plato ingrediente a ingrediente. Te explicamos cómo hacerlo y cómo mantenerlo actualizado cuando los precios cambian cada semana."
 date: "2026-07-10"
+dateModified: "2026-11-10"
 author: "Equipo Teremu"
 category: "Escandallos"
 ---
 
 # Qué es un escandallo y por qué tu carta lo necesita
 
-Un **escandallo** es el desglose detallado del coste de un plato: cuánto cuesta cada ingrediente que lleva, en la cantidad exacta que usas, para saber qué margen te deja a su precio de venta.
+Un **escandallo** (costeo de recetas) es el desglose detallado del costo de un plato: cuánto cuesta cada ingrediente que lleva, en la cantidad exacta que usas, para saber qué margen te deja a su precio de venta.
 
 ## Por qué importa
 
@@ -25,3 +26,5 @@ En Teremu, cada plato se costea en vivo desde los precios rodantes de tus factur
 Ese es el objetivo de Teremu: que tu escandallo nunca esté desactualizado, sin que tengas que tocar una hoja de cálculo.
 
 **¿Cuánto te cuesta un escandallo desactualizado?** Mira [un ejemplo con números](/why-teremu#example) y [haz la cuenta para tu cocina](/why-teremu#calculator).
+
+El costeo de recetas funciona igual en cualquier cocina, pero cada negocio tiene sus detalles. Revisa [Teremu para cada negocio de comida](/para), por ejemplo [panaderías](/para/panaderias) o [catering](/para/catering).

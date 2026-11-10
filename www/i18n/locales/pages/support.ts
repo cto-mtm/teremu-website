@@ -12,7 +12,7 @@ export default {
 
     // Getting started
     q1: '¿Cómo empiezo a usar Teremu?',
-    a1: 'Crea una cuenta gratis con tu cuenta de Google, escanea tu primera factura y aprueba las líneas en Triage. En menos de cinco minutos verás el coste real de tus platos.',
+    a1: 'Crea una cuenta gratis con tu cuenta de Google, escanea tu primera factura y aprueba las líneas en Triage. En menos de cinco minutos verás el costo real de tus platos.',
     q2: '¿Necesito instalar algo?',
     a2: 'No. Teremu funciona en el navegador y también se instala como app en iOS y Android. El mismo login y los mismos datos en todos tus dispositivos.',
     q3: '¿Puedo invitar a mi equipo?',

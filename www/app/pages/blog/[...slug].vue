@@ -12,21 +12,33 @@ const slug = computed(() => {
 })
 const path = computed(() => `/blog/${slug.value}`)
 
-const { data: post } = await useAsyncData(`blog-${locale.value}-${path.value}`, async () => {
+// No cross-locale fallback: every post exists in both languages (often under
+// a localized slug), and serving Spanish text at an /en/ URL would publish a
+// duplicate page for every Spanish slug.
+const { data: post } = await useAsyncData(`blog-${locale.value}-${path.value}`, () => {
   const collection = (`blog_${locale.value}`) as keyof Collections
-  const content = await queryCollection(collection).path(path.value).first()
-
-  // Fallback to Spanish (default locale) if content is missing
-  if (!content && locale.value !== 'es') {
-    return await queryCollection('blog_es').path(path.value).first()
-  }
-
-  return content
+  return queryCollection(collection).path(path.value).first()
 }, { watch: [locale] })
 
 if (!post.value) {
   throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true })
 }
+
+// Posts may use a localized slug; point the language switcher at the
+// translation (older posts share one slug across languages).
+const setI18nParams = useSetI18nParams()
+setI18nParams({
+  [locale.value]: { slug: slug.value.split('/') },
+  [locale.value === 'en' ? 'es' : 'en']: { slug: (post.value.altSlug ?? slug.value).split('/') },
+})
+
+// The business-type landing page this guide belongs to, if any.
+const { data: segment } = await useAsyncData(`blog-segment-${locale.value}-${path.value}`, async () => {
+  if (!post.value?.segment) return null
+  const collection = (`segments_${locale.value}`) as keyof Collections
+  const base = locale.value === 'en' ? '/for' : '/para'
+  return await queryCollection(collection).path(`${base}/${post.value.segment}`).select('path', 'cardTitle', 'cardBody').first()
+}, { watch: [locale] })
 
 function formatDate(d: string) {
   return new Intl.DateTimeFormat(locale.value === 'es' ? 'es-ES' : 'en-US', {
@@ -43,32 +55,47 @@ useSeoMeta({
   ogTitle: () => post.value?.title,
   ogDescription: () => post.value?.description,
   articlePublishedTime: () => post.value?.date,
+  articleModifiedTime: () => post.value?.dateModified ?? post.value?.date,
 })
 
-// Article structured data
-useHead(() => ({
-  script: post.value
-    ? [
-        {
-          type: 'application/ld+json',
-          innerHTML: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            headline: post.value.title,
-            description: post.value.description,
-            datePublished: post.value.date,
-            author: { '@type': 'Organization', name: post.value.author || 'Teremu' },
-            publisher: {
-              '@type': 'Organization',
-              name: 'Teremu',
-              logo: { '@type': 'ImageObject', url: `${site.url}/favicon-512.png` },
-            },
-            mainEntityOfPage: `${site.url}${path.value}`,
-          }),
-        },
-      ]
-    : [],
-}))
+// Article structured data (+ FAQ when the post has one)
+useHead(() => {
+  if (!post.value) return {}
+  const url = `${site.url}${localePath(path.value)}`
+  const graph: Record<string, unknown>[] = [
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: post.value.title,
+      description: post.value.description,
+      datePublished: post.value.date,
+      dateModified: post.value.dateModified ?? post.value.date,
+      inLanguage: locale.value === 'en' ? 'en-US' : 'es',
+      author: { '@type': 'Organization', name: post.value.author || 'Teremu', url: `${site.url}${localePath('why-teremu')}` },
+      publisher: { '@id': `${site.url}/#organization` },
+      about: { '@id': `${site.url}/#software` },
+      mainEntityOfPage: url,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Teremu', item: `${site.url}${localePath('index')}` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}${localePath('blog')}` },
+        { '@type': 'ListItem', position: 3, name: post.value.title, item: url },
+      ],
+    },
+  ]
+  if (post.value.faq?.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: post.value.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    })
+  }
+  return {
+    link: [{ rel: 'alternate', type: 'text/markdown', href: `/raw/${locale.value}${path.value}.md` }],
+    script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }) }],
+  }
+})
 </script>
 
 <template>
@@ -94,6 +121,10 @@ useHead(() => ({
           <span v-if="post.author">{{ t('blog.by') }} {{ post.author }}</span>
           <span v-if="post.author" aria-hidden="true">·</span>
           <time :datetime="post.date">{{ formatDate(post.date) }}</time>
+          <template v-if="post.dateModified && post.dateModified !== post.date">
+            <span aria-hidden="true">·</span>
+            <span>{{ t('blog.updated') }} <time :datetime="post.dateModified">{{ formatDate(post.dateModified) }}</time></span>
+          </template>
         </div>
       </div>
     </header>
@@ -103,6 +134,36 @@ useHead(() => ({
       <div class="blog-prose">
         <ContentRenderer :value="post" />
       </div>
+
+      <!-- Who writes these: a visible, honest byline (no invented people). -->
+      <aside class="mt-12 flex gap-4 rounded-2xl border border-stone-200 bg-white p-5">
+        <img src="/images/logo-color.svg" alt="" width="48" height="48" class="h-12 w-12 shrink-0 rounded-xl">
+        <div>
+          <p class="font-semibold text-stone-900">{{ t('blog.authorTitle') }}</p>
+          <p class="mt-1 text-sm text-stone-600">{{ t('blog.authorBody') }}</p>
+          <NuxtLink :to="localePath('why-teremu')" class="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary-700 hover:text-primary-800">
+            {{ t('blog.authorLink') }}
+            <UIcon name="i-lucide-arrow-right" class="h-4 w-4" />
+          </NuxtLink>
+        </div>
+      </aside>
+
+      <!-- FAQ -->
+      <section v-if="post.faq?.length" class="mt-14">
+        <h2 class="text-2xl font-bold text-stone-900">{{ t('blog.faqTitle') }}</h2>
+        <FaqList class="mt-6" :items="post.faq" />
+      </section>
+
+      <!-- The landing page for this kind of business -->
+      <NuxtLink
+        v-if="segment"
+        :to="localePath(segmentRoute(segment.path))"
+        class="group mt-14 block rounded-2xl border border-primary-200 bg-primary-50/60 p-6 transition-colors hover:border-primary-300"
+      >
+        <p class="text-xs font-semibold uppercase tracking-wide text-primary-700">{{ t('blog.segmentLabel') }}</p>
+        <p class="mt-1 text-lg font-bold text-stone-900 group-hover:text-primary-700">{{ segment.cardTitle }}</p>
+        <p class="mt-1 text-sm text-stone-600">{{ segment.cardBody }}</p>
+      </NuxtLink>
 
       <!-- CTA -->
       <div class="mt-14 rounded-2xl border border-stone-200 bg-stone-50 p-8 text-center">
@@ -116,59 +177,3 @@ useHead(() => ({
     </div>
   </article>
 </template>
-
-<style scoped>
-.blog-prose :deep(h1) {
-  font-family: var(--font-sans);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-ink);
-  margin: 2rem 0 1rem;
-  letter-spacing: -0.01em;
-}
-.blog-prose :deep(h2) {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--color-ink);
-  margin: 2rem 0 0.75rem;
-}
-.blog-prose :deep(h3) {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--color-ink);
-  margin: 1.5rem 0 0.5rem;
-}
-.blog-prose :deep(p) {
-  color: #44403c; /* stone-700 */
-  line-height: 1.75;
-  margin: 0 0 1.1rem;
-}
-.blog-prose :deep(ul),
-.blog-prose :deep(ol) {
-  margin: 0 0 1.1rem 1.25rem;
-  color: #44403c;
-  line-height: 1.75;
-}
-.blog-prose :deep(ul) { list-style: disc; }
-.blog-prose :deep(ol) { list-style: decimal; }
-.blog-prose :deep(li) { margin: 0.35rem 0; }
-.blog-prose :deep(strong) { color: var(--color-ink); font-weight: 700; }
-.blog-prose :deep(a) {
-  color: var(--color-ember-600);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.blog-prose :deep(blockquote) {
-  border-left: 3px solid var(--color-ember-300);
-  padding-left: 1rem;
-  color: var(--color-smoke);
-  font-style: italic;
-  margin: 0 0 1.1rem;
-}
-.blog-prose :deep(code) {
-  background: var(--color-ember-50);
-  padding: 0.15em 0.4em;
-  border-radius: 0.375rem;
-  font-size: 0.9em;
-}
-</style>

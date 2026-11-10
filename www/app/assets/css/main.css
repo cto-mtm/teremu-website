@@ -478,3 +478,77 @@ h1,
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+
+/* Long-form article body: blog posts and business-type landing pages.
+   `.not-prose` opts embedded widgets (the calculators) out of these rules. */
+.blog-prose h1:not(.not-prose *) {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 2rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+.blog-prose h2:not(.not-prose *) {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 2rem 0 0.75rem;
+}
+.blog-prose h3:not(.not-prose *) {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 1.5rem 0 0.5rem;
+}
+.blog-prose p:not(.not-prose *) {
+  color: #44403c; /* stone-700 */
+  line-height: 1.75;
+  margin: 0 0 1.1rem;
+}
+.blog-prose ul:not(.not-prose *),
+.blog-prose ol:not(.not-prose *) {
+  margin: 0 0 1.1rem 1.25rem;
+  color: #44403c;
+  line-height: 1.75;
+}
+.blog-prose ul:not(.not-prose *) { list-style: disc; }
+.blog-prose ol:not(.not-prose *) { list-style: decimal; }
+.blog-prose li:not(.not-prose *) { margin: 0.35rem 0; }
+.blog-prose strong:not(.not-prose *) { color: var(--color-ink); font-weight: 700; }
+.blog-prose a:not(.not-prose *) {
+  color: var(--color-ember-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-prose blockquote:not(.not-prose *) {
+  border-left: 3px solid var(--color-ember-300);
+  padding-left: 1rem;
+  color: var(--color-smoke);
+  font-style: italic;
+  margin: 0 0 1.1rem;
+}
+.blog-prose code:not(.not-prose *) {
+  background: var(--color-ember-50);
+  padding: 0.15em 0.4em;
+  border-radius: 0.375rem;
+  font-size: 0.9em;
+}
+
+.blog-prose table:not(.not-prose *) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+.blog-prose th:not(.not-prose *),
+.blog-prose td:not(.not-prose *) {
+  border-bottom: 1px solid #e7e5e4; /* stone-200 */
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  color: #44403c;
+}
+.blog-prose th:not(.not-prose *) { color: var(--color-ink); font-weight: 600; background: var(--color-ember-50); }

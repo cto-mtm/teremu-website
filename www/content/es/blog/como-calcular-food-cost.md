@@ -2,6 +2,7 @@
 title: "Cómo calcular el food cost de tu restaurante (sin hojas de cálculo)"
 description: "Guía práctica para calcular el porcentaje de food cost, entender la banda saludable del 28–35% y detectar los platos que te están comiendo el margen."
 date: "2026-07-15"
+dateModified: "2026-11-10"
 author: "Equipo Teremu"
 category: "Food cost"
 ---
@@ -14,9 +15,12 @@ El *food cost* es el porcentaje de tus ingresos que se va en comprar la comida q
 
 El food cost porcentual se calcula así:
 
-**Food cost % = (Coste de la comida vendida ÷ Ventas de comida) × 100**
+**Food cost % = (Costo de la comida vendida ÷ Ventas de comida) × 100**
 
 Si en una semana compraste $6,000 en ingredientes que se convirtieron en ventas de $20,000, tu food cost es del 30%. La banda saludable para la mayoría de restaurantes está entre el **28% y el 35%**; por encima, el margen se erosiona rápido.
+
+::food-cost-calculator
+::
 
 ## El problema del cálculo manual
 
@@ -24,8 +28,10 @@ Calcularlo a mano exige registrar cada factura, cada precio y cada merma. En la 
 
 ## Cómo lo resuelve Teremu
 
-Teremu construye el food cost a partir de lo que ya existe: escaneas la factura del proveedor, la IA extrae las líneas, y los precios ruedan automáticamente hacia el coste de cada plato. No hay registro diario: el número se mantiene vivo solo, y tú corriges únicamente lo que importa.
+Teremu construye el food cost a partir de lo que ya existe: escaneas la factura del proveedor, la IA extrae las líneas, y los precios ruedan automáticamente hacia el costo de cada plato. No hay registro diario: el número se mantiene vivo solo, y tú corriges únicamente lo que importa.
 
 El resultado es un food cost siempre actual, con alertas cuando un proveedor sube precios o un plato baja de su margen objetivo.
 
 **¿Quieres saber cuánto margen podrías recuperar?** [Haz la cuenta con los números de tu cocina](/why-teremu#calculator) y mira [por qué construimos Teremu](/why-teremu#mission).
+
+Para más cuentas rápidas, como el precio de venta a partir del costo, usa las [calculadoras gratis](/herramientas). Y si quieres ver cómo se aplica el food cost a tu tipo de negocio, revisa [Teremu para cada negocio de comida](/para), por ejemplo [restaurantes](/para/restaurantes) o [panaderías](/para/panaderias).

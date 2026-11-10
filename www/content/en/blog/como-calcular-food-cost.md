@@ -2,6 +2,7 @@
 title: "How to calculate your restaurant's food cost (no spreadsheets)"
 description: "A practical guide to calculating food cost percentage, understanding the healthy 28–35% range, and spotting the dishes that are eating your margin."
 date: "2026-07-15"
+dateModified: "2026-11-10"
 author: "Teremu Team"
 category: "Food cost"
 ---
@@ -18,6 +19,9 @@ Food cost percentage is calculated as:
 
 If in a given week you spent $6,000 on ingredients that turned into $20,000 in sales, your food cost is 30%. The healthy range for most restaurants sits between **28% and 35%**; above that, margin erodes fast.
 
+::food-cost-calculator
+::
+
 ## The problem with manual calculation
 
 Doing it by hand requires logging every invoice, every price, and every waste event. In practice, almost no one does this weekly — and when salmon jumps 8% without warning, you find out a month late.
@@ -29,3 +33,5 @@ Teremu builds your food cost from what already exists: you scan the supplier inv
 The result is an always-current food cost, with alerts when a supplier raises prices or a dish drops below its target margin.
 
 **Want to know how much margin you could recover?** [Do the math with your kitchen's numbers](/en/why-teremu#calculator) and see [why we built Teremu](/en/why-teremu#mission).
+
+For more quick math, like a menu price from a cost, try the [free calculators](/en/tools). And to see how food cost works in your kind of business, browse [Teremu for every food business](/en/for), for example [restaurants](/en/for/restaurants) or [bakeries](/en/for/bakeries).

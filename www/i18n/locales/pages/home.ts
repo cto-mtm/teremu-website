@@ -8,7 +8,7 @@ export default {
     heroTitleLead: 'Escanea la factura. Teremu hace las cuentas de tu',
     heroTitleWords: 'restaurante, taquería, pizzería, cafetería, panadería, food truck',
     heroSubtitle:
-      'Los precios de tus proveedores cambian cada semana; el coste de tus platos debería cambiar con ellos. Haz una foto a la factura y Teremu te muestra qué plato pierde margen, cuándo un proveedor cambió un precio y cuál conviene subir — en minutos y sin hojas de cálculo.',
+      'Los precios de tus proveedores cambian cada semana; el costo de tus platos debería cambiar con ellos. Haz una foto a la factura y Teremu te muestra qué plato pierde margen, cuándo un proveedor cambió un precio y cuál conviene subir — en minutos y sin hojas de cálculo.',
     heroCtaPrimary: 'Empieza gratis',
     heroCtaSecondary: 'Haz la cuenta',
     heroNote: 'Sin tarjeta. 25 escaneos al mes gratis, para siempre.',
@@ -38,11 +38,11 @@ export default {
     leak1Fix:
       'Teremu te muestra el food-cost real, plato por plato, para que sepas dónde está ese punto.',
     leak2Value: '+34%',
-    leak2Title: 'Los costes no se detienen',
+    leak2Title: 'Los costos no se detienen',
     leak2Body:
-      'Los costes de comida han subido un 34% desde antes de la pandemia, y no todos los ingredientes se mueven igual. La ficha de coste que hiciste hace tres meses ya está desactualizada.',
+      'Los costos de comida han subido un 34% desde antes de la pandemia, y no todos los ingredientes se mueven igual. La ficha de costo que hiciste hace tres meses ya está desactualizada.',
     leak2Fix:
-      'Cada factura aprobada actualiza el coste de tus platos al instante: ves el margen de hoy, no el de la última vez que abriste Excel.',
+      'Cada factura aprobada actualiza el costo de tus platos al instante: ves el margen de hoy, no el de la última vez que abriste Excel.',
     leak3Value: '1 de 3',
     leak3Title: 'Las facturas no siempre cuadran',
     leak3Body:
@@ -61,7 +61,7 @@ export default {
     leak3ExampleDelta: 'cobrada $38',
     leaksSourcesLabel: 'Fuentes',
     leaksSource1: 'Toast: márgenes del sector',
-    leaksSource2: 'National Restaurant Association: costes de comida',
+    leaksSource2: 'National Restaurant Association: costos de comida',
     leaksSource3: 'FSR Magazine: cobros de más en facturas',
 
     // Core loop

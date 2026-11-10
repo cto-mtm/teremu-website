@@ -86,7 +86,7 @@ export default {
 
     posTitle: 'Punto de venta (TPV)',
     posBody:
-      'Si conectas tu TPV —hoy Square—, Teremu importa las ventas registradas en él para calcular tus ingresos y contrastarlos con tus costes. No modificamos nada en el TPV. Puedes desconectarlo desde Ajustes; las ventas ya importadas se conservan como parte de tus registros.',
+      'Si conectas tu TPV —hoy Square—, Teremu importa las ventas registradas en él para calcular tus ingresos y contrastarlos con tus costos. No modificamos nada en el TPV. Puedes desconectarlo desde Ajustes; las ventas ya importadas se conservan como parte de tus registros.',
 
     billingTitle: 'Facturación y pagos',
     billingBody:

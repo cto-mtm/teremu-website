@@ -78,7 +78,7 @@ export default {
     worthItLink: 'Haz la cuenta con los números de tu cocina',
     compareTitle: 'Comparado con la alternativa',
     compareBody:
-      'Muchas herramientas comparables de control de costes se contratan con una llamada de ventas, cobran una cuota de implementación y cuestan varios cientos de dólares al mes. Teremu es de autoservicio: empiezas gratis y sin tarjeta, no hay cuota de implementación ni llamada de ventas, y Pro cuesta $39 por local al mes, con 500 escaneos y permisos granulares por miembro.',
+      'Muchas herramientas comparables de control de costos se contratan con una llamada de ventas, cobran una cuota de implementación y cuestan varios cientos de dólares al mes. Teremu es de autoservicio: empiezas gratis y sin tarjeta, no hay cuota de implementación ni llamada de ventas, y Pro cuesta $39 por local al mes, con 500 escaneos y permisos granulares por miembro.',
 
     // FAQ
     faqTitle: 'Preguntas frecuentes',

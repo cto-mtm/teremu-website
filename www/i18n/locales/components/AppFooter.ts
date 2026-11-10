@@ -2,6 +2,8 @@ export default {
   es: {
     tagline: 'La trastienda de tu restaurante, en la cámara de tu teléfono.',
     product: 'Producto',
+    forBusiness: 'Para tu negocio',
+    tools: 'Calculadoras gratis',
     why: 'Por qué Teremu',
     features: 'Funciones',
     pricing: 'Precios',
@@ -20,6 +22,8 @@ export default {
   en: {
     tagline: "Your restaurant's back office, in your phone's camera.",
     product: 'Product',
+    forBusiness: 'For your business',
+    tools: 'Free calculators',
     why: 'Why Teremu',
     features: 'Features',
     pricing: 'Pricing',

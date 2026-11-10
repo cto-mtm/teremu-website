@@ -9,16 +9,19 @@ const nav = computed(() => [
   { key: 'home', to: localePath('index'), label: t('AppHeader.home'), icon: 'i-lucide-home' },
   { key: 'why', to: localePath('why-teremu'), label: t('AppHeader.why'), icon: 'i-lucide-target' },
   { key: 'features', to: localePath('features'), label: t('AppHeader.features'), icon: 'i-lucide-layers' },
+  { key: 'forBusiness', to: localePath('para'), label: t('AppHeader.forBusiness'), icon: 'i-lucide-store' },
   { key: 'pricing', to: localePath('pricing'), label: t('AppHeader.pricing'), icon: 'i-lucide-tag' },
+  { key: 'tools', to: localePath('herramientas'), label: t('AppHeader.tools'), icon: 'i-lucide-calculator' },
   { key: 'blog', to: localePath('blog'), label: t('AppHeader.blog'), icon: 'i-lucide-newspaper' },
   { key: 'support', to: localePath('support'), label: t('AppHeader.support'), icon: 'i-lucide-life-buoy' },
   { key: 'contact', to: localePath('contact'), label: t('AppHeader.contact'), icon: 'i-lucide-mail' },
 ])
 
 // Desktop pill keeps a tighter set: the logo already links home, and Contact
-// lives in the footer + support CTA. (Dropping Home keeps the pill the same
-// width now that "Why Teremu" is in it.)
-const desktopNav = computed(() => nav.value.filter((i) => i.key !== 'contact' && i.key !== 'home'))
+// and Support live in the footer (and the mobile menu), which keeps the pill
+// from growing now that "For your business" and the calculators are in it.
+const desktopNav = computed(() => nav.value.filter((i) => !['contact', 'home', 'support'].includes(i.key)))
+const lgOnly = new Set(['forBusiness', 'tools'])
 
 // ── Smart navbar: hide on scroll down, reveal on scroll up ─────
 const hidden = ref(false)
@@ -117,10 +120,11 @@ onBeforeUnmount(() => {
 
         <!-- Desktop nav -->
         <ul class="hidden items-center gap-1 md:flex">
-          <li v-for="item in desktopNav" :key="item.key">
+          <!-- The two newest links only fit from lg up; tablets get them in the footer. -->
+          <li v-for="item in desktopNav" :key="item.key" :class="lgOnly.has(item.key) ? 'hidden lg:block' : ''">
             <NuxtLink
               :to="item.to"
-              class="group relative rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:text-stone-900"
+              class="group relative whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition-colors hover:text-stone-900"
               active-class="text-stone-900"
             >
               {{ item.label }}
@@ -137,7 +141,7 @@ onBeforeUnmount(() => {
           <NuxtLink
             :to="appUrl"
             external
-            class="btn-gradient hidden sm:inline-flex"
+            class="btn-gradient hidden whitespace-nowrap sm:inline-flex"
           >
             {{ t('AppHeader.cta') }}
           </NuxtLink>

@@ -2,6 +2,7 @@
 title: "AI in your restaurant, without the hype: what it really does and what it shouldn't"
 description: "Everyone is talking about AI. Here's where it genuinely helps in a kitchen, where it shouldn't decide for you, and how the Teremu Assistant works."
 date: "2026-10-15"
+dateModified: "2026-11-10"
 author: "Teremu Team"
 category: "AI"
 ---
@@ -50,3 +51,5 @@ Before you buy anything, ask four questions:
 AI isn't the product. The product is **more time to cook and more clarity about your numbers**. If AI helps with that, great. If it doesn't, it's just noise.
 
 Want to see it with your own invoices? [Start free](https://app.teremu.com), no card needed. If you'd rather understand the why first, read [why Teremu exists](/en/why-teremu), see [how the Assistant works](/en/features#assistant), or [do the math with your kitchen's numbers](/en/why-teremu#calculator).
+
+And to see what Teremu does in a business like yours, browse [Teremu for every food business](/en/for), for example [restaurants](/en/for/restaurants) or [ghost kitchens](/en/for/ghost-kitchens).

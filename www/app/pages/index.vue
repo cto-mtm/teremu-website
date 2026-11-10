@@ -36,16 +36,25 @@ useHead(() => ({
           },
           {
             '@type': 'SoftwareApplication',
+            '@id': `${site.url}/#software`,
             name: 'Teremu',
+            url: site.url,
             applicationCategory: 'BusinessApplication',
+            applicationSubCategory: 'Food cost and recipe costing software',
             operatingSystem: 'Web, iOS, Android',
             description: t('home.heroSubtitle'),
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-              description: t('home.heroNote'),
-            },
+            publisher: { '@id': `${site.url}/#organization` },
+            // Paid plans are billed per location; prices in USD.
+            offers: [
+              { '@type': 'Offer', name: t('pricing.freeName'), price: '0', priceCurrency: 'USD', description: t('home.heroNote') },
+              ...[[t('pricing.proName'), '39'], [t('pricing.maxName'), '59']].map(([name, price]) => ({
+                '@type': 'Offer',
+                name,
+                price,
+                priceCurrency: 'USD',
+                priceSpecification: { '@type': 'UnitPriceSpecification', price, priceCurrency: 'USD', unitCode: 'MON', referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitText: 'location' } },
+              })),
+            ],
           },
         ],
       }),

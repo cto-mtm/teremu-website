@@ -3,7 +3,7 @@ export default {
     // SEO + breadcrumb
     metaTitle: 'Por qué Teremu: controla tu food cost y protege tu margen',
     metaDescription:
-      'Los precios de tus proveedores cambian y tus costes no. Mira cuánto margen puedes recuperar y cómo Teremu te devuelve tiempo para cocinar.',
+      'Los precios de tus proveedores cambian y tus costos no. Mira cuánto margen puedes recuperar y cómo Teremu te devuelve tiempo para cocinar.',
     breadcrumbLabel: 'Ruta de navegación',
     breadcrumbHome: 'Inicio',
     breadcrumbCurrent: 'Por qué Teremu',
@@ -12,7 +12,7 @@ export default {
     heroEyebrow: 'Tú cocinas. Teremu lleva los números.',
     heroTitle: 'Protege el margen de tu restaurante sin dejar de cocinar',
     heroSubtitle:
-      'Cocinar bien es la mitad del negocio. Teremu se ocupa de las facturas, los costes y los márgenes por ti, para que te dediques a lo que te apasiona.',
+      'Cocinar bien es la mitad del negocio. Teremu se ocupa de las facturas, los costos y los márgenes por ti, para que te dediques a lo que te apasiona.',
     heroCtaPrimary: 'Empieza gratis',
     heroCtaSecondary: 'Haz la cuenta',
     heroNote: 'Sin tarjeta. 25 escaneos al mes gratis, para siempre.',
@@ -30,15 +30,15 @@ export default {
     p2Value: '42%',
     p2Title: 'Casi la mitad no gana dinero',
     p2Body:
-      'Según la National Restaurant Association, el 42% de los operadores dijo que su restaurante no fue rentable en 2025, por costes más altos y márgenes más bajos.',
+      'Según la National Restaurant Association, el 42% de los operadores dijo que su restaurante no fue rentable en 2025, por costos más altos y márgenes más bajos.',
     p2Fix: 'Ves el margen de cada plato y de cada proveedor al día, no cuando ya cerró el mes.',
     p2Source: 'National Restaurant Association: rentabilidad',
     p3Value: '+34%',
-    p3Title: 'Los costes no se detienen',
+    p3Title: 'Los costos no se detienen',
     p3Body:
-      'Los costes de comida han subido un 34% desde antes de la pandemia, y no todos los ingredientes se mueven igual. Una ficha de coste de hace tres meses ya puede estar desactualizada.',
-    p3Fix: 'Cada factura aprobada actualiza el coste de tus platos al instante.',
-    p3Source: 'National Restaurant Association: costes de comida',
+      'Los costos de comida han subido un 34% desde antes de la pandemia, y no todos los ingredientes se mueven igual. Una ficha de costo de hace tres meses ya puede estar desactualizada.',
+    p3Fix: 'Cada factura aprobada actualiza el costo de tus platos al instante.',
+    p3Source: 'National Restaurant Association: costos de comida',
     p4Value: '1 de 3',
     p4Title: 'Las facturas traen errores',
     p4Body:
@@ -72,14 +72,14 @@ export default {
     exTitle: 'Un ejemplo con números',
     exSubtitle: 'Así se ve una subida de precio cuando la cazas a tiempo y cuando no.',
     exIntro:
-      'Un plato de salmón se vende a {price} y cuesta {cost} prepararlo, un food cost del {pct}%. El salmón es más o menos el 60% de ese coste. Tu proveedor lo sube un 14% y nadie te avisa.',
+      'Un plato de salmón se vende a {price} y cuesta {cost} prepararlo, un food cost del {pct}%. El salmón es más o menos el 60% de ese costo. Tu proveedor lo sube un 14% y nadie te avisa.',
     exCaption: 'Efecto de una subida del 14% en el salmón sobre un plato',
     exColMetric: 'Concepto',
     exColBefore: 'Antes',
     exColHike: 'Tras la subida',
     exColFix: 'Subiendo {raise} el plato',
     exRowPrice: 'Precio de venta',
-    exRowCost: 'Coste del plato',
+    exRowCost: 'Costo del plato',
     exRowMargin: 'Margen por plato',
     exRowPct: 'Food cost',
     exRowMonthly: 'Margen al mes ({plates} platos)',
@@ -111,12 +111,12 @@ export default {
     missionBody1:
       'Teremu existe para ayudar a chefs y dueños apasionados a centrarse en lo que de verdad les importa: la comida, su gente y su lugar.',
     missionBody2:
-      'Las facturas, los costes y los márgenes no deberían quitarte las noches. Nos encargamos de la parte administrativa para que tengas más tiempo para cocinar y mejores herramientas para que tu restaurante tenga éxito.',
+      'Las facturas, los costos y los márgenes no deberían quitarte las noches. Nos encargamos de la parte administrativa para que tengas más tiempo para cocinar y mejores herramientas para que tu restaurante tenga éxito.',
     missionSign: 'El equipo de Teremu',
     promise1Title: 'Tú cocinas',
     promise1Body: 'Tu tiempo es para la cocina y para tu gente, no para las hojas de cálculo.',
     promise2Title: 'Nosotros llevamos los números',
-    promise2Body: 'Escaneas, y la IA mantiene al día tus costes, márgenes y precios.',
+    promise2Body: 'Escaneas, y la IA mantiene al día tus costos, márgenes y precios.',
     promise3Title: 'Tú decides',
     promise3Body: 'Cada número automático es corregible y tu corrección siempre gana.',
 
@@ -137,7 +137,7 @@ export default {
       'Son tuyas. Teremu solo necesita los ingredientes y sus cantidades para costear cada plato, nunca los pasos ni tu técnica. No vendemos ni compartimos tu información, y puedes pedirnos una copia o su borrado cuando quieras.',
     faq5Q: '¿Cuánto tarda empezar?',
     faq5A:
-      'El momento «ajá» tarda menos de cinco minutos: creas tu cuenta, escaneas una factura y ves cómo se actualiza el coste de tus platos. No necesitas llamada de ventas.',
+      'El momento «ajá» tarda menos de cinco minutos: creas tu cuenta, escaneas una factura y ves cómo se actualiza el costo de tus platos. No necesitas llamada de ventas.',
     faq6Q: '¿Se conecta con mi TPV?',
     faq6A:
       'La integración con TPV está en el plan de trabajo y todavía no está disponible. No la necesitas para costear tus platos desde las facturas, y hoy puedes importar tus ventas diarias desde un CSV.',
@@ -150,8 +150,8 @@ export default {
     src1Use: 'Margen neto de 3–5% en servicio completo.',
     src2Label: 'National Restaurant Association: informe de ventas y rentabilidad',
     src2Use: '42% de operadores no rentables en 2025.',
-    src3Label: 'National Restaurant Association: costes de comida y suministros',
-    src3Use: 'Costes de comida un 34% por encima de los previos a la pandemia.',
+    src3Label: 'National Restaurant Association: costos de comida y suministros',
+    src3Use: 'Costos de comida un 34% por encima de los previos a la pandemia.',
     src4Label: 'National Restaurant Association: indicadores de precios de comida',
     src4Use: 'Variación interanual de precios al productor, como el pescado sin procesar.',
     src5Label: 'FSR Magazine: cobros de más en facturas de restaurantes',

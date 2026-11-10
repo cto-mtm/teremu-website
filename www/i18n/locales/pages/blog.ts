@@ -3,7 +3,7 @@ export default {
     heroBadge: 'Blog',
     heroTitle: 'Ideas sobre food-cost y márgenes',
     heroSubtitle:
-      'Guías prácticas sobre costes de comida, escandallos y cómo los restaurantes independientes recuperan margen semana a semana.',
+      'Guías prácticas sobre costos de comida, escandallos y cómo los restaurantes independientes recuperan margen semana a semana.',
     readMore: 'Leer más',
     backToBlog: 'Volver al blog',
     empty: 'Pronto publicaremos nuevos artículos.',
@@ -11,6 +11,12 @@ export default {
     ctaTitle: 'Pon estas ideas a trabajar',
     ctaBody: 'Escanea tu primera factura y mira tus márgenes reales en minutos.',
     ctaButton: 'Empieza gratis',
+    faqTitle: 'Preguntas frecuentes',
+    segmentLabel: 'Teremu para tu negocio',
+    updated: 'Actualizado el',
+    authorTitle: 'Escrito por el equipo de Teremu',
+    authorBody: 'Construimos Teremu, la app de costos para negocios de comida independientes. Escribimos estas guías con los mismos cálculos que hace la app y revisamos los números de cada ejemplo.',
+    authorLink: 'Por qué hacemos Teremu',
   },
   en: {
     heroBadge: 'Blog',
@@ -24,5 +30,11 @@ export default {
     ctaTitle: 'Put these ideas to work',
     ctaBody: 'Scan your first invoice and see your real margins in minutes.',
     ctaButton: 'Start free',
+    faqTitle: 'Frequently asked questions',
+    segmentLabel: 'Teremu for your business',
+    updated: 'Updated',
+    authorTitle: 'Written by the Teremu team',
+    authorBody: 'We build Teremu, the food cost app for independent food businesses. We write these guides with the same math the app runs, and we check the numbers in every example.',
+    authorLink: 'Why we build Teremu',
   },
 }

@@ -10,6 +10,8 @@ import blog from './locales/pages/blog'
 import support from './locales/pages/support'
 import privacy from './locales/pages/privacy'
 import terms from './locales/pages/terms'
+import segments from './locales/pages/segments'
+import tools from './locales/pages/tools'
 
 export default defineI18nConfig(() => ({
   legacy: false,
@@ -29,6 +31,8 @@ export default defineI18nConfig(() => ({
       support: support.es,
       privacy: privacy.es,
       terms: terms.es,
+      segments: segments.es,
+      tools: tools.es,
     },
     en: {
       AppHeader: AppHeader.en,
@@ -43,6 +47,8 @@ export default defineI18nConfig(() => ({
       support: support.en,
       privacy: privacy.en,
       terms: terms.en,
+      segments: segments.en,
+      tools: tools.en,
     },
   },
 }))

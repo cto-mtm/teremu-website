@@ -28,7 +28,7 @@ export default {
 
     menuTitle: 'Menú y escandallos',
     menuBody:
-      'Cada plato costeado en vivo desde los precios rodantes de tus proveedores. La lista muestra barras de margen objetivo vs real, ordenadas de peor a mejor — los platos que necesitan atención flotan hacia arriba. Cada plato tiene su desglose de coste: la parte de cada ingrediente en el plato, la vista «por qué este plato es caro».',
+      'Cada plato costeado en vivo desde los precios rodantes de tus proveedores. La lista muestra barras de margen objetivo vs real, ordenadas de peor a mejor — los platos que necesitan atención flotan hacia arriba. Cada plato tiene su desglose de costo: la parte de cada ingrediente en el plato, la vista «por qué este plato es caro».',
     menuShot: 'Captura del escandallo de un plato',
 
     pantryTitle: 'Despensa teórica',
@@ -53,7 +53,7 @@ export default {
 
     // "Qué significa para ti" — una línea de beneficio por sección
     scannerBenefit: 'Para ti: una pila de facturas en un minuto y nada que teclear después.',
-    pipelineBenefit: 'Para ti: errores de lectura y de suma atrapados antes de que contaminen tus costes.',
+    pipelineBenefit: 'Para ti: errores de lectura y de suma atrapados antes de que contaminen tus costos.',
     triageBenefit: 'Para ti: pillas los cobros de más antes de pagar, mientras todavía puedes reclamar.',
     pulseBenefit: 'Para ti: sabes cómo va el negocio esta semana, no cuando cierra el mes.',
     menuBenefit: 'Para ti: sabes qué platos ganan dinero hoy y subes el precio solo de los que lo necesitan.',

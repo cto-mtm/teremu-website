@@ -27,7 +27,7 @@ export default {
 
     serviceTitle: 'Qué es Teremu',
     serviceBody:
-      'Teremu digitaliza facturas de proveedores —escaneadas con el móvil o importadas desde tu correo— y mantiene al día tus costes de comida, márgenes por plato, inventario y precios de proveedor; en los planes de pago incluye además un asistente de cocina y conexiones con tu punto de venta y con asistentes de IA externos. El servicio se presta «tal cual»: añadimos y mejoramos funciones de forma continua, y podemos modificar o retirar funcionalidades avisando con antelación razonable cuando el cambio sea sustancial. Algunas funciones pueden ofrecerse en fase beta; se proporcionan sin garantía y pueden cambiar o desaparecer.',
+      'Teremu digitaliza facturas de proveedores —escaneadas con el móvil o importadas desde tu correo— y mantiene al día tus costos de comida, márgenes por plato, inventario y precios de proveedor; en los planes de pago incluye además un asistente de cocina y conexiones con tu punto de venta y con asistentes de IA externos. El servicio se presta «tal cual»: añadimos y mejoramos funciones de forma continua, y podemos modificar o retirar funcionalidades avisando con antelación razonable cuando el cambio sea sustancial. Algunas funciones pueden ofrecerse en fase beta; se proporcionan sin garantía y pueden cambiar o desaparecer.',
 
     accountTitle: 'Cuentas y responsabilidad',
     accountIntro:
@@ -118,7 +118,7 @@ export default {
 
     indemnityTitle: 'Indemnidad',
     indemnityBody:
-      'Si un tercero nos reclama por el contenido que has subido, por tu uso del servicio incumpliendo estos términos o por la vulneración de derechos de terceros que te sea imputable, te comprometes a mantenernos indemnes y a asumir los daños, costes y gastos razonables de defensa que de ello se deriven. Te informaremos de la reclamación sin demora y podrás participar en su defensa. Esta obligación no se aplica a quienes contratan como consumidores cuando la ley de su país lo impida.',
+      'Si un tercero nos reclama por el contenido que has subido, por tu uso del servicio incumpliendo estos términos o por la vulneración de derechos de terceros que te sea imputable, te comprometes a mantenernos indemnes y a asumir los daños, costos y gastos razonables de defensa que de ello se deriven. Te informaremos de la reclamación sin demora y podrás participar en su defensa. Esta obligación no se aplica a quienes contratan como consumidores cuando la ley de su país lo impida.',
 
     liabilityTitle: 'Limitación de responsabilidad',
     liabilityBody:

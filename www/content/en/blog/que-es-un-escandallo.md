@@ -2,6 +2,7 @@
 title: "What is recipe costing and why your menu needs it"
 description: "Recipe costing is the ingredient-by-ingredient breakdown of a dish's cost. We explain how to do it and how to keep it current when prices change every week."
 date: "2026-07-10"
+dateModified: "2026-11-10"
 author: "Teremu Team"
 category: "Recipe costing"
 ---
@@ -25,3 +26,5 @@ In Teremu, every dish is costed live from the rolling prices on your invoices. W
 That's the goal of Teremu: your recipe costs are never outdated, without you ever touching a spreadsheet.
 
 **What does an out-of-date recipe cost really cost you?** See [a worked example](/en/why-teremu#example) and [do the math for your kitchen](/en/why-teremu#calculator).
+
+Recipe costing works the same way in any kitchen, but every business has its quirks. Browse [Teremu for every food business](/en/for), for example [bakeries](/en/for/bakeries) or [catering](/en/for/catering).

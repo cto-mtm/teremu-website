@@ -2,6 +2,7 @@
 title: "IA en tu restaurante, sin humo: qué hace de verdad y qué no debería hacer"
 description: "Todo el mundo habla de inteligencia artificial. Te contamos dónde ayuda de verdad en la cocina, dónde no debería decidir por ti y cómo funciona el Asistente de Teremu."
 date: "2026-10-15"
+dateModified: "2026-11-10"
 author: "Equipo Teremu"
 category: "IA"
 ---
@@ -50,3 +51,5 @@ Antes de contratar nada, hazte cuatro preguntas:
 La IA no es el producto. El producto es que tengas **más tiempo para cocinar y más claridad sobre tus números**. Si la IA ayuda a eso, bien. Si no, sobra.
 
 ¿Quieres verlo con tus propias facturas? [Empieza gratis](https://app.teremu.com), sin tarjeta. Si prefieres entender primero el porqué, lee [por qué existe Teremu](/why-teremu), mira [cómo funciona el Asistente](/features#assistant) o [haz la cuenta con los números de tu cocina](/why-teremu#calculator).
+
+Y si quieres ver qué hace Teremu en un negocio como el tuyo, revisa [Teremu para cada negocio de comida](/para), por ejemplo [restaurantes](/para/restaurantes) o [dark kitchens](/para/dark-kitchens).

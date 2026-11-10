@@ -1,4 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { readdirSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+
+// Markdown copies of every post and landing page (/raw/...), plus /llms.txt.
+// Nothing links to these with <a>, so the prerender crawler needs the list.
+function llmRoutes() {
+  const dirs: Array<[string, string]> = [
+    ['es', 'blog'], ['en', 'blog'], ['es', 'para'], ['en', 'for'],
+  ]
+  const routes = ['/llms.txt']
+  for (const [locale, section] of dirs) {
+    const dir = fileURLToPath(new URL(`./content/${locale}/${section}`, import.meta.url))
+    let files: string[]
+    try { files = readdirSync(dir) }
+    catch { continue }
+    for (const f of files.filter(f => f.endsWith('.md'))) routes.push(`/raw/${locale}/${section}/${f}`)
+  }
+  return routes
+}
 
 // ── CodePipe remote dev (Tailscale) ─────────────────────────────────
 const tailscaleHost = process.env.TAILSCALE_HOST // e.g. ks-mini.tail0293ef.ts.net
@@ -13,6 +32,9 @@ export default defineNuxtConfig({
     preset: 'static',
     output: {
       publicDir: '../firebase/www',
+    },
+    prerender: {
+      routes: llmRoutes(),
     },
   },
 
@@ -55,6 +77,8 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'es',
     strategy: 'prefix_except_default',
+    // Absolute URLs in hreflang/canonical tags (Google ignores relative ones).
+    baseUrl: 'https://teremu.com',
   },
 
   runtimeConfig: {
@@ -80,11 +104,18 @@ export default defineNuxtConfig({
     initMode: 'manual',
   },
 
+  // Don't mirror every URL into the other locale: posts and landing pages use
+  // localized slugs (/para/panaderias ↔ /en/for/bakeries), so a mirrored
+  // /en/for/panaderias would 404. Pages declare their own hreflang links.
+  sitemap: {
+    autoI18n: false,
+  },
+
   site: {
     url: 'https://teremu.com',
     name: 'Teremu',
     description:
-      'Escanea las facturas de tus proveedores y deja que la IA mantenga al día tus costes, márgenes e inventario. La herramienta de food-cost para restaurantes independientes.',
+      'Escanea las facturas de tus proveedores y deja que la IA mantenga al día tus costos, márgenes e inventario. La herramienta de food-cost para restaurantes independientes.',
     defaultLocale: 'es',
   },
 

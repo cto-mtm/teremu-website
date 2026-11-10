@@ -2,6 +2,7 @@
 title: "Welcome to Teremu"
 description: "Scan an invoice and watch it become line items, costs, and margins — no spreadsheets. Here's the idea behind Teremu."
 date: "2026-07-05"
+dateModified: "2026-11-10"
 author: "Teremu Team"
 category: "Product"
 ---
@@ -17,3 +18,5 @@ Our philosophy is simple: **smart approximation instead of bookkeeping**. Teremu
 ## What's next
 
 On this blog we'll share insights on food cost, recipe costing, supplier negotiation, and how independent restaurants recover margin points week after week. Welcome aboard.
+
+To see how Teremu fits your kind of business, start with [Teremu for every food business](/en/for): there are guides for [restaurants](/en/for/restaurants) and [coffee shops](/en/for/coffee-shops), among others.
